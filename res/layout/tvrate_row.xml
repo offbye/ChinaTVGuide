@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:padding="5dp">
+	<TextView android:id="@+id/rank" android:gravity="center" android:textColor="#ff00ff00"
+		android:layout_width="30dp" android:textSize="14sp"
+		android:layout_height="25dp" android:padding="5dp"
+		android:text="1" />
+	<TextView android:id="@+id/program" android:layout_toRightOf="@+id/rank"
+		android:layout_width="wrap_content" android:textSize="14sp"
+		android:layout_height="wrap_content" android:padding="1dp"
+		android:text="program" />
+
+	<TextView android:id="@+id/changes"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:padding="1dp"
+		android:layout_alignParentRight="true" android:text="-" />
+	<TextView android:id="@+id/channel" android:layout_marginLeft="30dp"
+		android:layout_below="@+id/program"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:padding="1dp"
+		android:text="channel" />
+	<TextView android:id="@+id/averagerate"
+		android:layout_below="@+id/program"
+		android:layout_alignParentRight="true"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:padding="1dp"
+		android:text="5.2" />
+</RelativeLayout>

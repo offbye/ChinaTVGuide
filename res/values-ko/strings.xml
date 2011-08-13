@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+	<string name="hello">세계여 안녕,차이나 TV 가이드! </string>
+	<string name="app_name">재미있는 TV</string>
+	<string name="channelname">TV채널</string>
+	<string name="currentprogram">방송중</string>
+	<string name="searchprogram">프로그램 검색</string>
+	<string name="program">TV프로그램</string>
+	<string name="starttime">방송 시간</string>
+	<string name="date">방송 일자</string>
+	<string name="alarmtimes">알람 시간 설정</string>
+	<string name="notsearchtime">프로그램 시간을 검색하지 않음</string>
+	<string name="synccompleted">오늘의 프로그램 데이터는 이미 휴대폰에 동기화되었습니다.</string>
+	<string name="datasyncing">프로그램 데이터 동기화중입니다.</string>
+	<string name="program_data_deleted">프로그램 데이터 베이스를 비웠습니다.</string>
+	<string name="no_data_deleted">삭제된 프로그램 데이터가 없습니다.</string>
+	<string name="havesynced">당일 프로그램 데이터는 이미 동기화되었습니다.</string>
+	<string name="allchannel">전체 채널</string>
+	<string name="alarm_service_finished">알람 서비스 종료</string>
+	<string name="alarm_service_started">알람 서비스 시작</string>
+	<string name="alarm_service_label">알람 서비스</string>
+	<string name="localchannel">로컬TV</string>
+	<string name="localprogram">로컬 프로그램</string>
+	<string name="current_location">현재 당신의 위치:</string>
+	<string name="no_location">당신의 위치를 찾을수 없습니다. </string>
+	<string name="select_dialog">선택하십시오</string>
+	<string name="suggest">제안</string>
+	<string name="suggest_title">당신의 소중한 제의를 제출해주십시오.</string>
+	<string name="invalid_content_title">당신의 제의를 써주십시오.</string>
+	<string name="invalid_content_msg">5자를 초과하지말 것을 제안합니다.열심히 적어주십시오.</string>
+	<string name="invalid_email_title">메일 주소를 입력해주세요.</string>
+	<string name="invalid_email_msg">이메일 주소를 입력하지 않았거나 틀린 포멧입니다. </string>
+	<string name="submitsuggest">제의 제출</string>
+	<string name="alert_dialog_ok">확인</string>
+	<string name="alert_dialog_cancel">취소</string>
+	<string name="menu_abouttitle">차이나TV 가이드에 관하여</string>
+	<string name="menu_about">관하여</string>
+	<string name="menu_help">도움말</string>
+	<string name="menu_clean">캐시 비우기</string>
+	<string name="menu_sync">동기화</string>
+	<string name="menu_channel">채널</string>
+	<string name="menu_exit">나가기</string>
+	<string name="msg_loading">데이터를 불러오는중입니다.</string>
+	<string name="msg_wait">잠시만 기다려주십시오...</string>
+	<string name="notify_succeeded">요청이 성공적으로 수락되었습니다.</string>
+	<string name="notify_network_error">인터넷 전송 이상</string>
+	<string name="notify_service_exception">서비스 이상</string>
+	<string name="notify_no_result">데이터가 없습니다.</string>
+	<string name="notify_json_error">분석 오류</string>
+	<string name="notify_database_error">데이터 베이스 오류</string>
+	<string name="notify_newversion">현재 신규 버전이 존재합니다.</string>
+	<string name="notify_no_permision">권한이 없습니다.</string>
+	<string name="notify_cannot_location">정위치가 불가합니다.</string>
+	<string name="notify_no_connection">연결된 인터넷이 없습니다.</string>
+	<string name="aboutinfo">본 소프트웨어은 중국 TV프로그램을 예고하는 프로그램이다.현재 방송중인 프로그램,최신
+		앤터테인먼트 정보,시청율 순위,핫 프로그램 추천 등을 찾아볼수 있으며 프로그램이 방송되기전에 알람을 제공하는 기능을 제공하여
+		즐겨보는 프로그램을 놓치는 현상을 미연에 방지하여준다.본 프로그램은 현재 CCTV,중국 교육TV,성급 위성 채널,홍콩/마카오
+		채널,디지털 TV 및 600여개 지면 채널 프로그램의 예고 정보를 제공하며 그 범위가 중국의 기본 도시를 덮었다.본
+		소프트웨어는 cmwap 넷을 지지하며 안드로이드 1.5-2.2을 환경에서 정상 가동할수 있다. </string>
+	<string name="helpinfo">1.휴대폰으로 인터넷 연결을 빈번하게 할수 없는 사용자들은 인터넷에 연결이 가능할때
+		MENU-동기화를 눌러 당일 프로그램 데이터를 일차적으로 로컬에 저장한다.이렇게 되면 꼭 필요치 않을 경우에는 인터넷에
+		접속하지 않아도 된다. \n 2.오랫동안 본 소프트웨어를 사용하신뒤 “캐시 비우기”기능으로 프로그램 캐시 데이터를 삭제하여
+		휴대폰 저장량을 절감할수 있다. \n 3.현재는 한개 프로그램에 대한 알람만 설정할수 있다.맨 마지막에 실행한 설정을 기준으로
+		한다. \n 4.프로그램 리스트 페이지에 프로그램 항목에 따라 메뉴가 뜬다.동일 채널의 기타 프로그램을 볼수도 있고 인테넷에서
+		프로그램을 검색하거나 친구들에게 프로그램을 전송할수도 있다. \n 5.채널리스트를 길게 누르면 채널을 즐려찾기에 추가하거나
+		삭제할수 있다.즐겨찾기에 추가된 채널은 바타화면 위젯에 보여준다.</string>
+	<string name="msg_no_connenction">인터넷 연결이 없습니다.</string>
+	<string name="msg_no_connenction_detail">현재 사용가능한 인터넷 연결이 없습니다.본 프로그램은 로컬 캐시중에서 프로그램 데이터를
+		불러올수밖에 없습니다.일부 기능은 사용불가할것입니다. </string>
+	<string name="tab_favouritechannel">즐겨찾기에 추가된 채널</string>
+	<string name="tab_favouriteprogram">즐겨찾기에 추가된 프로그램</string>
+	<string name="tab_cctv">CCTV</string>
+	<string name="tab_sjws">위성 방송</string>
+	<string name="tab_gt">홍콩/마카오/대만</string>
+	<string name="tab_local">로컬</string>
+	<string name="tab_shuzhi">데이터</string>
+	<string name="tab_iptv">텔레콤IPTV</string>
+	<string name="msg_setfavourate_ok">즐겨찾기에 추가되었습니다.</string>
+	<string name="msg_cancelfavourate_ok">즐겨찾기로부터 삭제되었습니다.</string>
+	<string name="grid_channel">TV채널</string>
+	<string name="grid_broadcasting">방송중입니다.</string>
+	<string name="grid_search">TV검색</string>
+	<string name="grid_suggest">제의 제출</string>
+	<string name="grid_comment">TV평논</string>
+	<string name="grid_favourite">나의 즐겨찾기</string>
+	<string name="grid_recommend">프로그램 추천</string>
+	<string name="grid_rss">앤터테인먼트 정보</string>
+	<string name="grid_rank">시청율 순위</string>
+	<string name="grid_about">우리에 관하여</string>
+	<string name="menu_home">첫 페이지</string>
+	<string name="menu_favourite">즐겨찾기</string>
+	<string name="menu_news">정보</string>
+	<string name="menu_rank">순위</string>
+	<string name="menu_comment">평가</string>
+	<string name="menu_forum">커뮤니티</string>
+	<string name="menu_delete_favourites">즐겨찾기에서 삭제</string>
+	<string name="tip_delete_favourites">즐겨찾기에 저장된 프로그램을 삭제하시렵니까?</string>
+	<string name="tip_deleted_favourites">즐겨찾기에 저장된 모든 프로그램을 삭제하였습니다. </string>
+	<string name="tip_not_delete_favourites">삭제된 프로그램이 없습니다. </string>
+	<string name="mo">월요일</string>
+	<string name="tu">화요일</string>
+	<string name="we">수요일</string>
+	<string name="th">목요일</string>
+	<string name="fr">금요일</string>
+	<string name="sa">토요일</string>
+	<string name="su">일요일</string>
+	<string name="msg_share">친구에게 전송</string>
+	<string name="tvrank">순위</string>
+	<string name="tvrate">시청율</string>
+	<string name="tvprogram">TV프로그램 및 채널</string>
+	<string name="changecity">도시 바꾸기</string>
+	<string name="suggest_content">당신의 제의는 저희의 가장 든든한 후원입니다. </string>
+	<string name="suggest_email">your@youremail.com</string>
+	<string name="tv_actor">배우</string>
+	<string name="tv_director">감독</string>
+	<string name="tv_intro">소개</string>
+	<string name="preferences_name">설정</string>
+	<string name="preferences_general_title">설정</string>
+	<string name="preferences_alarm_title">알람이 필요하십니까?</string>
+	<string name="preferences_alarm_times_title">알람 횟수</string>
+	<string name="preferences_actions_title">알람 방법</string>
+	<string name="preferences_play_beep_title">벨소리</string>
+	<string name="preferences_vibrate_title">진동</string>
+	<string name="preferences_local_title">현재 지역</string>
+	<string name="preferences_custom_city_title">사용자 지정 지역</string>
+	<string name="preferences_custom_city_summary">예를 들면 남경시</string>
+	<string name="preferences_custom_provice_summary">예를 들면 강소성</string>
+	<string name="preferences_provice_title">성</string>
+	<string name="preferences_city_title">도시</string>
+	<string name="city_setting">도시 설정</string>
+	<string name="input_your_city">당신의 거주지를 입력하십시오.</string>
+	<string name="hint_city">남경시</string>
+	<string name="hint_province">강소성</string>
+	<string name="set_city_ok">%s도시를 설정하셨습니다.설정화면에서 도시를 재설정할수 있습니다. </string>
+	<string name="widget_name">TV예고</string>
+	<string name="widget_info">당신이 저장한 채널의 프로그램 예고를 보여드립니다.채널 리스트에서 임의의 채널을 길게 눌러
+		즐겨찾기에 추가 또는 즐겨찾기에서 취소하십시오. </string>
+	<string name="create_shortcut">바탕화면에 바로가기 아이콘을 만듭니다.</string>
+	<string name="create_shortcut_body">확인을 클릭하시여 바탕화면에 재미있는 TV 바로가기 아이콘을 만듭니다. </string>
+</resources>

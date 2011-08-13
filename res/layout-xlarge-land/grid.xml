@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/home_view" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@drawable/homelarge"
+	android:orientation="vertical" android:spacing="5dp">
+		<ImageView android:id="@+id/ImageView01"
+			android:layout_margin="3dp" android:layout_width="wrap_content"
+			android:src="@drawable/top" android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal">
+		</ImageView>
+	<GridView android:id="@+id/myGrid"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:padding="20dp" android:verticalSpacing="25dp"
+		android:horizontalSpacing="20dp" android:numColumns="auto_fit"
+		android:columnWidth="80dp" android:stretchMode="columnWidth"
+		android:gravity="center" />
+</LinearLayout>

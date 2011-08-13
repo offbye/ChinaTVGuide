@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:padding="3dp" android:layout_marginLeft="5dp">
+	<TextView android:id="@+id/title" android:layout_width="fill_parent"
+		android:textSize="16sp" android:layout_height="wrap_content"
+		android:padding="1dp"  	android:singleLine="true" android:ellipsize="marquee"
+		android:marqueeRepeatLimit="marquee_forever"/>
+	<TextView android:id="@+id/pubdate"
+		android:layout_width="wrap_content" android:textSize="14sp"
+		android:layout_height="wrap_content" android:textColor="#fa00f900"
+		android:layout_below="@+id/title" />
+	<TextView android:id="@+id/timebefore"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:padding="1dp"
+		android:layout_alignParentRight="true"
+		android:layout_below="@+id/title" />
+	<TextView android:id="@+id/description" android:visibility="gone"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:paddingTop="3dp"
+		android:textSize="14sp" android:layout_below="@+id/pubdate" />
+</RelativeLayout>

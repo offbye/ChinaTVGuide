@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:textColorHighlight="#ff0000ff"
+	android:layout_height="wrap_content">
+
+	<TextView android:id="@+id/channelname"
+		android:layout_height="wrap_content" android:paddingLeft="5dp"
+		android:text="dddtv" android:layout_width="wrap_content"
+		android:textSize="18dp">
+	</TextView>
+
+	<TextView android:id="@+id/program"
+		android:layout_width="wrap_content" android:textSize="16dp"
+		android:layout_height="wrap_content" android:padding="5dp"
+		android:singleLine="true" android:textColorHighlight="#ffff0000"
+		android:text="description" android:layout_below="@+id/channelname" />
+
+	<TextView android:id="@+id/startime"
+		android:layout_width="wrap_content" android:textSize="16dp"
+		android:layout_height="wrap_content" android:padding="5dp"
+		android:scrollbars="vertical" android:textColor="#ffff0000"
+		android:textColorHighlight="#ff0000ff" android:text="13:08"
+		android:layout_alignParentRight="true" />
+</RelativeLayout>

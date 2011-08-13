@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ChinaTVGuide!</string>
+    <string name="app_name">玩转电视</string>
+    <string name="channelname">电视频道</string>
+    <string name="currentprogram">正在播出</string>
+    <string name="searchprogram">节目搜索</string>
+    <string name="program">电视节目</string>
+    <string name="starttime">播放时间</string>
+    <string name="date">播出日期</string>
+	<string name="alarmtimes">提醒时间设置</string>
+	<string name="notsearchtime">不搜索节目时间</string>
+
+	<string name="synccompleted">今天节目数据已经同步到手机</string>
+	<string name="datasyncing">正在同步节目数据！</string>
+	<string name="program_data_deleted">节目缓存数据已经清空！</string>
+	<string name="no_data_deleted">没有节目数据被删除！</string>
+	<string name="havesynced">当天节目数据已经同步过了！</string>
+	<string name="allchannel">全部频道</string>
+
+	<string name="alarm_service_finished">提醒服务结束</string>
+	<string name="alarm_service_started">提醒服务开始</string>
+	<string name="alarm_service_label">提醒服务</string>
+
+	<string name="localchannel">本地电视</string>
+	<string name="localprogram">本地节目</string>
+	<string name="current_location">您的当前位置:</string>
+	<string name="no_location">无法定位到您的位置</string>
+	<string name="select_dialog">请选择</string>
+
+	<string name="suggest">建议</string>
+	<string name="suggest_title">请提出您的宝贵建议</string>
+	<string name="invalid_content_title">请填写您的建议</string>
+	<string name="invalid_content_msg">建议不能少于5个字,请认真填写！</string>
+	<string name="invalid_email_title">请输入Email</string>
+	<string name="invalid_email_msg">Email没有填写或格式错误</string>
+	<string name="submitsuggest">提交建议</string>
+
+	<string name="alert_dialog_ok">确定</string>
+	<string name="alert_dialog_cancel">取消</string>
+
+	<string name="menu_abouttitle">关于ChinaTVGuide</string>
+	<string name="menu_about">关于</string>
+	<string name="menu_help">帮助</string>
+	<string name="menu_clean">清空缓存</string>
+	<string name="menu_sync">同步</string>
+	<string name="menu_channel">频道</string>
+	<string name="menu_exit">退出</string>
+
+	<string name="msg_loading">获取数据中</string>
+	<string name="msg_wait">请稍后...</string>
+
+	<string name="notify_succeeded">请求成功</string>
+	<string name="notify_network_error">网络传输异常</string>
+	<string name="notify_service_exception">服务异常</string>
+	<string name="notify_no_result">没有数据</string>
+	<string name="notify_json_error">解析错误</string>
+	<string name="notify_database_error">数据库错误</string>
+	<string name="notify_newversion">现在有新版本</string>
+	<string name="notify_no_permision">没有权限</string>
+	<string name="notify_cannot_location">无法定位</string>
+	<string name="notify_no_connection">没有网络连接</string>
+
+
+	<string name="aboutinfo">玩转电视提供中国电视节目预告，可以查看当前正在播出的节目，
+	最新的娱乐资讯，收视率排行，热点节目推荐等，可以设置节目播出前定时提醒，让您不错过想看的节目。软件现在提供中央电视台，
+	中国教育电视台，省级卫视频道,港澳台频道，数字电视，以及600多个地面频道节目预告信息，现在已经基本覆盖中国主要城市。
+	本软件支持cmwap网络，完全兼容android1.5-3.1。玩转电视支持在新浪微博上分享电视评论。
+	</string>
+	<string name="helpinfo">1、手机不能经常联网的用户请在能上网时，按 MENU-同步 把当天节目数据一次性同步到本地，
+	这样软件以后就可以不用联网运行了！\n 2、使用本软件很长时间后请注意使用"清空缓存"功能清除以前的节目缓存数据，节省宝贵的手机内存
+	\n 3、目前只能设置一个节目提醒，以最后设置的为准 \n 4、在节目列表页面长按节目项会出现菜单，可以查看本频道其他节目，在网上搜索节目，发送节目短信给朋友 \n 5、在频道列表上长按可以把该频道加入或删除收藏夹,收藏的频道可以在桌面widget显示\n
+	6 连接到新浪微博后可以在正在播出页面长按某个节目发布到新浪微博。</string>
+	<string name="msg_no_connenction">没有网络连接</string>
+  	<string name="msg_no_connenction_detail">目前没有可用的网络连接，本程序只能从本地缓存中读取节目数据，部分功能将不可用</string>
+
+    <string name="tab_favouritechannel">收藏的频道</string>
+	<string name="tab_favouriteprogram">收藏的节目</string>
+
+    <string name="tab_cctv">央视</string>
+	<string name="tab_sjws">卫视</string>
+    <string name="tab_gt">港澳台</string>
+	<string name="tab_local">本地</string>
+	<string name="tab_shuzhi">数字</string>
+	<string name="tab_iptv">电信IPTV</string>
+
+	<string name="msg_setfavourate_ok">已经加入收藏夹</string>
+	<string name="msg_cancelfavourate_ok">已经从收藏夹删除</string>
+
+	<string name="grid_channel">电视频道</string>
+	<string name="grid_broadcasting">正在播出</string>
+	<string name="grid_search">电视搜索</string>
+
+	<string name="grid_suggest">提交建议</string>
+	<string name="grid_comment">电视评论</string>
+	<string name="grid_favourite">我的收藏</string>
+	<string name="grid_recommend">节目推荐</string>
+	<string name="grid_rss">娱乐资讯</string>
+	<string name="grid_rank">收视排行</string>
+	<string name="grid_about">关于我们</string>
+
+	<string name="menu_home">首页</string>
+	<string name="menu_favourite">收藏</string>
+	<string name="menu_news">资讯</string>
+	<string name="menu_rank">排行</string>
+	<string name="menu_comment">评论</string>
+	<string name="menu_forum">社区</string>
+	<string name="menu_delete_favourites">删除收藏</string>
+	<string name="tip_delete_favourites">你确定要删除所有收藏的节目吗？</string>
+	<string name="tip_deleted_favourites">已经删除所有收藏的节目</string>
+	<string name="tip_not_delete_favourites">没有收藏的节目被删除</string>
+
+	<string name="mo">周一</string>
+	<string name="tu">周二</string>
+	<string name="we">周三</string>
+	<string name="th">周四</string>
+	<string name="fr">周五</string>
+	<string name="sa">周六</string>
+	<string name="su">周日</string>
+
+	<string name="msg_share">分享给朋友</string>
+	<string name="tvrank">排行</string>
+	<string name="tvrate">收视率</string>
+	<string name="tvprogram">电视节目和频道</string>
+	<string name="changecity">切换城市</string>
+	<string name="suggest_content">你的建议是对我们最好的支持！</string>
+	<string name="suggest_email">your@youremail.com</string>
+
+	<string name="tv_actor">演员</string>
+	<string name="tv_director">导演</string>
+	<string name="tv_intro">介绍</string>
+
+	<string name="preferences_name">设置</string>
+	<string name="preferences_general_title">设置</string>
+	<string name="preferences_alarm_title">是否提醒</string>
+	<string name="preferences_alarm_times_title">提醒次数</string>
+	<string name="preferences_actions_title">提醒方式</string>
+	<string name="preferences_play_beep_title">铃声</string>
+	<string name="preferences_vibrate_title">振动</string>
+	<string name="preferences_local_title">当前地区</string>
+	<string name="preferences_custom_city_title">自定义地区</string>
+	<string name="preferences_custom_city_summary">例如南京市</string>
+	<string name="preferences_custom_provice_summary">例如 江苏省</string>
+	<string name="preferences_provice_title">省份</string>
+	<string name="preferences_city_title">城市</string>
+	<string name="city_setting">设置城市</string>
+	<string name="input_your_city">请输入您所在的城市</string>
+	<string name="hint_city">南京市</string>
+	<string name="hint_province">江苏省</string>
+	<string name="set_city_ok">您已经成功设置城市为%s，您可以在设置界面修改您的城市</string>
+	<string name="widget_name">电视预告</string>
+	<string name="widget_info">显示您收藏的频道的节目预告，请在频道列表长按某个频道添加或取消收藏</string>
+	<string name="create_shortcut">创建桌面快捷图标</string>
+	<string name="create_shortcut_body">点击确定在桌面创建一个玩转电视的快捷图标</string>
+	<string name="connect_info">您还没有连接玩转电视到您的新浪微博，因此无法通过玩转电视分享您的留言到新浪微博。点击下面的按钮连接到新浪微博</string>
+	<string name="connect">连接到新浪微博</string>
+	<string name="weibo_promotion">我正在使用#玩转电视#，再也不会错过想看的电视了!</string>
+	<string name="weibo_post">发布到新浪微博</string>
+	<string name="weibo_title">分享评论到新浪微博</string>
+	<string name="weibo_watching">我正在收看 </string>
+	<string name="weibo_post_ok">成功发布到新浪微博</string>
+	<string name="weibo_connect_ok">您已经连接到新浪微博，现在您可以发布评论了</string>
+	<string name="weibo_menu">新浪微博</string>
+	<string name="weibo_re_binding">您已经连接到新浪微博，是否使用新的帐号重新连接？</string>
+	<string name="search_hint">搜索今天的电视节目</string>
+	<string name="search_not_blank">请输入要搜索的电视节目</string>
+</resources>

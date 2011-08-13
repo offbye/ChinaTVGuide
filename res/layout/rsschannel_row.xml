@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	>
+	
+	<ImageView android:id="@+id/icon"
+		android:layout_height="wrap_content" android:layout_marginRight="5dp"
+		android:src="@drawable/rss" android:layout_width="wrap_content">
+	</ImageView>
+	<TextView android:id="@+id/title"
+		android:layout_toRightOf="@+id/icon"
+		android:layout_width="fill_parent" android:textSize="16sp"
+		android:layout_height="wrap_content" android:padding="1dp"
+		android:textColor="#ff00ff00" android:text="title" />
+	<TextView android:id="@+id/url" android:layout_toRightOf="@+id/icon"
+		android:layout_width="wrap_content" android:singleLine="true"
+		android:layout_height="wrap_content" android:padding="1dp"
+		android:text="title" android:layout_below="@+id/title" />
+</RelativeLayout>

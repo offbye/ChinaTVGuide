@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.offbye.chinatvguide" android:versionName="5.9" android:versionCode="15">
+	<application android:icon="@drawable/icon"
+		android:allowClearUserData="true"
+		android:debuggable="false" android:description="@string/aboutinfo"
+		android:label="@string/app_name">
+		<activity android:name=".ChinaTVGuide"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category
+					android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".ChannelView" />
+		<activity android:name=".ChannelProgramView" />
+		<activity android:name=".CurrentProgramView" android:label="@string/grid_broadcasting"/>
+		<activity android:name=".SearchView" />
+		<activity android:name=".SearchResultView" android:label="@string/grid_search"/>
+		<activity android:name=".local.LocalChannelView" />
+		<activity android:name=".local.LocalChannelProgramView" />
+		<activity android:name=".local.LocalCurrentProgramView" />
+		<activity android:name=".SuggestView" android:label="@string/grid_suggest"/>
+		<receiver android:name=".TVAlarm" android:process=":remote">
+		</receiver>
+		<service android:name="SyncService">
+		</service>
+		<activity android:name=".channel.ChannelActivity" />
+		<activity android:name=".channel.ChannelTab" android:label="@string/grid_channel"/>
+		<activity android:name=".favorite.FavouriteTab" android:label="@string/grid_favourite"/>
+		<activity android:name=".favorite.FavouriteChannelActivity" />
+		<activity android:name=".favorite.FavoriteProgramActivity" />
+		<activity android:name=".grid.Grid" android:launchMode="singleTask"/>
+
+        <activity android:name=".rss.RSSActivity" android:label="@string/grid_rss"/>
+		<activity android:name=".rss.RSSReader" />
+		<activity android:name=".rss.ShowDescription" />
+		<activity android:name=".rate.TVRateActivity" android:label="@string/grid_rank"/>
+		<activity android:name=".recommend.TVRecommendActivity" android:label="@string/grid_recommend"/>
+
+		<activity android:name="PreferencesActivity" android:label="@string/preferences_name"/>
+		 <activity android:name=".weibo.OAuthActivity">
+	        <intent-filter>
+		        <action android:name="android.intent.action.VIEW" />
+		        <category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
+		        <data android:scheme="chinatvguide" android:host="OAuthActivity" />
+			</intent-filter>
+        </activity>
+        <activity android:name=".weibo.WeiboCheck"/>
+        <activity android:name=".weibo.Post"/>
+  		<activity android:name=".weibo.WebViewActivity"
+                 android:label="@string/app_name"
+                 android:configChanges="keyboardHidden|orientation"
+                 android:screenOrientation="portrait" 
+                 >
+       </activity>
+		<receiver android:name="widget.TVWidget"
+			android:label="@string/widget_name">
+			<intent-filter>
+				<action
+					android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+				<action android:name="com.offbye.chinatvguide.widget.TVWidget.refresh" />
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider"
+				android:resource="@xml/widget_provider" />
+		</receiver>
+		<!-- <uses-library android:name="com.google.android.maps" /> -->
+		<!-- <meta-data android:value="a14bc5b678a95fa" android:name="ADMOB_PUBLISHER_ID"/>-->
+		 	 <meta-data android:value="78de666e7f4a4d9d9da29192ea93926f" android:name="Wooboo_PID"/>
+			 <meta-data android:value="03" android:name="Market_ID"/>
+	</application>
+	<uses-sdk android:minSdkVersion="2"  android:targetSdkVersion="11"/>
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+   	<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+   	<uses-permission android:name="android.permission.RESTART_PACKAGES"></uses-permission>
+</manifest>

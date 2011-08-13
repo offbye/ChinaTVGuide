@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	>
+
+	<ImageView android:layout_toLeftOf="@+id/program"
+		android:id="@+id/channellogo" android:layout_height="wrap_content"
+		android:src="@drawable/icon" android:layout_width="wrap_content">
+	</ImageView>
+
+	<TextView android:id="@+id/channelname" android:layout_marginLeft="6dp"
+		android:layout_centerVertical="true"
+		android:layout_width="wrap_content" android:textSize="18sp"
+		android:layout_height="wrap_content" android:padding="4dp"
+		android:layout_toRightOf="@+id/channellogo" />
+	<ImageView android:layout_alignParentRight="true"
+		android:layout_centerVertical="true" android:layout_marginRight="5dp"
+		android:id="@+id/favouriteicon" android:layout_height="wrap_content"
+		android:visibility="gone" android:src="@drawable/favouriteicon"
+		android:layout_width="wrap_content">
+	</ImageView>
+</RelativeLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:spacing="16dp" android:layout_height="fill_parent">
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<TextView android:id="@+id/TextView01" android:visibility="gone"
+			android:layout_width="fill_parent" android:paddingLeft="20dp"
+			android:textSize="18sp" android:textColor="#ffff0a00" android:text=""
+			android:layout_height="wrap_content" />
+	</LinearLayout>
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<Button android:text="@string/mo" android:id="@+id/mo"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/tu" android:id="@+id/tu"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/we" android:id="@+id/we"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/th" android:id="@+id/th"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/fr" android:id="@+id/fr"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/sa" android:id="@+id/sa"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/su" android:id="@+id/su"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+		</Button>
+	</LinearLayout>
+	<ListView android:id="@+id/ListView01"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_weight="1"
+		android:paddingBottom="5dp" android:paddingLeft="5dp"
+		android:layout_gravity="center_horizontal">
+	</ListView>
+</LinearLayout>
+

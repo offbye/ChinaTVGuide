@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory
+		android:title="@string/preferences_general_title">
+		<CheckBoxPreference android:key="preferences_alarm"
+			android:defaultValue="true"
+			android:title="@string/preferences_alarm_title" />
+		<CheckBoxPreference android:key="preferences_alarm_times"
+			android:defaultValue="true"
+			android:title="@string/preferences_alarm_times_title" />
+	</PreferenceCategory>
+	<PreferenceCategory
+		android:title="@string/preferences_actions_title">
+		<CheckBoxPreference android:key="preferences_play_beep"
+			android:defaultValue="true"
+			android:title="@string/preferences_play_beep_title" />
+		<CheckBoxPreference android:key="preferences_vibrate"
+			android:defaultValue="false"
+			android:title="@string/preferences_vibrate_title" />
+	</PreferenceCategory>
+	<PreferenceCategory
+		android:title="@string/preferences_local_title">
+			
+		<EditTextPreference android:key="preferences_province"
+			android:title="@string/preferences_provice_title"
+			android:summary="@string/preferences_custom_provice_summary" />
+		<EditTextPreference android:key="preferences_city"
+			android:title="@string/preferences_city_title"
+			android:summary="@string/preferences_custom_city_summary" />
+	</PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:adsdk="http://schemas.android.com/apk/res/com.offbye.chinatvguide"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent"  android:background="@drawable/home">
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:gravity="center_vertical"
+		android:layout_height="wrap_content" android:background="@drawable/rowbg">
+			
+		<ImageView android:id="@+id/channellogo"
+			android:layout_height="wrap_content" android:src="@drawable/cctv1"
+			android:layout_width="wrap_content">
+		</ImageView>
+		<TextView android:id="@+id/cdate"
+			android:layout_width="wrap_content" android:textSize="18sp"
+			android:layout_height="wrap_content" android:padding="5dp" 
+			android:singleLine="true" android:textColor="#ffff0000"
+			android:gravity="center_vertical" android:text="title"
+			/>
+	</LinearLayout>
+	<LinearLayout android:gravity="center" android:layout_marginTop="3dp"
+		android:layout_width="fill_parent" android:layout_marginBottom="5dp"
+		android:layout_height="wrap_content">
+
+		<Button android:text="@string/mo" android:id="@+id/mo" android:background="@xml/btn_week"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/tu" android:id="@+id/tu" android:background="@xml/btn_week"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/we" android:id="@+id/we" android:background="@xml/btn_week"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/th" android:id="@+id/th" android:background="@xml/btn_week"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/fr" android:id="@+id/fr" android:background="@xml/btn_week"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/sa" android:id="@+id/sa" android:background="@xml/btn_week"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</Button>
+		<Button android:text="@string/su" android:id="@+id/su" android:background="@xml/btn_week"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content">
+		</Button>
+	</LinearLayout>
+   <com.wooboo.adlib_android.WoobooAdView
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    adsdk:testing="false"
+    adsdk:backgroundColor="#00000000"
+    adsdk:textColor="#FFFFFFFF"
+    adsdk:refreshInterval="30"
+    />
+	<ListView android:id="@+id/ListView01"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_weight="1"
+		android:layout_gravity="center_horizontal">
+	</ListView>
+
+</LinearLayout>
+

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ChinaTVGuide!</string>
+    <string name="app_name">玩轉電視</string>
+    <string name="channelname">電視頻道</string>
+    <string name="currentprogram">正在播出</string>
+    <string name="searchprogram">節目搜索</string>
+    <string name="program">電視節目</string>
+    <string name="starttime">播放時間</string>
+    <string name="date">播出日期</string>
+	<string name="alarmtimes">提醒時間設置</string>
+	<string name="notsearchtime">不搜索節目時間</string>
+
+	<string name="synccompleted">今天節目資料已經同步到手機</string>
+	<string name="datasyncing">正在同步節目資料！</string>
+	<string name="program_data_deleted">節目緩存資料已經清空！</string>
+	<string name="no_data_deleted">沒有節目資料被刪除！</string>
+	<string name="havesynced">當天節目資料已經同步過了！</string>
+	<string name="allchannel">全部頻道</string>
+
+	<string name="alarm_service_finished">提醒服務結束</string>
+	<string name="alarm_service_started">提醒服務開始</string>
+	<string name="alarm_service_label">提醒服務</string>
+
+	<string name="localchannel">本地電視</string>
+	<string name="localprogram">本地節目</string>
+	<string name="current_location">您的當前位置:</string>
+	<string name="no_location">無法定位到您的位置</string>
+	<string name="select_dialog">請選擇</string>
+
+	<string name="suggest">建議</string>
+	<string name="suggest_title">請提出您的寶貴建議</string>
+	<string name="invalid_content_title">請填寫您的建議</string>
+	<string name="invalid_content_msg">建議不能少於5個字,請認真填寫！</string>
+	<string name="invalid_email_title">請輸入Email</string>
+	<string name="invalid_email_msg">Email沒有填寫或格式錯誤</string>
+	<string name="submitsuggest">提交建議</string>
+
+	<string name="alert_dialog_ok">確定</string>
+	<string name="alert_dialog_cancel">取消</string>
+
+	<string name="menu_abouttitle">關於ChinaTVGuide</string>
+	<string name="menu_about">關於</string>
+	<string name="menu_help">幫助</string>
+	<string name="menu_clean">清空緩存</string>
+	<string name="menu_sync">同步</string>
+	<string name="menu_channel">頻道</string>
+	<string name="menu_exit">退出</string>
+
+	<string name="msg_loading">獲取資料中</string>
+	<string name="msg_wait">請稍後...</string>
+
+	<string name="notify_succeeded">請求成功</string>
+	<string name="notify_network_error">網路傳輸異常</string>
+	<string name="notify_service_exception">服務異常</string>
+	<string name="notify_no_result">沒有資料</string>
+	<string name="notify_json_error">解析錯誤</string>
+	<string name="notify_database_error">資料庫錯誤</string>
+	<string name="notify_newversion">現在有新版本</string>
+	<string name="notify_no_permision">沒有許可權</string>
+	<string name="notify_cannot_location">無法定位</string>
+	<string name="notify_no_connection">沒有網路連接</string>
+
+
+	<string name="aboutinfo">本軟體提供中國電視節目預告，可以查看當前正在播出的節目，
+	最新的娛樂資訊，收視率排行，熱點節目推薦等，可以設置節目播出前定時提醒，讓您不錯過想看的節目。軟體現在提供中央電視臺，
+	中國教育電視臺，省級衛視頻道,港澳臺頻道，數位電視，以及600多個地面頻道節目預告資訊，現在已經基本覆蓋中國主要城市。
+	本軟體支援cmwap網路，完全相容android1.5-3.0。
+	</string>
+	<string name="helpinfo">1、手機不能經常聯網的用戶請在能上網時，按 MENU-同步 把當天節目資料一次性同步到本地，
+	這樣軟體以後就可以不用聯網運行了！\n 2、使用本軟體很長時間後請注意使用"清空緩存"功能清除以前的節目緩存資料，節省寶貴的手機記憶體
+	\n 3、目前只能設置一個節目提醒，以最後設置的為准 \n 4、在節目清單頁面長按節目項會出現功能表，可以查看本頻道其他節目，在網上搜索節目，發送節目短信給朋友 \n 5、在頻道清單上長按可以把該頻道加入或刪除我的最愛,收藏的頻道可以在桌面widget顯示</string>
+	<string name="msg_no_connenction">沒有網路連接</string>
+  	<string name="msg_no_connenction_detail">目前沒有可用的網路連接，本程式只能從本地緩存中讀取節目資料，部分功能將不可用</string>
+
+    <string name="tab_favouritechannel">收藏的頻道</string>
+	<string name="tab_favouriteprogram">收藏的節目</string>
+
+    <string name="tab_cctv">央視</string>
+	<string name="tab_sjws">衛視</string>
+    <string name="tab_gt">港澳臺</string>
+	<string name="tab_local">本地</string>
+	<string name="tab_shuzhi">數字</string>
+	<string name="tab_iptv">電信IPTV</string>
+
+	<string name="msg_setfavourate_ok">已經加入我的最愛</string>
+	<string name="msg_cancelfavourate_ok">已經從我的最愛刪除</string>
+
+	<string name="grid_channel">電視頻道</string>
+	<string name="grid_broadcasting">正在播出</string>
+	<string name="grid_search">電視搜索</string>
+
+	<string name="grid_suggest">提交建議</string>
+	<string name="grid_comment">電視評論</string>
+	<string name="grid_favourite">我的收藏</string>
+	<string name="grid_recommend">節目推薦</string>
+	<string name="grid_rss">娛樂資訊</string>
+	<string name="grid_rank">收視排行</string>
+	<string name="grid_about">關於我們</string>
+
+	<string name="menu_home">首頁</string>
+	<string name="menu_favourite">收藏</string>
+	<string name="menu_news">資訊</string>
+	<string name="menu_rank">排行</string>
+	<string name="menu_comment">評論</string>
+	<string name="menu_forum">社區</string>
+	<string name="menu_delete_favourites">刪除收藏</string>
+	<string name="tip_delete_favourites">你確定要刪除所有收藏的節目嗎？</string>
+	<string name="tip_deleted_favourites">已經刪除所有收藏的節目</string>
+	<string name="tip_not_delete_favourites">沒有收藏的節目被刪除</string>
+
+	<string name="mo">週一</string>
+	<string name="tu">週二</string>
+	<string name="we">週三</string>
+	<string name="th">週四</string>
+	<string name="fr">週五</string>
+	<string name="sa">週六</string>
+	<string name="su">周日</string>
+
+	<string name="msg_share">分享給朋友</string>
+	<string name="tvrank">排行</string>
+	<string name="tvrate">收視率</string>
+	<string name="tvprogram">電視節目和頻道</string>
+	<string name="changecity">切換城市</string>
+	<string name="suggest_content">你的建議是對我們最好的支持！</string>
+	<string name="suggest_email">your@youremail.com</string>
+
+	<string name="tv_actor">演員</string>
+	<string name="tv_director">導演</string>
+	<string name="tv_intro">介紹</string>
+
+	<string name="preferences_name">設置</string>
+	<string name="preferences_general_title">設置</string>
+	<string name="preferences_alarm_title">是否提醒</string>
+	<string name="preferences_alarm_times_title">提醒次數</string>
+	<string name="preferences_actions_title">提醒方式</string>
+	<string name="preferences_play_beep_title">鈴聲</string>
+	<string name="preferences_vibrate_title">振動</string>
+	<string name="preferences_local_title">當前地區</string>
+	<string name="preferences_custom_city_title">自訂地區</string>
+	<string name="preferences_custom_city_summary">例如南京市</string>
+	<string name="preferences_custom_provice_summary">例如 江蘇省</string>
+	<string name="preferences_provice_title">省份</string>
+	<string name="preferences_city_title">城市</string>
+	<string name="city_setting">設置城市</string>
+	<string name="input_your_city">請輸入您所在的城市</string>
+	<string name="hint_city">南京市</string>
+	<string name="hint_province">江蘇省</string>
+	<string name="set_city_ok">您已經成功設置城市為%s，您可以在設置介面修改您的城市</string>
+	<string name="widget_name">電視預告</string>
+	<string name="widget_info">顯示您收藏的頻道的節目預告，請在頻道清單長按某個頻道添加或取消收藏</string>
+	<string name="create_shortcut">創建桌面快捷圖示</string>
+	<string name="create_shortcut_body">點擊確定在桌面創建一個玩轉電視的快捷圖示</string>
+	<string name="connect_info">您還沒有連接玩轉電視到您的新浪微博，因此無法通過玩轉電視分享您的留言到新浪微博。點擊下面的按鈕連接到新浪微博</string>
+	<string name="connect">連接到新浪微博</string>
+	<string name="weibo_promotion">我正在使用玩轉電視，再也不會錯過想看的電視了!</string>
+	<string name="weibo_post">發布到新浪微博</string>
+	<string name="weibo_title">分享評論到新浪微博</string>
+	<string name="weibo_watching">我正在收看 </string>
+	<string name="weibo_connect_ok">您已經連接到新浪微博，現在您可以發布評論了</string>
+	<string name="weibo_menu">新浪微博</string>
+	<string name="weibo_re_binding">您已經連接到新浪微博，是否使用新的帳號重新連接？</string>
+</resources>

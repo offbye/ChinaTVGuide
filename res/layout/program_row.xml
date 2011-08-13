@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:id="@+id/rllayout" android:padding="5dp">
+	<ImageView android:id="@+id/daynight" android:padding="3dp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:src="@drawable/day">
+	</ImageView>
+
+	<TextView android:id="@+id/startime" android:layout_marginLeft="10dp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:padding="3dp"
+		android:text="13:33" android:textColor="#ffff0000"
+		android:layout_toRightOf="@+id/daynight" android:textSize="18sp" />
+
+	<TextView android:id="@+id/program" android:layout_marginLeft="10dp"
+		android:layout_width="wrap_content" android:singleLine="true"
+		android:ellipsize="marquee" android:marqueeRepeatLimit="marquee_forever"
+		android:layout_height="wrap_content" android:padding="3dp"
+		android:textSize="18sp" android:textColorHighlight="#ffff0000"
+		android:textColor="#ffffffff" android:text="program"
+		android:layout_toRightOf="@+id/startime" />
+
+</RelativeLayout>
+

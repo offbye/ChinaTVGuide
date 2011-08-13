@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/appwidget_bg" android:gravity="center">
+
+	<ImageButton android:id="@+id/refresh"
+		android:src="@drawable/refreshwidget"
+		android:background="#00ffffff"
+		android:layout_marginLeft="20dp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</ImageButton>
+	<TextView android:layout_width="fill_parent"
+		android:textColor="#ffffffff" android:layout_height="wrap_content"
+		android:layout_marginTop="5dp" android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp" android:layout_marginBottom="5dp"
+		android:text="@string/widget_info" android:id="@+id/hello" />
+
+
+</LinearLayout>

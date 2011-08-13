@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ChinaTVGuide!</string>
+    <string name="app_name">ChinaTVGuide</string>
+    <string name="channelname">Channels</string>
+    <string name="currentprogram">BroadCasting</string>
+    <string name="searchprogram">Search</string>
+    <string name="program">Programs</string>
+    <string name="starttime">Time</string>
+    <string name="date">Date</string>
+	<string name="alarmtimes">Alarm Setting</string>
+	<string name="notsearchtime">Do not search time</string>
+
+	<string name="synccompleted">TV programs of Today have been synced.</string>
+	<string name="datasyncing">TV programs syncing！</string>
+	<string name="program_data_deleted">Cache have been deleted！</string>
+	<string name="no_data_deleted">No data be deleted！</string>
+	<string name="havesynced">TV programs of Today have already been synced！</string>
+	<string name="allchannel">All channel</string>
+
+	<string name="alarm_service_finished">Alarm service finished</string>
+	<string name="alarm_service_started">Alarm service started</string>
+	<string name="alarm_service_label">Alarm service</string>
+
+	<string name="localchannel">Local channel</string>
+	<string name="localprogram">Local program</string>
+	<string name="current_location">Current location:</string>
+	<string name="no_location">Can not location</string>
+	<string name="select_dialog">Please Select</string>
+
+	<string name="suggest">Suggestion</string>
+	<string name="suggest_title">Please give your suggestion</string>
+	<string name="invalid_content_title">your suggestion</string>
+	<string name="invalid_content_msg">No less than 5 letters！</string>
+	<string name="invalid_email_title">Input Email</string>
+	<string name="invalid_email_msg">Email is invalid</string>
+	<string name="submitsuggest">Suggest</string>
+
+	<string name="alert_dialog_ok">OK</string>
+	<string name="alert_dialog_cancel">Cancel</string>
+
+	<string name="menu_abouttitle">About ChinaTVGuide</string>
+	<string name="menu_about">About</string>
+	<string name="menu_help">Help</string>
+	<string name="menu_clean">Clean Cache</string>
+	<string name="menu_sync">Sync</string>
+	<string name="menu_channel">Channel</string>
+	<string name="menu_exit">Exit</string>
+
+	<string name="msg_loading">Load Data</string>
+	<string name="msg_wait">Please Wait...</string>
+
+	<string name="notify_succeeded">Success</string>
+	<string name="notify_network_error">Network error</string>
+	<string name="notify_service_exception">Server error</string>
+	<string name="notify_no_result">No data</string>
+	<string name="notify_json_error">Parse error</string>
+	<string name="notify_database_error">Data error</string>
+	<string name="notify_newversion">New version</string>
+	<string name="notify_no_permision">No permision</string>
+	<string name="notify_cannot_location">No locationg</string>
+	<string name="notify_no_connection">No connection</string>
+
+
+	<string name="aboutinfo">
+ChinaTVGuide provide TV program guide in China,  Quickly get an overview of what TV program is on right now.It also provide  entertainment news, tv rates，and tv program recommendations.Now it covers about 700 TV channels in China.
+	It comparable with android1.5-3.0。
+	</string>
+	<string name="helpinfo">1、手机不能经常联网的用户请在能上网时，按 MENU-同步 把当天节目数据一次性同步到本地，
+	这样软件以后就可以不用联网运行了！\n 2、使用本软件很长时间后请注意使用"清空缓存"功能清除以前的节目缓存数据，节省宝贵的手机内存
+	\n 3、目前只能设置一个节目提醒，以最后设置的为准 \n 4、在节目列表页面长按节目项会出现菜单，可以查看本频道其他节目，在网上搜索节目，发送节目短信给朋友 \n 5、在频道列表上长按可以把该频道加入或删除收藏夹,收藏的频道可以在桌面widget显示</string>
+	<string name="msg_no_connenction">no network connenction</string>
+  	<string name="msg_no_connenction_detail">there is no network connenction,most of feature can not be uesed.</string>
+
+    <string name="tab_favouritechannel">Favourite channels</string>
+	<string name="tab_favouriteprogram">Favourite programs</string>
+
+    <string name="tab_cctv">CCTV</string>
+	<string name="tab_sjws">Provices</string>
+    <string name="tab_gt">Taiwan</string>
+	<string name="tab_local">Local</string>
+	<string name="tab_shuzhi">Digital</string>
+	<string name="tab_iptv">IPTV</string>
+
+	<string name="msg_setfavourate_ok">Added to favourites</string>
+	<string name="msg_cancelfavourate_ok">Removed from favourites</string>
+
+	<string name="grid_channel">Channels</string>
+	<string name="grid_broadcasting">Broadcasting</string>
+	<string name="grid_search">Search</string>
+
+	<string name="grid_suggest">Suggest</string>
+	<string name="grid_comment">Comment</string>
+	<string name="grid_favourite">Favourites</string>
+	<string name="grid_recommend">Recommend</string>
+	<string name="grid_rss">News</string>
+	<string name="grid_rank">Rank</string>
+	<string name="grid_about">About</string>
+
+	<string name="menu_home">Home</string>
+	<string name="menu_favourite">Favourite</string>
+	<string name="menu_news">News</string>
+	<string name="menu_rank">Rank</string>
+	<string name="menu_comment">Comments</string>
+	<string name="menu_forum">Forum</string>
+	<string name="menu_delete_favourites">Delete favourites</string>
+	<string name="tip_delete_favourites">Are you sure to delete all favourites？</string>
+	<string name="tip_deleted_favourites">Deleted</string>
+	<string name="tip_not_delete_favourites">Nothing deleted</string>
+
+	<string name="mo">MO</string>
+	<string name="tu">TU</string>
+	<string name="we">WE</string>
+	<string name="th">TH</string>
+	<string name="fr">FR</string>
+	<string name="sa">SA</string>
+	<string name="su">SU</string>
+
+	<string name="msg_share">Share</string>
+	<string name="tvrank">Rank</string>
+	<string name="tvrate">TV Rate</string>
+	<string name="tvprogram">Channel</string>
+	<string name="changecity">Change city</string>
+	<string name="suggest_content">Thank you for you suggest！</string>
+	<string name="suggest_email">your@youremail.com</string>
+
+	<string name="tv_actor">Actor</string>
+	<string name="tv_director">Director</string>
+	<string name="tv_intro">Intro</string>
+
+	<string name="preferences_name">Setting</string>
+	<string name="preferences_general_title">Setting</string>
+	<string name="preferences_alarm_title">是否提醒</string>
+	<string name="preferences_alarm_times_title">提醒次数</string>
+	<string name="preferences_actions_title">提醒方式</string>
+	<string name="preferences_play_beep_title">铃声</string>
+	<string name="preferences_vibrate_title">振动</string>
+	<string name="preferences_local_title">当前地区</string>
+	<string name="preferences_custom_city_title">自定义地区</string>
+	<string name="preferences_custom_city_summary">例如南京市</string>
+	<string name="preferences_custom_provice_summary">例如 江苏省</string>
+	<string name="preferences_provice_title">Province</string>
+	<string name="preferences_city_title">City</string>
+	<string name="city_setting">City setting</string>
+	<string name="input_your_city">请输入您所在的城市</string>
+	<string name="hint_city">南京市</string>
+	<string name="hint_province">江苏省</string>
+	<string name="set_city_ok">您已经成功设置城市为%s，您可以在设置界面修改您的城市</string>
+	<string name="widget_name">TV Guide</string>
+	<string name="widget_info">Show your favorite channels programs，please add to favourite in channel list by long click</string>
+	<string name="create_shortcut">Create a shortcut</string>
+	<string name="create_shortcut_body">Do you want to create a shortcut?</string>
+	<string name="connect_info">You have not authorized ChinaTVGuide to connect to your sina Weibo. Now you can connect to Sina Weibo,then you can post tv comments.</string>
+	<string name="connect">Connect to Sina Weibo</string>
+	<string name="weibo_promotion">I am using ChinaTvGuide,It is amazing!</string>
+	<string name="weibo_post">Post to sina Weibo</string>
+	<string name="weibo_title">Post</string>
+	<string name="weibo_watching">I am watching </string>
+	<string name="weibo_post_ok">have posted to Sina Weibo.</string>
+	<string name="weibo_connect_ok">You have connected to Sina Weibo,now you can post comments.</string>
+	<string name="weibo_menu">Sina Weibo</string>
+	<string name="weibo_re_binding">You have already binding to Sina Weibo.Do you want to binding use a new account?</string>
+    <string name="search_hint">Search a TV program of today</string>
+	<string name="search_not_blank">Search text can not be blank</string>
+</resources>

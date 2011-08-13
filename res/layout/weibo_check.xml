@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@drawable/home">
+
+	<TextView android:text="@string/connect_info" android:id="@+id/connect_info"
+		android:layout_gravity="center_horizontal" android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_margin="10dp" android:layout_width="wrap_content"
+		android:layout_height="wrap_content"></TextView>
+	<ImageButton android:layout_height="wrap_content"
+		android:src="@drawable/weibo_login" android:layout_gravity="center_horizontal"
+		android:layout_width="wrap_content" android:id="@+id/Connect" />
+	<ImageButton android:id="@+id/btnPost" android:visibility="gone"
+		android:layout_width="wrap_content" android:src="@drawable/weibo_share"
+		android:layout_height="wrap_content" android:layout_gravity="center_horizontal" />
+</LinearLayout>

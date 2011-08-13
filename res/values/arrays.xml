@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="colors">
+        <item>red</item>
+        <item>orange</item>
+        <item>yellow</item>
+        <item>green</item>
+        <item>blue</item>
+        <item>violet</item>
+    </string-array>
+
+    <string-array name="alarmtimes">
+        <item>When program start</item>
+        <item>Before 10 minutes</item>
+        <item>Before 1 hours</item>
+        <item>Before 3 hours</item>
+    </string-array>
+    <string-array name="localoptions">
+        <item>View other programs</item>
+        <item>Share it to friends</item>
+        <item>Search on google</item>
+        <item>Add to favourite</item>
+        <item>I am Watching</item>
+    </string-array>
+ 	<string-array name="rss">
+        <item>View all</item>
+        <item>Share</item>
+    </string-array>
+    <string-array name="tvcity">
+        <item>Beijing</item>
+        <item>Shanghai</item>
+        <item>Guangzhou</item>
+        <item>Chongqing</item>
+        <item>Tianjin</item>
+        <item>Wuhan</item>
+        <item>Changsha</item>
+        <item>Chengdu</item>
+        <item>Xi an</item>
+        <item>Shenyang</item>
+        <item>Nanjing</item>
+        <item>Hangzhou</item>
+    </string-array>
+</resources>

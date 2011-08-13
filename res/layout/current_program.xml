@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:adsdk="http://schemas.android.com/apk/res/com.offbye.chinatvguide"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:spacing="5dp" android:layout_height="fill_parent">
+	<com.wooboo.adlib_android.WoobooAdView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true" adsdk:testing="false"
+		adsdk:backgroundColor="#00000000" adsdk:textColor="#FFFFFFFF"
+		adsdk:refreshInterval="30" />
+	<TextView android:id="@+id/TextView01" android:visibility="gone"
+		android:layout_width="fill_parent" android:textSize="20sp"
+		android:textColor="#ffffffff" android:gravity="center"
+		android:layout_height="fill_parent" />
+
+	<ListView android:id="@+id/ListView01"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal">
+	</ListView>
+
+</LinearLayout>
+

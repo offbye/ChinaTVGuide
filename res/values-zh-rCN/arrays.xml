@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="colors">
+        <item>red</item>
+        <item>orange</item>
+        <item>yellow</item>
+        <item>green</item>
+        <item>blue</item>
+        <item>violet</item>
+    </string-array>
+
+    <string-array name="alarmtimes">
+        <item>节目开始时提醒</item>
+        <item>提前10分钟提醒</item>
+        <item>提前1小时提醒</item>
+        <item>提前3小时提醒</item>
+    </string-array>
+    <string-array name="localoptions">
+        <item>查看当前频道其它节目</item>
+        <item>分享电视节目给朋友</item>
+        <item>在网络上搜索这个节目</item>
+        <item>把这个节目加入收藏夹</item>
+        <item>签到（我正在收看）</item>
+        <item>对电视节目发表评论</item>
+    </string-array>
+     <string-array name="programoptions">
+        <item>查看当前频道其它节目</item>
+        <item>分享电视节目给朋友</item>
+        <item>在网络上搜索这个节目</item>
+        <item>把这个节目加入收藏夹</item>
+        <item>签到（我正在收看）</item>
+        <item>对电视节目发表评论</item>
+    </string-array>
+ 	<string-array name="rss">
+        <item>查看全文</item>
+        <item>分享给朋友</item>
+    </string-array>
+    <string-array name="tvcity">
+        <item>北京</item>
+        <item>上海</item>
+        <item>广州</item>
+        <item>重庆</item>
+        <item>天津</item>
+        <item>武汉</item>
+        <item>长沙</item>
+        <item>成都</item>
+        <item>西安</item>
+        <item>沈阳</item>
+        <item>南京</item>
+        <item>杭州</item>
+    </string-array>
+</resources>
