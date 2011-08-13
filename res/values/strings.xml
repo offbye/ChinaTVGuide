@@ -162,4 +162,7 @@ ChinaTVGuide provide TV program guide in China,  Quickly get an overview of what
 	<string name="weibo_re_binding">You have already binding to Sina Weibo.Do you want to binding use a new account?</string>
     <string name="search_hint">Search a TV program of today</string>
 	<string name="search_not_blank">Search text can not be blank</string>
+	
+	<string name="checkin_failed">Check in failed</string>
+	<string name="checkin_succeed">Check in succeed</string>
 </resources>

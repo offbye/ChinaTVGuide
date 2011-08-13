@@ -78,10 +78,7 @@ public class Post extends Activity {
 				//post(mContent.getText().toString());
 				
 				Comment c = new Comment();
-				c.userid = "u";
-				c.channel = "ccc";
-				c.program = "p";
-				c.screenName = "s";
+
 				
 				new CommentTask(getApplicationContext(),CommentTask.genUrl(c),mCallback).start();
 			}

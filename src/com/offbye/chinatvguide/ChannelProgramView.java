@@ -1,14 +1,17 @@
 package com.offbye.chinatvguide;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import com.offbye.chinatvguide.channel.ChannelTab;
+import com.offbye.chinatvguide.server.Comment;
+import com.offbye.chinatvguide.server.CommentTask;
+import com.offbye.chinatvguide.util.AppException;
+import com.offbye.chinatvguide.util.Constants;
+import com.offbye.chinatvguide.util.HttpUtil;
+import com.offbye.chinatvguide.util.MD5;
+import com.offbye.chinatvguide.weibo.OAuthActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -40,11 +43,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import com.offbye.chinatvguide.channel.ChannelTab;
-import com.offbye.chinatvguide.util.AppException;
-import com.offbye.chinatvguide.util.Constants;
-import com.offbye.chinatvguide.util.HttpUtil;
-import com.offbye.chinatvguide.util.MD5;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ChannelProgramView extends Activity {
 	private static final String TAG = "ChannelProgramView";
@@ -62,7 +68,7 @@ public class ChannelProgramView extends Activity {
 	private String channel;
 	private int currentPosition;
 
-	private TVProgram seletedProgram=null;
+	private TVProgram seletedProgram = null;
 	private int seletedinterval=0;
 	private TelephonyManager tm ;
 	private Date mo,tu,we,th,fr,sa,su;
@@ -75,12 +81,13 @@ public class ChannelProgramView extends Activity {
 	private String province;
 
 	private String city;
+	private Context mContext;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.channelprogramview);
-
+		mContext = this;
 		channellogo = (ImageView) this.findViewById(R.id.channellogo);
 		cdate = (TextView) this.findViewById(R.id.cdate);
 		optionsListView = (ListView) this.findViewById(R.id.ListView01);
@@ -373,7 +380,7 @@ public class ChannelProgramView extends Activity {
 		Cursor programsCursor = null;
 		MydbHelper mydb = null;
 		try {
-			mydb  = new MydbHelper(ChannelProgramView.this);
+			mydb  = new MydbHelper(mContext);
 			//Log.v(TAG, "sql=" + sql.toString());
 			programsCursor = mydb.searchPrograms(sql);
 			startManagingCursor(programsCursor);
@@ -443,7 +450,7 @@ public class ChannelProgramView extends Activity {
 			switch (msg.what) {
 			case R.string.notify_succeeded:
 				pd.dismiss();
-				ProgramAdapter pa=new ProgramAdapter(ChannelProgramView.this,R.layout.program_row,pl);
+				ProgramAdapter pa=new ProgramAdapter(mContext,R.layout.program_row,pl);
         		optionsListView.setAdapter(pa);
                 if (currentPosition > 0) {
                     Log.d(TAG, "currentPosition=" + currentPosition);
@@ -454,7 +461,7 @@ public class ChannelProgramView extends Activity {
         			{
         				seletedProgram = pl.get(position);
         				
-        				new AlertDialog.Builder(ChannelProgramView.this)
+        				new AlertDialog.Builder(mContext)
                         .setIcon(R.drawable.icon)
                         .setTitle(R.string.alarmtimes)
                         .setSingleChoiceItems(R.array.alarmtimes, 0, new DialogInterface.OnClickListener() {
@@ -466,12 +473,12 @@ public class ChannelProgramView extends Activity {
                             public void onClick(DialogInterface dialog, int whichButton) {
 
                                 /* User clicked Yes so do some stuff */
-                   	            Intent indent = new Intent(ChannelProgramView.this, TVAlarm.class); 
+                   	            Intent indent = new Intent(mContext, TVAlarm.class); 
                 	            indent.putExtra("id", seletedProgram.getId());
                 	            indent.putExtra("starttime", seletedProgram.getStarttime());
                 	            indent.putExtra("program", seletedProgram.getProgram());
                 	            indent.putExtra("channel", seletedProgram.getChannel());
-                	            PendingIntent sender = PendingIntent.getBroadcast(ChannelProgramView.this,
+                	            PendingIntent sender = PendingIntent.getBroadcast(mContext,
                 	                    0, indent,PendingIntent.FLAG_CANCEL_CURRENT);
 
                 	            Calendar calendar = Calendar.getInstance();
@@ -506,7 +513,7 @@ public class ChannelProgramView extends Activity {
                 	            am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
                 	            
                 	            String alarm= "成功设置提醒 " +seletedProgram.getProgram();
-                                Toast.makeText(ChannelProgramView.this, alarm,10).show();
+                                Toast.makeText(mContext, alarm,10).show();
                             }
                         })
                         .setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {
@@ -524,7 +531,7 @@ public class ChannelProgramView extends Activity {
         			{
         				seletedProgram = pl.get(position);
         				
-        				new AlertDialog.Builder(ChannelProgramView.this)
+        				new AlertDialog.Builder(mContext)
         	                .setTitle(R.string.select_dialog)
         	                .setItems(R.array.localoptions, new DialogInterface.OnClickListener() {
         	                    public void onClick(DialogInterface dialog, int which) {
@@ -532,7 +539,7 @@ public class ChannelProgramView extends Activity {
         	                        /* User clicked so do some stuff */
         	                       //String[] items = getResources().getStringArray(R.array.localoptions);
         	                       if(which==0){
-        	           	            	Intent i = new Intent(ChannelProgramView.this, ChannelProgramView.class); 
+        	           	            	Intent i = new Intent(mContext, ChannelProgramView.class); 
         	           	            	i.putExtra("channel", seletedProgram.getChannel());
         	           					startActivity(i); 
         	                       }
@@ -549,12 +556,18 @@ public class ChannelProgramView extends Activity {
         	                    	   startActivity(intent);
         	                       }
         	                       else if(which==3){
-        	                    	   MydbHelper mydb = new MydbHelper(ChannelProgramView.this);
+        	                    	   MydbHelper mydb = new MydbHelper(mContext);
         	                    	   mydb.addFavoriteProgram(seletedProgram.getChannel(), seletedProgram.getDate(), seletedProgram.getStarttime(), seletedProgram.getEndtime(), seletedProgram.getProgram(), seletedProgram.getDaynight(), seletedProgram.getChannelname());
         	           				   mydb.close();
-        	           				   Toast.makeText(ChannelProgramView.this, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
+        	           				   Toast.makeText(mContext, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
         	                       }
+        	                       else if(which == 4){
+        	                           pd = ProgressDialog.show(mContext, getString(R.string.msg_loading), getString(R.string.msg_wait), true, true);
+        	                           pd.setIcon(R.drawable.icon);
+        	                           checkin(seletedProgram);
+                                   }
         	                    }
+
         	                }).show();
 						return true;
    
@@ -565,33 +578,33 @@ public class ChannelProgramView extends Activity {
 			case R.string.notify_network_error:
 				pd.dismiss();
 				optionsListView.setAdapter(null);
-				Toast.makeText(ChannelProgramView.this, R.string.notify_network_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_network_error, 5).show();
 				break;
 			case R.string.notify_json_error:
 				pd.dismiss();
 				optionsListView.setAdapter(null);
-				Toast.makeText(ChannelProgramView.this, R.string.notify_json_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_json_error, 5).show();
 				break;
 			case R.string.notify_database_error:
 				pd.dismiss();
 				optionsListView.setAdapter(null);
-				Toast.makeText(ChannelProgramView.this, R.string.notify_database_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_database_error, 5).show();
 				break;
 			case R.string.notify_no_result:
 				pd.dismiss();
 				optionsListView.setAdapter(null);
-				Toast.makeText(ChannelProgramView.this,  R.string.notify_no_result, 5).show();
+				Toast.makeText(mContext,  R.string.notify_no_result, 5).show();
 				break;
 			case R.string.notify_no_connection:
 				pd.dismiss();
-				Toast.makeText(ChannelProgramView.this, R.string.notify_no_connection, 5).show();
+				Toast.makeText(mContext, R.string.notify_no_connection, 5).show();
 				break;
 			case R.string.notify_newversion:
 				pd.dismiss();
 				optionsListView.setAdapter(null);
-				Toast.makeText(ChannelProgramView.this, servermsg.split("--")[4], 5).show();
+				Toast.makeText(mContext, servermsg.split("--")[4], 5).show();
 				
-				new AlertDialog.Builder(ChannelProgramView.this)
+				new AlertDialog.Builder(mContext)
                 .setIcon(R.drawable.icon)
                 .setTitle(servermsg.split("--")[3])
                 .setMessage(servermsg.split("--")[4])
@@ -603,14 +616,48 @@ public class ChannelProgramView extends Activity {
                     }
                 }).show();
 
-				break;		
+				break;
+			case R.string.checkin_failed:
+                pd.dismiss();
+                Toast.makeText(mContext, R.string.checkin_failed, 5).show();
+                break;
+			case R.string.checkin_succeed:
+                pd.dismiss();
+                Toast.makeText(mContext, R.string.checkin_succeed, 5).show();
+                break;
 			default:
-				Toast.makeText(ChannelProgramView.this,R.string.notify_no_result, 5).show();
+				Toast.makeText(mContext,R.string.notify_no_result, 5).show();
 			}
 		}
 	};
 
-	
+    private void checkin(TVProgram program) {
+        Comment c = new Comment();
+        c.setChannel(program.getChannelname());
+        c.setProgram(program.getProgram());
+        c.setType("0");
+        if ("".equals(OAuthActivity.getUserId(this))) {
+            c.setUserid("guest");
+        } else {
+            c.setUserid(OAuthActivity.getUserId(this));
+        }
+        String url = CommentTask.genUrl(c);
+        CommentTask.Callback callback = new CommentTask.Callback() {
+
+            @Override
+            public void update(Object message) {
+                if (message instanceof Exception) {
+                    progressHandler.sendMessage(progressHandler.obtainMessage(
+                            R.string.checkin_failed, null));
+                } else {
+                    progressHandler.sendMessage(progressHandler.obtainMessage(
+                            R.string.checkin_succeed, null));
+                }
+            }
+        };
+        new CommentTask(this, url, callback).start();
+    }
+    
 	private Bitmap getImageFromAssetFile(String fileName) {
 		Bitmap image = null;
 		try {

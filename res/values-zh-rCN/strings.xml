@@ -164,4 +164,7 @@
 	<string name="weibo_re_binding">您已经连接到新浪微博，是否使用新的帐号重新连接？</string>
 	<string name="search_hint">搜索今天的电视节目</string>
 	<string name="search_not_blank">请输入要搜索的电视节目</string>
+	
+	<string name="checkin_failed">签到失败</string>
+	<string name="checkin_succeed">签到成功</string>
 </resources>

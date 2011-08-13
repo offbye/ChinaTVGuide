@@ -8,6 +8,7 @@ import weibo4android.http.RequestToken;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -55,7 +56,7 @@ public class OAuthActivity extends Activity {
 				sp.edit().putString(ACCESS_TPKEN, accessToken.getToken()).commit();
 				sp.edit().putString(ACCESS_TPKEN_SECRET,
 						accessToken.getTokenSecret()).commit();
-				sp.edit().putLong(USERID, accessToken.getUserId()).commit();
+				sp.edit().putString(USERID, "" +accessToken.getUserId()).commit();
 				sp.edit().putString(SCREEN_NAME, accessToken.getScreenName()).commit();
 			}
 			else
@@ -80,4 +81,24 @@ public class OAuthActivity extends Activity {
 		});
 
 	}
+	
+    public static String getUserId(Context context){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getString(OAuthActivity.USERID, "");
+    }
+    
+    public static String getAccessToken(Context context){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getString(OAuthActivity.ACCESS_TPKEN, "");
+    }
+    
+    public static String getAccessSecret(Context context){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getString(OAuthActivity.ACCESS_TPKEN_SECRET, "");
+    }
+    
+    public static String getScreenName(Context context){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getString(OAuthActivity.SCREEN_NAME, "");
+    }
 }

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 public class CommentTask extends Thread {
     private static final String TAG = "CommentTask"; 
@@ -44,17 +45,26 @@ public class CommentTask extends Thread {
         sb.append(Constants.URL_COMMENT);
         sb.append("?");
         sb.append("userid=");
-        sb.append(c.userid);
-        sb.append("&content=");
-        sb.append(c.content);
-        sb.append("&channel=");
-        sb.append(c.channel);
-        sb.append("&program=");
-        sb.append(c.program);
-        sb.append("&screenname=");
-        sb.append(c.screenName);
+        sb.append(c.getUserid());
+        if (null != c.getContent() && !"".equals(c.getContent())) {
+            sb.append("&content=");
+            sb.append(URLEncoder.encode(c.getContent()));
+        }
+        if (null != c.getChannel() && !"".equals(c.getChannel())) {
+            sb.append("&channel=");
+            sb.append(URLEncoder.encode(c.getChannel()));
+        }
+
+        if (null != c.getProgram() && !"".equals(c.getProgram())) {
+            sb.append("&program=");
+            sb.append(URLEncoder.encode(c.getProgram()));
+        }
+        if (null != c.getScreenName() && !"".equals(c.getScreenName())) {
+            sb.append("&screenname=");
+            sb.append(URLEncoder.encode(c.getScreenName()));
+        }
         sb.append("&type=");
-        sb.append(c.type);
+        sb.append(c.getType());
 
         return sb.toString();
     }

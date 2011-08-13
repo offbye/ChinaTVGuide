@@ -20,7 +20,8 @@
         <item>Share it to friends</item>
         <item>Search on google</item>
         <item>Add to favourite</item>
-        <item>I am Watching</item>
+        <item>Check in,I am Watching</item>
+        <item>Comment this tv program</item>
     </string-array>
  	<string-array name="rss">
         <item>View all</item>
