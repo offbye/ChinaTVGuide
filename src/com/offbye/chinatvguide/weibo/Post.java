@@ -2,6 +2,7 @@ package com.offbye.chinatvguide.weibo;
 
 
 import com.offbye.chinatvguide.R;
+import com.offbye.chinatvguide.TVProgram;
 import com.offbye.chinatvguide.server.Comment;
 import com.offbye.chinatvguide.server.CommentTask;
 
@@ -38,17 +39,64 @@ public class Post extends Activity {
 	private ProgressDialog pd;
 	private String token;
 	private String secret;
+	private String mChannel;
+	private String mProgram;
+	private Context mContext;
+	
+    public static void addWeibo(Context context,TVProgram p) {
+        SharedPreferences sp = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        if (!"".equals(sp.getString(OAuthActivity.ACCESS_TPKEN, ""))) {
+            Intent it = new Intent();
+            it.putExtra("channel", p.getChannelname());
+            it.putExtra("program", p.getProgram());
+            it.putExtra("msg", context.getString(R.string.weibo_watching) + "#" + p.getChannelname() +"#, #" + p.getProgram()+"#");
+            it.setClass(context, Post.class);
+            context.startActivity(it);
+        }
+        else
+        {
+            Intent it = new Intent();
+            it.setClass(context, WeiboCheck.class);
+            context.startActivity(it);
+        }
+    }
+    
+    public static Status post(Context context, String content) throws WeiboException {
+        Status status = null;
+        String token = OAuthActivity.getAccessToken(context);
+        String secret = OAuthActivity.getAccessSecret(context);
+        Weibo weibo = OAuthConstant.getInstance().getWeibo();
+        OAuthConstant.getInstance().setToken(token);
+        OAuthConstant.getInstance().setTokenSecret(secret);
+        weibo.setToken(token, secret);
 
+        LocationManager locationManager = (LocationManager) context
+                .getSystemService(Context.LOCATION_SERVICE);
+        Location location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
+        if (null != location) {
+            status = weibo.updateStatus(content, location.getLatitude(), location.getLongitude());
+        } else {
+            status = weibo.updateStatus(content);
+        }
+        Log.i("post", "status=" + status);
+        return status;
+    }
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.post);
+		mContext = getApplicationContext();
 		System.setProperty("weibo4j.oauth.consumerKey", Weibo.CONSUMER_KEY);
 		System.setProperty("weibo4j.oauth.consumerSecret",
 				Weibo.CONSUMER_SECRET);
 
 		init();
-		String msg = this.getIntent().getStringExtra("msg");
+		String msg = getIntent().getStringExtra("msg");
+		mChannel = getIntent().getStringExtra("channel");
+		mProgram = getIntent().getStringExtra("program");
 		
 		if (!"".equals(msg)) {
 			mContent.setText(msg);
@@ -75,29 +123,31 @@ public class Post extends Activity {
 			@Override
 			public void onClick(View v) {
 				showProgressDialog();
-				//post(mContent.getText().toString());
 				
 				Comment c = new Comment();
-
-				
+				c.setChannel(mChannel);
+				c.setProgram(mProgram);
+				c.setUserid(OAuthActivity.getUserId(mContext));
+				c.setContent(mContent.getText().toString());
+				c.setType("1");
 				new CommentTask(getApplicationContext(),CommentTask.genUrl(c),mCallback).start();
+				
+				post(mContent.getText().toString());
 			}
 		});
 	}
 	private CommentTask.Callback mCallback = new CommentTask.Callback(){
 
         @Override
-        public void update(Object message) {
-            if(message instanceof Exception)
+        public void update(int status) {
+            if(status < 0)
             {
                 mHandler.sendMessage(mHandler.obtainMessage(1, null));
             }
             else {
                 mHandler.sendMessage(mHandler.obtainMessage(0, null));
             }
-            
-           
-            
+                        
         }};
 	
 
@@ -131,7 +181,7 @@ public class Post extends Activity {
 			mHandler.sendMessage(mHandler.obtainMessage(0, status));
 
 		} catch (WeiboException e) {
-			mHandler.sendMessage(mHandler.obtainMessage(1, e));
+			mHandler.sendMessage(mHandler.obtainMessage(-1, e));
 			e.printStackTrace();
 		}
 	}
@@ -146,14 +196,21 @@ public class Post extends Activity {
 							Toast.LENGTH_SHORT).show();
 				}
 				break;
-			case 1:
+			case -1:
 				if (null != pd) {
 					Toast.makeText(Post.this,
-							((WeiboException) msg.obj).getMessage(),
+							((WeiboException) msg.obj).getLocalizedMessage(),
 							Toast.LENGTH_SHORT).show();
 					pd.dismiss();
 				}
 				break;
+			case 2:
+                if (null != pd) {
+                    pd.dismiss();
+                    Toast.makeText(Post.this,R.string.comment_succeed,
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
 			}
 		};
 

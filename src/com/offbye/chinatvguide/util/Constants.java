@@ -17,4 +17,9 @@ public class Constants {
 	
 	public static final String URL_COMMENT = "http://wztv.sinaapp.com/client/comment.php";
 	
+	//JIFEN
+	public static final int COMMENT_POINT = 5;
+	public static final int COMMENT_WEIBO_POINT = 5;
+	public static final int CHECKIN_POINT = 2;
+	public static final int CHECKIN_WEIBO_POINT = 2;
 }

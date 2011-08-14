@@ -28,15 +28,15 @@ public class CommentTask extends Thread {
         try {
             String sb = HttpUtil.getUrl(mContext, mUrl);
             Log.d(TAG,sb);
-            mCallback.update(sb);
+            mCallback.update(Integer.valueOf(sb));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            mCallback.update(e);
+            mCallback.update(-3);
         } catch (AppException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            mCallback.update(e);
+            mCallback.update(-2);
         }
     }
 
@@ -70,6 +70,6 @@ public class CommentTask extends Thread {
     }
 
     public interface Callback {
-        void update(Object message);
+        void update(int status);
     }
 }

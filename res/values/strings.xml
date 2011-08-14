@@ -164,5 +164,7 @@ ChinaTVGuide provide TV program guide in China,  Quickly get an overview of what
 	<string name="search_not_blank">Search text can not be blank</string>
 	
 	<string name="checkin_failed">Check in failed</string>
-	<string name="checkin_succeed">Check in succeed</string>
+	<string name="checkin_succeed">Check in succeed, get %s points</string>
+	<string name="comment_failed">Comment failed</string>
+	<string name="comment_succeed">Comment succeed</string>
 </resources>

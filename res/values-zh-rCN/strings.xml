@@ -166,5 +166,9 @@
 	<string name="search_not_blank">请输入要搜索的电视节目</string>
 	
 	<string name="checkin_failed">签到失败</string>
-	<string name="checkin_succeed">签到成功</string>
+	<string name="checkin_succeed">签到成功,获得%s个积分</string>
+	<string name="comment_failed">发表电视评论失败</string>
+	<string name="comment_succeed">成功发表电视评论，获得%s个积分</string>
+	<string name="comment_weibo_failed">同步电视评论到新浪微博失败</string>
+	<string name="comment_weibo_succeed">成功同步电视评论到新浪微博，获得%s个积分</string>
 </resources>

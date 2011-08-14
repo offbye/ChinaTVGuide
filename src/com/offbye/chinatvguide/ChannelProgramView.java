@@ -8,9 +8,12 @@ import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
 import com.offbye.chinatvguide.util.MD5;
 import com.offbye.chinatvguide.weibo.OAuthActivity;
+import com.offbye.chinatvguide.weibo.Post;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import weibo4android.WeiboException;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -345,13 +348,14 @@ public class ChannelProgramView extends Activity {
 			else if (sb.length() > 0 && !sb.toString().equals("null") && !sb.toString().equals("error")) {
 				JSONArray ja = new JSONArray(sb.toString());
 				int len = ja.length();
+				currentPosition = 0;
 				for (int i = 0; i < len; i++) {
 					JSONArray jp = ja.getJSONArray(i);
 					TVProgram tp = new TVProgram(jp.getString(0), jp
 							.getString(1), jp.getString(2), jp.getString(3), jp
 							.getString(4), jp.getString(5), jp.getString(6), jp.getString(7));
 					
-	                if (tp.getStarttime().compareTo(currentTime) < 0
+	                if (currentPosition == 0 && tp.getStarttime().compareTo(currentTime) < 0
 	                        && tp.getEndtime().compareTo(currentTime) > 0) {
 	                    tp.setDaynight("c");
 	                    currentPosition = i;
@@ -384,14 +388,15 @@ public class ChannelProgramView extends Activity {
 			//Log.v(TAG, "sql=" + sql.toString());
 			programsCursor = mydb.searchPrograms(sql);
 			startManagingCursor(programsCursor);
-			int i= 0;
+			int i = 0;
+			currentPosition = 0;
 			while (programsCursor.moveToNext()) {
 				TVProgram tvprogram = new TVProgram(
 						programsCursor.getString(0), programsCursor
 								.getString(1), programsCursor.getString(2),
 						programsCursor.getString(3), programsCursor
 								.getString(4), programsCursor.getString(5), programsCursor.getString(6), programsCursor.getString(7));
-                if (tvprogram.getStarttime().compareTo(currentTime) < 0
+                if (currentPosition == 0 && tvprogram.getStarttime().compareTo(currentTime) < 0
                         && tvprogram.getEndtime().compareTo(currentTime) > 0) {
                     tvprogram.setDaynight("c");
                     currentPosition = i;
@@ -565,6 +570,10 @@ public class ChannelProgramView extends Activity {
         	                           pd = ProgressDialog.show(mContext, getString(R.string.msg_loading), getString(R.string.msg_wait), true, true);
         	                           pd.setIcon(R.drawable.icon);
         	                           checkin(seletedProgram);
+
+                                   }
+        	                       else if(which == 5){
+                                       Post.addWeibo(mContext, seletedProgram);
                                    }
         	                    }
 
@@ -623,7 +632,7 @@ public class ChannelProgramView extends Activity {
                 break;
 			case R.string.checkin_succeed:
                 pd.dismiss();
-                Toast.makeText(mContext, R.string.checkin_succeed, 5).show();
+                Toast.makeText(mContext, String.format(mContext.getString(R.string.checkin_succeed),Constants.CHECKIN_POINT), 5).show();
                 break;
 			default:
 				Toast.makeText(mContext,R.string.notify_no_result, 5).show();
@@ -645,8 +654,8 @@ public class ChannelProgramView extends Activity {
         CommentTask.Callback callback = new CommentTask.Callback() {
 
             @Override
-            public void update(Object message) {
-                if (message instanceof Exception) {
+            public void update(int status) {
+                if (status < 0) {
                     progressHandler.sendMessage(progressHandler.obtainMessage(
                             R.string.checkin_failed, null));
                 } else {
@@ -656,6 +665,15 @@ public class ChannelProgramView extends Activity {
             }
         };
         new CommentTask(this, url, callback).start();
+        
+        final String msg = mContext.getString(R.string.weibo_watching) + "#"
+                + program.getChannelname() + "#, #" + program.getProgram() + "#";
+        try {
+            Post.post(mContext, msg);
+        } catch (WeiboException e) {
+            e.printStackTrace();
+        }
+        
     }
     
 	private Bitmap getImageFromAssetFile(String fileName) {

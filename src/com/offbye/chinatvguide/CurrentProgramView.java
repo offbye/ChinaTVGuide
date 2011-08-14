@@ -1,9 +1,15 @@
 package com.offbye.chinatvguide;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import com.offbye.chinatvguide.channel.ChannelTab;
+import com.offbye.chinatvguide.grid.Grid;
+import com.offbye.chinatvguide.util.AppException;
+import com.offbye.chinatvguide.util.Constants;
+import com.offbye.chinatvguide.util.HttpUtil;
+import com.offbye.chinatvguide.util.MD5;
+import com.offbye.chinatvguide.util.Shortcut;
+import com.offbye.chinatvguide.weibo.OAuthActivity;
+import com.offbye.chinatvguide.weibo.Post;
+import com.offbye.chinatvguide.weibo.WeiboCheck;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,6 +18,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,19 +40,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-import com.offbye.chinatvguide.channel.ChannelTab;
-import com.offbye.chinatvguide.grid.Grid;
-import com.offbye.chinatvguide.util.AppException;
-import com.offbye.chinatvguide.util.Constants;
-import com.offbye.chinatvguide.util.HttpUtil;
-import com.offbye.chinatvguide.util.MD5;
-import com.offbye.chinatvguide.util.Shortcut;
-import com.offbye.chinatvguide.weibo.OAuthActivity;
-import com.offbye.chinatvguide.weibo.Post;
-import com.offbye.chinatvguide.weibo.WeiboCheck;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class CurrentProgramView extends Activity {
 	private static final String TAG = "CurrentProgramView";
+	private Context mContext;
 	private String servermsg;
 	private String currentdate;
 
@@ -63,6 +65,7 @@ public class CurrentProgramView extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.current_program);
 
+		mContext = getApplicationContext();
 		titleText = (TextView) this.findViewById(R.id.TextView01);
 		optionsListView = (ListView) this.findViewById(R.id.ListView01);
 
@@ -133,7 +136,7 @@ public class CurrentProgramView extends Activity {
 	public ArrayList<TVProgram> getTVProgramsFromDB(String sql) {
 		ArrayList<TVProgram> pl = new ArrayList<TVProgram>();
 		Cursor programsCursor = null;
-		MydbHelper mydb = new MydbHelper(CurrentProgramView.this);
+		MydbHelper mydb = new MydbHelper(mContext);
 		try {
 			programsCursor = mydb.searchPrograms(sql);
 			while (programsCursor.moveToNext()) {
@@ -199,20 +202,20 @@ public class CurrentProgramView extends Activity {
 			case R.string.notify_succeeded:
 				pd.dismiss();
 				CurrentProgramAdapter pa = new CurrentProgramAdapter(
-						CurrentProgramView.this, R.layout.current_row, pl);
+						mContext, R.layout.current_row, pl);
 				optionsListView.setAdapter(pa);
 
 				optionsListView.setOnItemLongClickListener(new OnItemLongClickListener() {
         			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int position, long id)
         			{
         				seletedProgram = pl.get(position);
-        				new AlertDialog.Builder(CurrentProgramView.this)
+        				new AlertDialog.Builder(mContext)
         	                .setTitle(R.string.select_dialog)
         	                .setItems(R.array.localoptions, new DialogInterface.OnClickListener() {
         	                    public void onClick(DialogInterface dialog, int which) {
 
         	                       if(which==0){
-        	           	            	Intent i = new Intent(CurrentProgramView.this, ChannelProgramView.class);
+        	           	            	Intent i = new Intent(mContext, ChannelProgramView.class);
         	           	            	i.putExtra("channel", seletedProgram.getChannel());
         	           					startActivity(i);
         	                       }
@@ -229,13 +232,16 @@ public class CurrentProgramView extends Activity {
         	                    	   startActivity(intent);
         	                       }
         	                       else if(which==3){
-        	                    	   MydbHelper mydb = new MydbHelper(CurrentProgramView.this);
+        	                    	   MydbHelper mydb = new MydbHelper(mContext);
         	                    	   mydb.addFavoriteProgram(seletedProgram.getChannel(), seletedProgram.getDate(), seletedProgram.getStarttime(), seletedProgram.getEndtime(), seletedProgram.getProgram(), seletedProgram.getDaynight(), seletedProgram.getChannelname());
         	           				   mydb.close();
-        	           				   Toast.makeText(CurrentProgramView.this, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
+        	           				   Toast.makeText(mContext, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
         	                       }
-        	                       else if(which==4){
-        	                    	   addWeibo(seletedProgram);
+        	                       else if(which == 4){
+                                       Post.addWeibo(mContext, seletedProgram);
+                                   }
+        	                       else if(which == 5){
+        	                           Post.addWeibo(mContext, seletedProgram);
         	                       }
         	                    }
         	                }).show();
@@ -248,32 +254,32 @@ public class CurrentProgramView extends Activity {
 				pd.dismiss();
 				titleText.setText(R.string.notify_network_error);
 				titleText.setVisibility(View.VISIBLE);
-				Toast.makeText(CurrentProgramView.this, R.string.notify_network_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_network_error, 5).show();
 				break;
 			case R.string.notify_json_error:
 				pd.dismiss();
 				titleText.setText(R.string.notify_json_error);
 				titleText.setVisibility(View.VISIBLE);
-				Toast.makeText(CurrentProgramView.this, R.string.notify_json_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_json_error, 5).show();
 				break;
 			case R.string.notify_database_error:
 				pd.dismiss();
 				titleText.setText(R.string.notify_database_error);
 				titleText.setVisibility(View.VISIBLE);
-				Toast.makeText(CurrentProgramView.this, R.string.notify_database_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_database_error, 5).show();
 				break;
 			case R.string.notify_no_result:
 				pd.dismiss();
 				titleText.setText(R.string.notify_no_result);
 				titleText.setVisibility(View.VISIBLE);
-				Toast.makeText(CurrentProgramView.this, R.string.notify_no_result, 5).show();
+				Toast.makeText(mContext, R.string.notify_no_result, 5).show();
 				break;
 			case R.string.notify_newversion:
 				pd.dismiss();
 
-				Toast.makeText(CurrentProgramView.this, servermsg.split("--")[4], 5).show();
+				Toast.makeText(mContext, servermsg.split("--")[4], 5).show();
 
-				new AlertDialog.Builder(CurrentProgramView.this)
+				new AlertDialog.Builder(mContext)
                 .setIcon(R.drawable.icon)
                 .setTitle(servermsg.split("--")[3])
                 .setMessage(servermsg.split("--")[4])
@@ -288,36 +294,17 @@ public class CurrentProgramView extends Activity {
 				break;
 			case R.string.notify_no_connection:
 				pd.dismiss();
-				Toast.makeText(CurrentProgramView.this, R.string.notify_no_connection, 5).show();
+				Toast.makeText(mContext, R.string.notify_no_connection, 5).show();
 				titleText.setText(R.string.notify_no_connection);
 				titleText.setVisibility(View.VISIBLE);
 				break;
 			default:
-				Toast.makeText(CurrentProgramView.this, R.string.notify_network_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_network_error, 5).show();
 				titleText.setText(R.string.notify_network_error);
 				titleText.setVisibility(View.VISIBLE);
 			}
 		}
 	};
-
-	private void addWeibo(TVProgram p) {
-		SharedPreferences sp = PreferenceManager
-				.getDefaultSharedPreferences(CurrentProgramView.this);
-		if (!"".equals(sp.getString(OAuthActivity.ACCESS_TPKEN, ""))) {
-			Intent it = new Intent();
-			it.putExtra("channel", p.getChannelname());
-			it.putExtra("program", p.getProgram());
-			it.putExtra("msg", getString(R.string.weibo_watching) + "#" + p.getChannelname() +"#, #" + p.getProgram()+"#");
-			it.setClass(getApplicationContext(), Post.class);
-			this.startActivity(it);
-		}
-		else
-		{
-			Intent it = new Intent();
-			it.setClass(getApplicationContext(), WeiboCheck.class);
-			this.startActivity(it);
-		}
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
