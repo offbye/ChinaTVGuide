@@ -30,7 +30,9 @@ public class ChinaTVGuide extends Activity {
 
         //Log.v(TAG, "ChinaTVGuide start ..."); 
         imageview.setAlpha(alpha); 
-
+        if(PreferencesActivity.isAutoSyncOn(this)){
+            this.startService(new Intent(this, SyncService.class));
+        }
         new Thread(new Runnable() { 
             public void run() { 
                 initApp(); //初始化程序 

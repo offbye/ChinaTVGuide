@@ -56,6 +56,8 @@
                  android:screenOrientation="portrait" 
                  >
        </activity>
+       <activity android:name=".server.user.UserInfoActivity" android:label="@string/user_info"/>
+       
 		<receiver android:name="widget.TVWidget"
 			android:label="@string/widget_name">
 			<intent-filter>

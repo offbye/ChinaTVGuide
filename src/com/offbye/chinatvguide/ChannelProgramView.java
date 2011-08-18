@@ -665,13 +665,16 @@ public class ChannelProgramView extends Activity {
             }
         };
         new CommentTask(this, url, callback).start();
-        
-        final String msg = mContext.getString(R.string.weibo_watching) + "#"
-                + program.getChannelname() + "#, #" + program.getProgram() + "#";
-        try {
-            Post.post(mContext, msg);
-        } catch (WeiboException e) {
-            e.printStackTrace();
+
+         //TODO HOW TO NOTIFY USER WEIBO POST?
+        if (!"".equals(OAuthActivity.getUserId(this))) {
+            final String msg = mContext.getString(R.string.weibo_watching) + "#"
+                    + program.getChannelname() + "#, #" + program.getProgram() + "#";
+            try {
+                Post.post(mContext, msg);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         
     }
@@ -684,7 +687,7 @@ public class ChannelProgramView extends Activity {
 			image = BitmapFactory.decodeStream(is);
 			is.close();
 		} catch (Exception e) {
-
+		    e.printStackTrace();
 		}
 		return image;
 	}

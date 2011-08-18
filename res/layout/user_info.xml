@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+	<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:background="#FFF4F4F4"
+		android:scrollbars="none" android:fadingEdgeLength="0dip"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_alignParentBottom="true">
+		<LinearLayout android:orientation="vertical"
+			android:background="#FFF4F4F4" android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<RelativeLayout android:id="@+id/pic"
+				android:background="#FFF4F4F4" android:layout_width="fill_parent"
+				android:layout_height="136.0dip">
+				<FrameLayout android:id="@+id/avatar"
+					android:layout_width="120dip" android:layout_height="120dip"
+					android:layout_marginLeft="12dip" android:layout_marginTop="8dip">
+					<ImageView android:id="@+id/av" android:layout_width="fill_parent"
+						android:layout_height="fill_parent" android:src="@drawable/portrait">
+					</ImageView>
+
+				</FrameLayout>
+				<TextView android:textSize="16sp" android:text="screenname"
+					android:textColor="#FF202020" android:gravity="top" android:id="@+id/screenname"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:layout_marginLeft="12dip" android:layout_marginTop="18dip"
+					android:layout_toRightOf="@+id/avatar">
+				</TextView>
+
+				<TextView android:textSize="16sp" android:text="10 points"
+					android:textColor="#FF202020" android:gravity="top" android:id="@+id/point"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:layout_marginTop="10dip" android:layout_marginLeft="12dip"
+					android:layout_below="@+id/screenname" android:layout_toRightOf="@+id/avatar">
+				</TextView>
+
+				<Button android:textColor="#FFFFFFFF" android:id="@+id/refresh"
+					android:visibility="visible" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:layout_marginRight="12dip"
+					android:layout_marginBottom="8dip" android:layout_alignParentRight="true"
+					android:layout_alignParentBottom="true"
+					android:layout_centerVertical="true" android:text="refresh">
+				</Button>
+			</RelativeLayout>
+
+			<LinearLayout android:orientation="vertical"
+				android:layout_width="fill_parent" android:layout_height="fill_parent">
+				<RelativeLayout android:id="@+id/loc"
+					android:background="@drawable/myshape" android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:layout_marginLeft="12dip"
+					android:layout_marginRight="12.5999775dip" android:minHeight="93dip">
+					<LinearLayout android:gravity="top"
+						android:orientation="horizontal" android:id="@+id/layoutUsername"
+						android:layout_width="fill_parent" android:layout_height="wrap_content"
+						android:minHeight="46dip" android:layout_margin="0dp">
+						<TextView android:textSize="16sp" android:textColor="#FF7D899D"
+							android:gravity="clip_vertical" android:id="@+id/lblemail"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginTop="10dip" android:layout_marginLeft="12dip"
+							android:text="@string/user_email" android:layout_alignParentLeft="true"
+							android:layout_alignParentTop="true">
+						</TextView>
+						<TextView android:textSize="16sp" android:textColor="#FF373737"
+							android:id="@+id/email" android:layout_width="wrap_content"
+							android:layout_height="wrap_content" android:layout_marginTop="10dip"
+							android:layout_marginLeft="10dip" android:layout_toRightOf="@+id/lblemail"
+							android:layout_alignTop="@+id/lblemail">
+						</TextView>
+					</LinearLayout>
+					<View android:id="@+id/line" android:background="#cccccc"
+						android:layout_width="fill_parent" android:layout_height="1px"
+						android:layout_below="@+id/layoutUsername"
+						android:layout_centerVertical="true">
+					</View>
+
+					<LinearLayout android:gravity="top"
+						android:orientation="horizontal" android:id="@+id/llocation"
+						android:layout_width="fill_parent" android:layout_height="wrap_content"
+						android:minHeight="46dip" android:layout_margin="0dp"
+						android:layout_below="@+id/line">
+						<TextView android:textSize="16sp" android:textColor="#FF7D899D"
+							android:gravity="clip_vertical" android:id="@+id/lbllocation"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginTop="10dip" android:layout_marginLeft="12dip"
+							android:text="@string/user_location" android:layout_alignParentLeft="true"
+							android:layout_alignParentTop="true">
+						</TextView>
+						<TextView android:textSize="16sp" android:textColor="#FF373737"
+							android:id="@+id/location" android:layout_width="wrap_content"
+							android:layout_height="wrap_content" android:layout_marginTop="10dip"
+							android:layout_marginLeft="10dip" android:layout_toRightOf="@+id/lbllocation"
+							android:layout_alignTop="@+id/lbllocation">
+						</TextView>
+					</LinearLayout>
+					<View android:id="@+id/line2" android:background="#cccccc"
+						android:layout_width="fill_parent" android:layout_height="1px"
+						android:layout_below="@+id/llocation"
+						android:layout_centerVertical="true">
+					</View>
+
+					<LinearLayout android:gravity="top"
+						android:orientation="horizontal" android:id="@+id/ddd23"
+						android:layout_width="fill_parent" android:layout_height="wrap_content"
+						android:minHeight="46dip" android:layout_below="@+id/line2"
+						android:weightSum="1">
+						<TextView android:textSize="16sp" android:textColor="#FF7D899D"
+							android:gravity="top" android:id="@+id/aaaaaa"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginTop="10dip" android:layout_marginLeft="12dip"
+							android:text="7F0B019A" android:layout_alignLeft="@+id/bbb"
+							android:layout_centerInParent="true" android:layout_weight="0.5">
+						</TextView>
+						<TextView android:textSize="16.0sp" android:textColor="#FF373737"
+							android:gravity="top" android:id="@+id/cccc"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:layout_marginLeft="12dip" android:layout_marginTop="10dip"
+							android:layout_marginBottom="6dip" android:layout_toRightOf="@+id/aaaaaa"
+							android:text="weibo" android:layout_weight="0.5">
+						</TextView>
+					</LinearLayout>
+				</RelativeLayout>
+
+				<RelativeLayout android:id="@+id/listb"
+					android:background="@drawable/list_above_background"
+					android:clickable="true" android:focusable="true" android:focusableInTouchMode="true"
+					android:layout_width="fill_parent" android:layout_height="43.0dip"
+					android:layout_marginTop="10dp" android:layout_marginBottom="0dp"
+					android:layout_marginLeft="12dip" android:layout_marginRight="12dip">
+					<TextView android:id="@+id/favor" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_marginLeft="18.0dip"
+						android:text="favor" android:layout_alignParentLeft="true"
+						android:layout_centerVertical="true">
+					</TextView>
+					<TextView android:id="@+id/checkin" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_marginLeft="10.0dip"
+						android:text="0" android:layout_toRightOf="@+id/favor"
+						android:layout_centerVertical="true">
+					</TextView>
+					<ImageView android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_marginRight="18.0dip"
+						android:src="@drawable/retrive_list_arrow"
+						android:layout_alignParentRight="true"
+						android:layout_centerVertical="true">
+					</ImageView>
+				</RelativeLayout>
+
+				<RelativeLayout android:id="@+id/listb2"
+					android:background="@drawable/list_below_background"
+					android:clickable="true" android:focusable="true" android:focusableInTouchMode="true"
+					android:layout_width="fill_parent" android:layout_height="43.0dip"
+					android:layout_marginTop="0dp" android:layout_marginLeft="12dip"
+					android:layout_marginRight="12dip">
+					<TextView android:id="@+id/favor2" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_marginLeft="18.0dip"
+						android:text="favor" android:layout_alignParentLeft="true"
+						android:layout_centerVertical="true">
+					</TextView>
+					<TextView android:id="@+id/comment" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_marginLeft="10.0dip"
+						android:text="0" android:layout_toRightOf="@+id/favor2"
+						android:layout_centerVertical="true">
+					</TextView>
+					<ImageView android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_marginRight="18.0dip"
+						android:src="@drawable/retrive_list_arrow"
+						android:layout_alignParentRight="true"
+						android:layout_centerVertical="true">
+					</ImageView>
+				</RelativeLayout>
+
+				<RelativeLayout android:orientation="horizontal"
+					android:layout_width="fill_parent" android:layout_height="45.0dip">
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+

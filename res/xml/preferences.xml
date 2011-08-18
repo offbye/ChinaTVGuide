@@ -2,6 +2,17 @@
 <PreferenceScreen
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<PreferenceCategory
+		android:title="@string/preferences_sync_title">
+		<CheckBoxPreference android:key="autosync"
+			android:defaultValue="true"
+			android:title="@string/preferences_autosync_title" 
+			android:summary="@string/preferences_autosync_summary" />/>
+		<CheckBoxPreference android:key="preferences_vibrate"
+			android:defaultValue="false"
+			android:title="@string/preferences_vibrate_title" />
+	</PreferenceCategory>
+	
+	<PreferenceCategory
 		android:title="@string/preferences_general_title">
 		<CheckBoxPreference android:key="preferences_alarm"
 			android:defaultValue="true"

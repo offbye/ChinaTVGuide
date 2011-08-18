@@ -65,7 +65,7 @@ public class CurrentProgramView extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.current_program);
 
-		mContext = getApplicationContext();
+		mContext = this;
 		titleText = (TextView) this.findViewById(R.id.TextView01);
 		optionsListView = (ListView) this.findViewById(R.id.ListView01);
 

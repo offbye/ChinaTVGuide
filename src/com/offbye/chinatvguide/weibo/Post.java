@@ -44,9 +44,8 @@ public class Post extends Activity {
 	private Context mContext;
 	
     public static void addWeibo(Context context,TVProgram p) {
-        SharedPreferences sp = PreferenceManager
-                .getDefaultSharedPreferences(context);
-        if (!"".equals(sp.getString(OAuthActivity.ACCESS_TPKEN, ""))) {
+
+        if (!"".equals(OAuthActivity.getAccessToken(context))) {
             Intent it = new Intent();
             it.putExtra("channel", p.getChannelname());
             it.putExtra("program", p.getProgram());

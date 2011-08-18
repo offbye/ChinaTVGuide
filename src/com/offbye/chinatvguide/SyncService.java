@@ -91,9 +91,9 @@ public class SyncService extends Service {
 	        
 
 		if (mydb.getProgramsCountByDate(currentdate)> 100) {
-			Toast.makeText(this, R.string.havesynced, 10).show();
+			Toast.makeText(this, R.string.havesynced, Toast.LENGTH_SHORT).show();
 		} else {
-			Toast.makeText(this, R.string.datasyncing, 10).show();
+			Toast.makeText(this, R.string.datasyncing, Toast.LENGTH_SHORT).show();
 			Thread thr = new Thread(null, mTask, "SyncService");
 			thr.start();
 		}
@@ -224,22 +224,22 @@ public class SyncService extends Service {
 				
 				break;
 			case R.string.notify_network_error:
-				Toast.makeText(SyncService.this, "网络传输错误", 5).show();
+				Toast.makeText(SyncService.this, R.string.notify_network_error, 5).show();
 				break;
 			case R.string.notify_json_error:
-				Toast.makeText(SyncService.this, "数据处理错误", 5).show();
+				Toast.makeText(SyncService.this, R.string.notify_json_error, 5).show();
 				break;
 			case R.string.notify_database_error:
-				Toast.makeText(SyncService.this, "查询数据库错误", 5).show();
+				Toast.makeText(SyncService.this, R.string.notify_database_error, 5).show();
 				break;
 			case R.string.notify_no_result:
-				Toast.makeText(SyncService.this, "没有节目数据", 5).show();
+				Toast.makeText(SyncService.this, R.string.notify_no_result, 5).show();
 				break;
 			case R.string.notify_no_connection:
 				Toast.makeText(SyncService.this, R.string.notify_no_connection, 5).show();
 				break;
 			default:
-				Toast.makeText(SyncService.this, "网络传输错误", 5).show();
+				Toast.makeText(SyncService.this, R.string.notify_network_error, 5).show();
 			}
 		}
 	};

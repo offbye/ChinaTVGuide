@@ -1,6 +1,7 @@
 package com.offbye.chinatvguide.grid;
 
 import com.offbye.chinatvguide.CurrentProgramView;
+import com.offbye.chinatvguide.PreferencesActivity;
 import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.SearchResultView;
 import com.offbye.chinatvguide.SearchView;
@@ -10,6 +11,7 @@ import com.offbye.chinatvguide.favorite.FavouriteTab;
 import com.offbye.chinatvguide.rate.TVRateActivity;
 import com.offbye.chinatvguide.recommend.TVRecommendActivity;
 import com.offbye.chinatvguide.rss.RSSActivity;
+import com.offbye.chinatvguide.server.user.UserInfoActivity;
 import com.offbye.chinatvguide.util.Shortcut;
 import com.offbye.chinatvguide.weibo.WeiboCheck;
 
@@ -159,8 +161,10 @@ public class Grid extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 0, 0, this.getText(R.string.weibo_menu)).setIcon(R.drawable.weibo);
-		menu.add(0, 1, 1,  this.getText(R.string.menu_help)).setIcon(android.R.drawable.ic_menu_help);
-		menu.add(0, 2, 2,  this.getText(R.string.menu_exit)).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+		menu.add(0, 1, 1,  this.getText(R.string.menu_help)).setIcon(R.drawable.ic_menu_help);
+		menu.add(0, 2, 2,  this.getText(R.string.menu_exit)).setIcon(R.drawable.ic_menu_close_clear_cancel);
+		menu.add(0, 3, 3,  this.getText(R.string.preferences_name)).setIcon(R.drawable.ic_menu_preferences);
+		menu.add(0, 4, 4,  this.getText(R.string.user_info)).setIcon(R.drawable.ic_menu_edit);
 		if (10 < Integer.valueOf(Build.VERSION.SDK)) {
 			menu.getItem(0).setShowAsAction(1);
 			menu.getItem(1).setShowAsAction(1);
@@ -194,8 +198,18 @@ public class Grid extends Activity {
 			finish();
 			Shortcut.exit(this);
 			break;
-
-		}
+		case 3:
+		    Intent it = new Intent();
+	        it.setClass(this, PreferencesActivity.class);
+	        this.startActivity(it);
+            break;
+		
+	    case 4:
+            Intent it2 = new Intent();
+            it2.setClass(this, UserInfoActivity.class);
+            this.startActivity(it2);
+            break;
+        }
 		return super.onOptionsItemSelected(item);
 	}
 
