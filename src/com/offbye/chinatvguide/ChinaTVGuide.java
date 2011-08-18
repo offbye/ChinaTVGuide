@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.offbye.chinatvguide.grid.Grid;
 
+import weibo4android.util.LocationUtils;
+
 
 public class ChinaTVGuide extends Activity {
     private static final String TAG = "ChinaTVGuide";
@@ -30,9 +32,7 @@ public class ChinaTVGuide extends Activity {
 
         //Log.v(TAG, "ChinaTVGuide start ..."); 
         imageview.setAlpha(alpha); 
-        if(PreferencesActivity.isAutoSyncOn(this)){
-            this.startService(new Intent(this, SyncService.class));
-        }
+        
         new Thread(new Runnable() { 
             public void run() { 
                 initApp(); //初始化程序 
@@ -55,6 +55,12 @@ public class ChinaTVGuide extends Activity {
 
             } 
         }).start(); 
+        
+        new Thread(){
+            public void run() {
+                LocationUtils.getLocation(getApplicationContext());
+            };
+        }.start();
 
         mHandler = new Handler() { 
             @Override 
@@ -74,7 +80,9 @@ public class ChinaTVGuide extends Activity {
             b = 2; 
             int current=0;
             int score =0;
-
+            if(PreferencesActivity.isAutoSyncOn(this)){
+                this.startService(new Intent(this, SyncService.class));
+            }
             Intent i = new Intent(this, Grid.class); 
             i.putExtra("current", current);
             i.putExtra("score", score);

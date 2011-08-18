@@ -186,5 +186,6 @@
 	<string name="user_point">积分</string>
 	<string name="user_checkin">签到</string>
 	<string name="user_comment">评论</string>
+	<string name="user_guest">游客</string>
 	
 </resources>

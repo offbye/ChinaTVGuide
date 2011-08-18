@@ -16,7 +16,7 @@ public class Constants {
 	public static String CONSUMER_SECRET = "04a3a910a2cd3012d37426aee0364466";
 	
 	public static final String URL_COMMENT = "http://wztv.sinaapp.com/client/comment.php";
-	public static final String URL_USERINFO = "http://wztv.sinaapp.com/client/userinfo.php?userid=";
+	public static final String URL_USERINFO = "http://wztv.sinaapp.com/client/userinfo.php?userid=%s";
 	public static final String URL_USER_REG = "http://wztv.sinaapp.com/client/user_reg.php?email=%s&password=%s&screenname=%s";
 	public static final String URL_USER_LOGIN = "http://wztv.sinaapp.com/client/user_login.php?email=%s&password=%s";
 	

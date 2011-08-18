@@ -165,6 +165,26 @@ ChinaTVGuide provide TV program guide in China,  Quickly get an overview of what
 	
 	<string name="checkin_failed">Check in failed</string>
 	<string name="checkin_succeed">Check in succeed, get %s points</string>
-	<string name="comment_failed">Comment failed</string>
-	<string name="comment_succeed">Comment succeed</string>
+	<string name="comment_failed">Comment failed</string>	
+	<string name="comment_succeed">成功发表电视评论，获得%s个积分</string>
+	<string name="comment_weibo_failed">同步电视评论到新浪微博失败</string>
+	<string name="comment_weibo_succeed">成功同步电视评论到新浪微博，获得%s个积分</string>
+	
+	<string name="preferences_sync_title">电视节目同步</string>
+	<string name="preferences_autosync_title">启动电视节目同步</string>
+	<string name="preferences_autosync_summary">软件启动自动同步当天的电视节目表</string>
+	
+    <string name="preferences_clearcache_title">清除节目数据缓存</string>
+	<string name="preferences_clearcache_summary">清除节目数据缓存，节省手机内存</string>
+	
+	<string name="user_info">我的资料</string>
+	<string name="user_screen_name">昵称</string>
+	<string name="user_email">Email</string>
+	<string name="user_location">所在地</string>
+	<string name="user_point">积分</string>
+	<string name="user_checkin">签到</string>
+	<string name="user_comment">评论</string>
+	<string name="user_guest">游客</string>
+	<string name="user_get_success">Get user data success.</string>
+	<string name="user_get_fail">Get user data failed.</string>	
 </resources>

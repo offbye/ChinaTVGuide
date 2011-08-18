@@ -2,6 +2,9 @@ package com.offbye.chinatvguide;
 
 import com.offbye.chinatvguide.channel.ChannelTab;
 import com.offbye.chinatvguide.grid.Grid;
+import com.offbye.chinatvguide.server.Comment;
+import com.offbye.chinatvguide.server.CommentTask;
+import com.offbye.chinatvguide.server.user.UserInfoActivity;
 import com.offbye.chinatvguide.util.AppException;
 import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
@@ -238,7 +241,9 @@ public class CurrentProgramView extends Activity {
         	           				   Toast.makeText(mContext, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
         	                       }
         	                       else if(which == 4){
-                                       Post.addWeibo(mContext, seletedProgram);
+        	                           pd = ProgressDialog.show(mContext, getString(R.string.msg_loading), getString(R.string.msg_wait), true, true);
+                                       pd.setIcon(R.drawable.icon);
+                                       checkin(seletedProgram);
                                    }
         	                       else if(which == 5){
         	                           Post.addWeibo(mContext, seletedProgram);
@@ -298,6 +303,15 @@ public class CurrentProgramView extends Activity {
 				titleText.setText(R.string.notify_no_connection);
 				titleText.setVisibility(View.VISIBLE);
 				break;
+			case R.string.checkin_failed:
+                pd.dismiss();
+                Toast.makeText(mContext, R.string.checkin_failed, 5).show();
+                break;
+            case R.string.checkin_succeed:
+                pd.dismiss();
+                Toast.makeText(mContext, String.format(mContext.getString(R.string.checkin_succeed),Constants.CHECKIN_POINT), 5).show();
+                break;
+                
 			default:
 				Toast.makeText(mContext, R.string.notify_network_error, 5).show();
 				titleText.setText(R.string.notify_network_error);
@@ -305,6 +319,46 @@ public class CurrentProgramView extends Activity {
 			}
 		}
 	};
+	
+	 private void checkin(TVProgram program) {
+	        Comment c = new Comment();
+	        c.setChannel(program.getChannelname());
+	        c.setProgram(program.getProgram());
+	        c.setType("0");
+	        if ("".equals(UserInfoActivity.getUserId(this))) {
+	            c.setUserid("guest");
+	        } else {
+	            c.setUserid(UserInfoActivity.getUserId(this));
+	        }
+	        String url = CommentTask.genUrl(c);
+	        Log.d(TAG, "url:" +url);
+	        CommentTask.Callback callback = new CommentTask.Callback() {
+
+	            @Override
+	            public void update(int status) {
+	                if (status < 0) {
+	                    progressHandler.sendMessage(progressHandler.obtainMessage(
+	                            R.string.checkin_failed, null));
+	                } else {
+	                    progressHandler.sendMessage(progressHandler.obtainMessage(
+	                            R.string.checkin_succeed, null));
+	                }
+	            }
+	        };
+	        new CommentTask(this, url, callback).start();
+
+	         //TODO HOW TO NOTIFY USER WEIBO POST?
+	        if (!"".equals(UserInfoActivity.getUserId(this))) {
+	            final String msg = mContext.getString(R.string.weibo_watching) + "#"
+	                    + program.getChannelname() + "#, #" + program.getProgram() + "#";
+	            try {
+	                Post.post(mContext, msg);
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        
+	    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

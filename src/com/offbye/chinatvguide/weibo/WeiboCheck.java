@@ -1,6 +1,7 @@
 package com.offbye.chinatvguide.weibo;
 
 import com.offbye.chinatvguide.R;
+import com.offbye.chinatvguide.server.user.UserInfoActivity;
 
 import weibo4android.Weibo;
 import weibo4android.WeiboException;
@@ -8,13 +9,12 @@ import weibo4android.http.RequestToken;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WeiboCheck extends Activity {
     @Override
@@ -26,8 +26,7 @@ public class WeiboCheck extends Activity {
         ImageButton post = (ImageButton) findViewById(R.id.btnPost);
         ImageButton beginOAuthBtn = (ImageButton) findViewById(R.id.Connect);
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!"".equals(sp.getString(OAuthActivity.ACCESS_TPKEN, ""))) {
+        if (!"".equals(UserInfoActivity.getAccessToken(this))) {
             ((TextView) findViewById(R.id.connect_info)).setText(R.string.weibo_re_binding);
             post.setVisibility(View.VISIBLE);
         }
@@ -51,6 +50,7 @@ public class WeiboCheck extends Activity {
                     startActivity(intent);
                 } catch (WeiboException e) {
                     e.printStackTrace();
+                    Toast.makeText(WeiboCheck.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -60,7 +60,7 @@ public class WeiboCheck extends Activity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent();
-                it.setClass(getApplicationContext(), Post.class);
+                it.setClass(WeiboCheck.this, Post.class);
                 startActivity(it);
                 finish();
             }

@@ -2,6 +2,7 @@
 package com.offbye.chinatvguide.weibo;
 
 import com.offbye.chinatvguide.R;
+import com.offbye.chinatvguide.server.user.UserInfoActivity;
 
 import weibo4android.WeiboException;
 import weibo4android.http.AccessToken;
@@ -21,17 +22,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class OAuthActivity extends Activity {
-    public static final String ACCESS_TPKEN = "AccessToken";
-
-    public static final String ACCESS_TPKEN_SECRET = "AccessTokenSecret";
-
-    public static final String USERID = "userid";
-
-    public static final String SCREEN_NAME = "screenname";
 
     private static final String TAG = "OAuthActivity";
 
-    public static final String PREFS_USER = "user";
+
 
     ImageButton post;
 
@@ -56,12 +50,12 @@ public class OAuthActivity extends Activity {
                 Log.d(TAG, "token:" + accessToken.getToken() + " key:"
                         + accessToken.getTokenSecret());
                 textView.setText(R.string.weibo_connect_ok);
-                SharedPreferences sp = getSharedPreferences(PREFS_USER, 0);
+                SharedPreferences sp = getSharedPreferences(UserInfoActivity.PREFS_USER, 0);
 
-                sp.edit().putString(ACCESS_TPKEN, accessToken.getToken()).commit();
-                sp.edit().putString(ACCESS_TPKEN_SECRET, accessToken.getTokenSecret()).commit();
-                sp.edit().putString(USERID, "" + accessToken.getUserId()).commit();
-                sp.edit().putString(SCREEN_NAME, accessToken.getScreenName()).commit();
+                sp.edit().putString(UserInfoActivity.ACCESS_TPKEN, accessToken.getToken()).commit();
+                sp.edit().putString(UserInfoActivity.ACCESS_TPKEN_SECRET, accessToken.getTokenSecret()).commit();
+                sp.edit().putString(UserInfoActivity.USERID, "" + accessToken.getUserId()).commit();
+                sp.edit().putString(UserInfoActivity.SCREEN_NAME, accessToken.getScreenName()).commit();
             } else {
                 textView.setText("connect failed");
                 Log.d(TAG,"connect failed");
@@ -85,23 +79,5 @@ public class OAuthActivity extends Activity {
 
     }
 
-    public static String getUserId(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getString(OAuthActivity.USERID, "");
-    }
 
-    public static String getAccessToken(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getString(OAuthActivity.ACCESS_TPKEN, "");
-    }
-
-    public static String getAccessSecret(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getString(OAuthActivity.ACCESS_TPKEN_SECRET, "");
-    }
-
-    public static String getScreenName(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getString(OAuthActivity.SCREEN_NAME, "");
-    }
 }

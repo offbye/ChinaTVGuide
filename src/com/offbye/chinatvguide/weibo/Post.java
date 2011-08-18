@@ -5,6 +5,7 @@ import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.TVProgram;
 import com.offbye.chinatvguide.server.Comment;
 import com.offbye.chinatvguide.server.CommentTask;
+import com.offbye.chinatvguide.server.user.UserInfoActivity;
 
 import weibo4android.Status;
 import weibo4android.Weibo;
@@ -14,12 +15,10 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,7 +44,7 @@ public class Post extends Activity {
 	
     public static void addWeibo(Context context,TVProgram p) {
 
-        if (!"".equals(OAuthActivity.getAccessToken(context))) {
+        if (!"".equals(UserInfoActivity.getAccessToken(context))) {
             Intent it = new Intent();
             it.putExtra("channel", p.getChannelname());
             it.putExtra("program", p.getProgram());
@@ -63,8 +62,8 @@ public class Post extends Activity {
     
     public static Status post(Context context, String content) throws WeiboException {
         Status status = null;
-        String token = OAuthActivity.getAccessToken(context);
-        String secret = OAuthActivity.getAccessSecret(context);
+        String token = UserInfoActivity.getAccessToken(context);
+        String secret = UserInfoActivity.getAccessSecret(context);
         Weibo weibo = OAuthConstant.getInstance().getWeibo();
         OAuthConstant.getInstance().setToken(token);
         OAuthConstant.getInstance().setTokenSecret(secret);
@@ -100,11 +99,10 @@ public class Post extends Activity {
 		if (!"".equals(msg)) {
 			mContent.setText(msg);
 		}
-		SharedPreferences sp = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		if (!"".equals(sp.getString(OAuthActivity.ACCESS_TPKEN, ""))) {
-			token = sp.getString(OAuthActivity.ACCESS_TPKEN, "");
-			secret = sp.getString(OAuthActivity.ACCESS_TPKEN_SECRET, "");
+
+		if (!"".equals(UserInfoActivity.getAccessToken(mContext))) {
+			token = UserInfoActivity.getAccessToken(mContext);
+			secret = UserInfoActivity.getAccessSecret(mContext);
 		} else {
 			Intent it = new Intent();
 			it.setClass(getApplicationContext(), WeiboCheck.class);
@@ -126,7 +124,7 @@ public class Post extends Activity {
 				Comment c = new Comment();
 				c.setChannel(mChannel);
 				c.setProgram(mProgram);
-				c.setUserid(OAuthActivity.getUserId(mContext));
+				c.setUserid(UserInfoActivity.getUserId(mContext));
 				c.setContent(mContent.getText().toString());
 				c.setType("1");
 				new CommentTask(getApplicationContext(),CommentTask.genUrl(c),mCallback).start();
