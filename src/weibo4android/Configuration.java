@@ -62,6 +62,10 @@ public class Configuration {
         defaultProperty.setProperty("weibo4j.http.readTimeout", "120000");
         defaultProperty.setProperty("weibo4j.http.retryCount", "3");
         defaultProperty.setProperty("weibo4j.http.retryIntervalSecs", "10");
+        
+        //offbye add key.
+        defaultProperty.setProperty("weibo4j.oauth.consumerKey", Weibo.CONSUMER_KEY);
+        defaultProperty.setProperty("weibo4j.oauth.consumerSecret", Weibo.CONSUMER_SECRET);
         //defaultProperty.setProperty("weibo4j.oauth.consumerKey","");
         //defaultProperty.setProperty("weibo4j.oauth.consumerSecret","");
         defaultProperty.setProperty("weibo4j.async.numThreads", "1");

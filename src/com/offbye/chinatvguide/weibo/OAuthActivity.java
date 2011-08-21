@@ -3,6 +3,7 @@ package com.offbye.chinatvguide.weibo;
 
 import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.server.user.UserInfoActivity;
+import com.offbye.chinatvguide.server.user.UserStore;
 
 import weibo4android.WeiboException;
 import weibo4android.http.AccessToken;
@@ -50,12 +51,12 @@ public class OAuthActivity extends Activity {
                 Log.d(TAG, "token:" + accessToken.getToken() + " key:"
                         + accessToken.getTokenSecret());
                 textView.setText(R.string.weibo_connect_ok);
-                SharedPreferences sp = getSharedPreferences(UserInfoActivity.PREFS_USER, 0);
+                SharedPreferences sp = getSharedPreferences(UserStore.PREFS_USER, 0);
 
-                sp.edit().putString(UserInfoActivity.ACCESS_TPKEN, accessToken.getToken()).commit();
-                sp.edit().putString(UserInfoActivity.ACCESS_TPKEN_SECRET, accessToken.getTokenSecret()).commit();
-                sp.edit().putString(UserInfoActivity.USERID, "" + accessToken.getUserId()).commit();
-                sp.edit().putString(UserInfoActivity.SCREEN_NAME, accessToken.getScreenName()).commit();
+                sp.edit().putString(UserStore.ACCESS_TPKEN, accessToken.getToken()).commit();
+                sp.edit().putString(UserStore.ACCESS_TPKEN_SECRET, accessToken.getTokenSecret()).commit();
+                sp.edit().putString(UserStore.USERID, "" + accessToken.getUserId()).commit();
+                sp.edit().putString(UserStore.SCREEN_NAME, accessToken.getScreenName()).commit();
             } else {
                 textView.setText("connect failed");
                 Log.d(TAG,"connect failed");

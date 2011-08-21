@@ -5,7 +5,7 @@ import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.TVProgram;
 import com.offbye.chinatvguide.server.Comment;
 import com.offbye.chinatvguide.server.CommentTask;
-import com.offbye.chinatvguide.server.user.UserInfoActivity;
+import com.offbye.chinatvguide.server.user.UserStore;
 
 import weibo4android.Status;
 import weibo4android.Weibo;
@@ -44,7 +44,7 @@ public class Post extends Activity {
 	
     public static void addWeibo(Context context,TVProgram p) {
 
-        if (!"".equals(UserInfoActivity.getAccessToken(context))) {
+        if (!"".equals(UserStore.getAccessToken(context))) {
             Intent it = new Intent();
             it.putExtra("channel", p.getChannelname());
             it.putExtra("program", p.getProgram());
@@ -62,8 +62,8 @@ public class Post extends Activity {
     
     public static Status post(Context context, String content) throws WeiboException {
         Status status = null;
-        String token = UserInfoActivity.getAccessToken(context);
-        String secret = UserInfoActivity.getAccessSecret(context);
+        String token = UserStore.getAccessToken(context);
+        String secret = UserStore.getAccessSecret(context);
         Weibo weibo = OAuthConstant.getInstance().getWeibo();
         OAuthConstant.getInstance().setToken(token);
         OAuthConstant.getInstance().setTokenSecret(secret);
@@ -100,9 +100,9 @@ public class Post extends Activity {
 			mContent.setText(msg);
 		}
 
-		if (!"".equals(UserInfoActivity.getAccessToken(mContext))) {
-			token = UserInfoActivity.getAccessToken(mContext);
-			secret = UserInfoActivity.getAccessSecret(mContext);
+		if (!"".equals(UserStore.getAccessToken(mContext))) {
+			token = UserStore.getAccessToken(mContext);
+			secret = UserStore.getAccessSecret(mContext);
 		} else {
 			Intent it = new Intent();
 			it.setClass(getApplicationContext(), WeiboCheck.class);
@@ -124,7 +124,7 @@ public class Post extends Activity {
 				Comment c = new Comment();
 				c.setChannel(mChannel);
 				c.setProgram(mProgram);
-				c.setUserid(UserInfoActivity.getUserId(mContext));
+				c.setUserid(UserStore.getUserId(mContext));
 				c.setContent(mContent.getText().toString());
 				c.setType("1");
 				new CommentTask(getApplicationContext(),CommentTask.genUrl(c),mCallback).start();

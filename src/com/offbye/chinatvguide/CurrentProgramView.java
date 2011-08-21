@@ -4,7 +4,7 @@ import com.offbye.chinatvguide.channel.ChannelTab;
 import com.offbye.chinatvguide.grid.Grid;
 import com.offbye.chinatvguide.server.Comment;
 import com.offbye.chinatvguide.server.CommentTask;
-import com.offbye.chinatvguide.server.user.UserInfoActivity;
+import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.AppException;
 import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
@@ -325,10 +325,10 @@ public class CurrentProgramView extends Activity {
 	        c.setChannel(program.getChannelname());
 	        c.setProgram(program.getProgram());
 	        c.setType("0");
-	        if ("".equals(UserInfoActivity.getUserId(this))) {
+	        if ("".equals(UserStore.getUserId(this))) {
 	            c.setUserid("guest");
 	        } else {
-	            c.setUserid(UserInfoActivity.getUserId(this));
+	            c.setUserid(UserStore.getUserId(this));
 	        }
 	        String url = CommentTask.genUrl(c);
 	        Log.d(TAG, "url:" +url);
@@ -348,7 +348,7 @@ public class CurrentProgramView extends Activity {
 	        new CommentTask(this, url, callback).start();
 
 	         //TODO HOW TO NOTIFY USER WEIBO POST?
-	        if (!"".equals(UserInfoActivity.getUserId(this))) {
+	        if (!"".equals(UserStore.getUserId(this))) {
 	            final String msg = mContext.getString(R.string.weibo_watching) + "#"
 	                    + program.getChannelname() + "#, #" + program.getProgram() + "#";
 	            try {

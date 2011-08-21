@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@drawable/home">
+	<TextView android:gravity="center" android:textSize="20sp"
+		android:layout_width="fill_parent" android:padding="10dp"
+		android:text="@string/user_register_now" android:layout_height="wrap_content"
+		android:singleLine="true" />
+	<EditText android:id="@+id/screenname" android:padding="5dp"
+		android:layout_width="fill_parent" android:layout_margin="5dp"
+		android:layout_height="wrap_content" android:hint="@string/user_screen_name" />
+	<EditText android:id="@+id/email" android:maxLength="30"
+		android:padding="5dp" android:layout_width="fill_parent"
+		android:layout_margin="5dp" android:layout_height="wrap_content"
+		android:singleLine="true" android:hint="@string/user_email" />
+	<EditText android:id="@+id/password" android:maxLength="30"
+		android:padding="5dp" android:layout_width="fill_parent"
+		android:layout_margin="5dp" android:layout_height="wrap_content"
+		android:singleLine="true" android:hint="@string/user_password" />
+
+	<EditText android:id="@+id/passwordAgain" android:maxLength="30"
+		android:padding="5dp" android:layout_width="fill_parent"
+		android:layout_margin="5dp" android:layout_height="wrap_content"
+		android:singleLine="true" android:hint="@string/user_password_again" />
+
+
+	<Button android:id="@+id/register" android:layout_margin="5dp"
+		android:layout_width="fill_parent" android:text="@string/user_register"
+		android:layout_height="wrap_content">
+	</Button>
+</LinearLayout>

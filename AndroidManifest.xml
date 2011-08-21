@@ -57,7 +57,8 @@
                  >
        </activity>
        <activity android:name=".server.user.UserInfoActivity" android:label="@string/user_info"/>
-       
+       <activity android:name=".server.user.Login" android:label="@string/user_login"/>
+       <activity android:name=".server.user.Register" android:label="@string/user_register_now"/>
 		<receiver android:name="widget.TVWidget"
 			android:label="@string/widget_name">
 			<intent-filter>

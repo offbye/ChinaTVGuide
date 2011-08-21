@@ -1,13 +1,12 @@
 package com.offbye.chinatvguide;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.offbye.chinatvguide.channel.ChannelTab;
+import com.offbye.chinatvguide.grid.Grid;
+import com.offbye.chinatvguide.util.AppException;
+import com.offbye.chinatvguide.util.Constants;
+import com.offbye.chinatvguide.util.HttpUtil;
+import com.offbye.chinatvguide.util.Validator;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -26,11 +25,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.offbye.chinatvguide.channel.ChannelTab;
-import com.offbye.chinatvguide.grid.Grid;
-import com.offbye.chinatvguide.util.AppException;
-import com.offbye.chinatvguide.util.Constants;
-import com.offbye.chinatvguide.util.HttpUtil;
+
+import java.io.IOException;
+import java.net.URLEncoder;
 
 public class SuggestView extends Activity {
 	private static final String TAG = "SuggestView";
@@ -79,7 +76,7 @@ public class SuggestView extends Activity {
 								R.string.invalid_content_msg);
 					}
 
-					else if (!checkEmail(email.getText().toString())) {
+					else if (!Validator.isEmail(email.getText().toString())) {
 						showMsgBox(R.string.invalid_email_title,
 								R.string.invalid_email_msg);
 					} else {
@@ -106,13 +103,7 @@ public class SuggestView extends Activity {
 					}
 				}).show();
 	}
-	private boolean checkEmail(String mail){   
-        String regex = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";   
-        Pattern   p   =   Pattern.compile(regex);   
-        Matcher   m   =   p.matcher(mail);   
-        return m.find();   
-    }   
-    
+
 	private  String saveSuggest(String weburl) {
     	String re="";
 		try {

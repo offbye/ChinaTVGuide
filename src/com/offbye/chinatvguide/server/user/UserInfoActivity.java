@@ -4,19 +4,20 @@ package com.offbye.chinatvguide.server.user;
 import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
-import com.offbye.chinatvguide.weibo.OAuthActivity;
-import com.offbye.chinatvguide.weibo.OAuthConstant;
+import com.offbye.chinatvguide.weibo.Post;
+import com.offbye.chinatvguide.weibo.WeiboCheck;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import weibo4android.Weibo;
 import weibo4android.WeiboException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -29,25 +30,6 @@ import android.widget.Toast;
 import java.io.IOException;
 
 public class UserInfoActivity extends Activity {
-    public static final String PREFS_USER = "user";
-
-    public static final String ACCESS_TPKEN = "AccessToken";
-
-    public static final String ACCESS_TPKEN_SECRET = "AccessTokenSecret";
-
-    public static final String USERID = "userid";
-
-    public static final String SCREEN_NAME = "screenname";
-    
-    private static final String EMAIL = "email";
-
-    private static final String POINT = "point";
-
-    private static final String CHECKIN = "checkin";
-
-    private static final String COMMENT = "comment";
-
-    private static final String LOCATION = "location";
 
     protected static final String TAG = "UserInfoActivity";
 
@@ -77,14 +59,42 @@ public class UserInfoActivity extends Activity {
         mContext = this;
 
         init();
-        mEmail = getEmail(mContext);
+        mEmail = UserStore.getEmail(mContext);
 
-        showProgressDialog();
-        getUserInfo();
+        String userid = UserStore.getUserId(mContext);
+        if ("".equals(userid) && "".equals(mEmail)) {
+            new AlertDialog.Builder(this).setIcon(R.drawable.icon).setTitle(R.string.user_login)
+                    .setMessage(R.string.user_guest_tip).setPositiveButton(R.string.user_login,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    Intent it = new Intent();
+                                    it.setClass(mContext, Login.class);
+                                    startActivity(it);
+                                    finish();
+                                }
+                            }).setNeutralButton(R.string.user_reg,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    Intent it = new Intent();
+                                    it.setClass(mContext, Register.class);
+                                    startActivity(it);
+                                    finish();
+                                }
+                            }).setNegativeButton(R.string.weibo_menu,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    WeiboCheck.bindWeibo(mContext);
+                                }
+                            }).show();
+            return;
+        } else {
+            showProgressDialog();
+            getUserInfo();
+        }
 
-        final String token = getAccessToken(mContext);
-        final String secret = getAccessToken(mContext);
-        if (!"".equals(getAccessSecret(mContext))) {
+        final String token = UserStore.getAccessToken(mContext);
+        final String secret = UserStore.getAccessToken(mContext);
+        if (!"".equals(UserStore.getAccessSecret(mContext))) {
             /*
              * new Thread() { public void run() { try { final Weibo weibo =
              * OAuthConstant.getInstance().getWeibo();
@@ -94,11 +104,9 @@ public class UserInfoActivity extends Activity {
              * weibo.getAuthenticatedUser(); if (null!= u){ Log.d(TAG,
              * u.toString()); SharedPreferences sp =
              * mContext.getSharedPreferences(PREFS_USER, 0);
-             * sp.edit().putString(SCREEN_NAME,
-             * u.getScreenName()).commit();
+             * sp.edit().putString(SCREEN_NAME, u.getScreenName()).commit();
              * sp.edit().putString(LOCATION,u.getLocation()).commit();
-             * sp.edit().putString(SCREEN_NAME,
-             * u.getScreenName()).commit(); }
+             * sp.edit().putString(SCREEN_NAME, u.getScreenName()).commit(); }
              * mHandler.sendMessage(mHandler.obtainMessage(3)); } catch
              * (Exception e) { // TODO Auto-generated catch block
              * e.printStackTrace(); } }; }.start();
@@ -152,7 +160,7 @@ public class UserInfoActivity extends Activity {
     private void getUserInfo() {
         new Thread() {
             public void run() {
-                String userid = getUserId(mContext);
+                String userid = UserStore.getUserId(mContext);
                 if ("".equals(userid)) {
                     return;
                 }
@@ -164,9 +172,9 @@ public class UserInfoActivity extends Activity {
                     Log.d(TAG, "status:  " + status);
                     boolean exist = user.getBoolean("exist");
                     if (exist) {
-                        setPoint(mContext, user.getInt("point"));
-                        setComment(mContext, user.getInt("comment"));
-                        setCheckin(mContext, user.getInt("checkin"));
+                        UserStore.setPoint(mContext, user.getInt("point"));
+                        UserStore.setComment(mContext, user.getInt("comment"));
+                        UserStore.setCheckin(mContext, user.getInt("checkin"));
                     }
                     mHandler.sendMessage(mHandler.obtainMessage(3, status));
                 } catch (IOException e) {
@@ -201,80 +209,13 @@ public class UserInfoActivity extends Activity {
     }
 
     private void setvalue() {
-        String sname = getScreenName(mContext);
+        String sname = UserStore.getScreenName(mContext);
         mScreenNameTv.setText("".equals(sname) ? mContext.getString(R.string.user_guest) : sname);
-        mEmailTv.setText("" + getEmail(mContext));
-        mLocationTv.setText("" + getLocation(mContext));
-        mPointTv.setText("" + getPoint(mContext) + " points");
-        mCheckinTv.setText("" + getCheckin(mContext));
-        mCommentTv.setText("" + getComment(mContext));
-    }
-    
-
-    public static String getUserId(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getString(USERID, "");
-    }
-
-    public static String getAccessToken(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getString(ACCESS_TPKEN, "");
-    }
-
-    public static String getAccessSecret(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getString(ACCESS_TPKEN_SECRET, "");
-    }
-
-
-    public static String getScreenName(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getString(SCREEN_NAME, "");
-    }
-
-    public static String getEmail(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getString(EMAIL, "");
-    }
-
-    public static String getLocation(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getString(LOCATION, "");
-    }
-
-    public static int getPoint(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getInt(POINT, 0);
-    }
-
-    public static int getCheckin(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getInt(CHECKIN, 0);
-    }
-
-    public static int getComment(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        return sp.getInt(COMMENT, 0);
-    }
-
-    public static void setLocation(Context context, String location) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        sp.edit().putString(LOCATION, location).commit();
-    }
-
-    public static void setPoint(Context context, int point) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        sp.edit().putInt(POINT, point).commit();
-    }
-
-    public static void setCheckin(Context context, int num) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        sp.edit().putInt(CHECKIN, num).commit();
-    }
-
-    public static void setComment(Context context, int num) {
-        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
-        sp.edit().putInt(COMMENT, num).commit();
+        mEmailTv.setText("" + UserStore.getEmail(mContext));
+        mLocationTv.setText("" + UserStore.getLocation(mContext));
+        mPointTv.setText("" + UserStore.getPoint(mContext) + " points");
+        mCheckinTv.setText("" + UserStore.getCheckin(mContext));
+        mCommentTv.setText("" + UserStore.getComment(mContext));
     }
 
 }

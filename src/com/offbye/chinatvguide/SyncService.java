@@ -101,8 +101,7 @@ public class SyncService extends Service {
 
 	@Override
 	public void onStart(Intent intent, int startId) {
-		Log.i(TAG, "Starting #" + startId + ": " + intent.getExtras());
-
+		//Log.i(TAG, "Starting #" + startId + ": " + intent.getExtras());
 	}
 
 	@Override
