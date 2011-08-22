@@ -309,7 +309,7 @@ public class CurrentProgramView extends Activity {
                 break;
             case R.string.checkin_succeed:
                 pd.dismiss();
-                Toast.makeText(mContext, String.format(mContext.getString(R.string.checkin_succeed),Constants.CHECKIN_POINT), 5).show();
+                Toast.makeText(mContext, R.string.checkin_succeed, 5).show();
                 break;
                 
 			default:
@@ -322,8 +322,8 @@ public class CurrentProgramView extends Activity {
 	
 	 private void checkin(TVProgram program) {
 	        Comment c = new Comment();
-	        c.setChannel(program.getChannelname());
-	        c.setProgram(program.getProgram());
+	        c.setChannel(program.getChannelname().trim());
+	        c.setProgram(program.getProgram().trim());
 	        c.setType("0");
 	        if ("".equals(UserStore.getUserId(this))) {
 	            c.setUserid("guest");
@@ -331,6 +331,9 @@ public class CurrentProgramView extends Activity {
 	            c.setUserid(UserStore.getUserId(this));
 	        }
 	        String url = CommentTask.genUrl(c);
+	        if(!"".equals(UserStore.getEmail(mContext))){
+	            url = url + "&email=" + UserStore.getEmail(mContext);
+	        }
 	        Log.d(TAG, "url:" +url);
 	        CommentTask.Callback callback = new CommentTask.Callback() {
 

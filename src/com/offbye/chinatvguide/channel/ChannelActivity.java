@@ -103,7 +103,7 @@ public class ChannelActivity extends Activity {
 			channellCursor = mydb.fetchChannels();
 		}
 
-		startManagingCursor(channellCursor);
+		//startManagingCursor(channellCursor);
 		channelList=new ArrayList<TVChannel>();
 
 		while(channellCursor.moveToNext()){

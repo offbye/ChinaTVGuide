@@ -47,7 +47,7 @@ public class SuggestView extends Activity {
         email = (EditText) this.findViewById(R.id.email);
         
     	urlsb =new StringBuffer(128);
-		urlsb.append(Constants.url_suggest);
+		urlsb.append(Constants.URL_SUGGEST);
 		
 		ConnectivityManager cwjManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE); 
         NetworkInfo info = cwjManager.getActiveNetworkInfo();
@@ -108,7 +108,7 @@ public class SuggestView extends Activity {
     	String re="";
 		try {
 			re = HttpUtil.getUrl(this,weburl);
-
+			Log.d(TAG, re);
 		} catch (IOException e) {
 			progressHandler.sendEmptyMessage(R.string.notify_network_error);
 			Log.d(TAG, "network err");
@@ -134,7 +134,7 @@ public class SuggestView extends Activity {
 			// 4. the working
 			String re= saveSuggest(urlsb.toString());
 			//Log.v(TAG, "load from web");
-			if (re.equals("ok")) {
+			if (re.trim().equals("ok")) {
 				// 5. to call sendEmptyMessage() to notificate this working
 				// is done
 				progressHandler.sendEmptyMessage(R.string.notify_succeeded);

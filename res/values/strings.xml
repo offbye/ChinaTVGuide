@@ -164,11 +164,11 @@ ChinaTVGuide provide TV program guide in China,  Quickly get an overview of what
 	<string name="search_not_blank">Search text can not be blank</string>
 	
 	<string name="checkin_failed">Check in failed</string>
-	<string name="checkin_succeed">Check in succeed, get %s points</string>
+	<string name="checkin_succeed">Check in success</string>
 	<string name="comment_failed">Comment failed</string>	
-	<string name="comment_succeed">成功发表电视评论，获得%s个积分</string>
+	<string name="comment_succeed">成功发表电视评论</string>
 	<string name="comment_weibo_failed">同步电视评论到新浪微博失败</string>
-	<string name="comment_weibo_succeed">成功同步电视评论到新浪微博，获得%s个积分</string>
+	<string name="comment_weibo_succeed">成功同步电视评论到新浪微博</string>
 	
 	<string name="preferences_sync_title">电视节目同步</string>
 	<string name="preferences_autosync_title">启动电视节目同步</string>
@@ -189,6 +189,7 @@ ChinaTVGuide provide TV program guide in China,  Quickly get an overview of what
 	<string name="user_get_fail">获取用户资料失败</string>
 	<string name="user_guest_tip">您现在是游客身份，无法获取用户资料，如果您以前注册过，您可以直接登录。如果您没有注册，您可以注册用户或使用新浪微博用户登录。</string>
 	<string name="user_weibo_login_failed">使用新浪微博账户登录失败，请退出软件后重试</string>
+	<string name="user_refresh">刷新</string>
 	
 	<string name="user_reg">注册</string>
 	<string name="user_register_now">立即注册</string>

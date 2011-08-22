@@ -58,23 +58,23 @@ public class Register extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (screenName.getText().toString().length() < 2) {
+                if (screenName.getText().toString().trim().length() < 2) {
                     Toast.makeText(mContext, R.string.user_screenname_invalid, Toast.LENGTH_SHORT)
                             .show();
                     return;
                 }
 
-                if (!Validator.isEmail(email.getText().toString())) {
+                if (!Validator.isEmail(email.getText().toString().trim())) {
                     Toast.makeText(mContext, R.string.invalid_email_msg, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (password.getText().toString().length() < 6) {
+                if (password.getText().toString().trim().length() < 6) {
                     Toast.makeText(mContext, R.string.user_password_invalid, Toast.LENGTH_SHORT)
                             .show();
                     return;
                 }
 
-                if (!password.getText().toString().equals(passwordAgain.getText().toString())) {
+                if (!password.getText().toString().trim().equals(passwordAgain.getText().toString().trim())) {
                     Toast.makeText(mContext, R.string.user_password_not_same, Toast.LENGTH_SHORT)
                             .show();
                     return;
@@ -99,8 +99,8 @@ public class Register extends Activity {
     private void regiter() {
         new Thread() {
             public void run() {
-                String url = String.format(Constants.URL_USER_REG, email.getText().toString(),
-                        password.getText().toString(), screenName.getText().toString());
+                String url = String.format(Constants.URL_USER_REG, email.getText().toString().trim(),
+                        password.getText().toString().trim(), screenName.getText().toString().trim());
                 try {
                     Log.d(TAG, "url:  " + url);
                     String resp = HttpUtil.getURL(url);

@@ -161,10 +161,16 @@ public class UserInfoActivity extends Activity {
         new Thread() {
             public void run() {
                 String userid = UserStore.getUserId(mContext);
-                if ("".equals(userid)) {
+                if ("".equals(userid) && "".equals(mEmail)) {
                     return;
                 }
-                String url = String.format(Constants.URL_USERINFO, userid);
+                String url = Constants.URL_USERINFO;
+                if (!"".equals(userid)) {
+                    url = url + "?userid=" + userid;
+                } else {
+                    url = url + "?email=" + mEmail;
+                }
+                
                 try {
                     Log.d(TAG, "url:  " + url);
                     String status = HttpUtil.getURL(url);

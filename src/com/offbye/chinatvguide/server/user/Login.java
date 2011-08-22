@@ -56,11 +56,11 @@ public class Login extends Activity {
 
             @Override
             public void onClick(View v) {
-                if (!Validator.isEmail(email.getText().toString())) {
+                if (!Validator.isEmail(email.getText().toString().trim())) {
                     Toast.makeText(mContext, R.string.invalid_email_msg, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (password.getText().toString().length() < 6) {
+                if (password.getText().toString().trim().length() < 6) {
                     Toast.makeText(mContext, R.string.user_password_invalid, Toast.LENGTH_SHORT)
                             .show();
                     return;
@@ -93,8 +93,8 @@ public class Login extends Activity {
     private void login() {
         new Thread() {
             public void run() {
-                String url = String.format(Constants.URL_USER_LOGIN, email.getText().toString(),
-                        password.getText().toString());
+                String url = String.format(Constants.URL_USER_LOGIN, email.getText().toString().trim(),
+                        password.getText().toString().trim());
                 try {
                     Log.d(TAG, "url:  " + url);
                     String resp = HttpUtil.getURL(url);

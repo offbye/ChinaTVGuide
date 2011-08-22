@@ -37,7 +37,7 @@
 					android:layout_height="wrap_content" android:layout_marginRight="12dip"
 					android:layout_marginBottom="8dip" android:layout_alignParentRight="true"
 					android:layout_alignParentBottom="true"
-					android:layout_centerVertical="true" android:text="refresh">
+					android:layout_centerVertical="true" android:text="@string/user_refresh">
 				</Button>
 			</RelativeLayout>
 
