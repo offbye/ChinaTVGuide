@@ -1,12 +1,13 @@
 package com.offbye.chinatvguide.rate;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.util.ArrayList;
+import com.offbye.chinatvguide.R;
+import com.offbye.chinatvguide.SuggestView;
+import com.offbye.chinatvguide.channel.ChannelTab;
+import com.offbye.chinatvguide.grid.Grid;
+import com.offbye.chinatvguide.util.AppException;
+import com.offbye.chinatvguide.util.Constants;
+import com.offbye.chinatvguide.util.HttpUtil;
+import com.offbye.chinatvguide.util.MD5;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,6 +15,7 @@ import org.json.JSONException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,23 +26,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 
-import com.offbye.chinatvguide.ChannelProgramView;
-import com.offbye.chinatvguide.R;
-import com.offbye.chinatvguide.SuggestView;
-import com.offbye.chinatvguide.channel.ChannelTab;
-import com.offbye.chinatvguide.grid.Grid;
-import com.offbye.chinatvguide.util.AppException;
-import com.offbye.chinatvguide.util.Constants;
-import com.offbye.chinatvguide.util.HttpUtil;
-import com.offbye.chinatvguide.util.MD5;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class TVRateActivity extends Activity {
 	private static final String TAG = "TVrateActivity";
@@ -50,39 +42,34 @@ public class TVRateActivity extends Activity {
 	private ProgressDialog pd;
 	private ListView optionsListView;
 	private TelephonyManager tm ;
-	private ArrayAdapter<CharSequence> cityAdapter;
 	private String selectdCity;
+	private Context mContext;
+	private Button mChange;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.rate_view);
-
+		mContext = this;
 		optionsListView = (ListView) this.findViewById(R.id.ListView01);
 		url = buildurl("");
 		getDataInitialize();
 		
-		
-		Spinner changecity = (Spinner) this.findViewById(R.id.changecity);
-		cityAdapter = ArrayAdapter.createFromResource(this, R.array.tvcity,
-                android.R.layout.simple_spinner_item);
-		cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		changecity.setAdapter(cityAdapter);
-		changecity.setOnItemSelectedListener(
-		            new OnItemSelectedListener() {
-		                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-		                	selectdCity = cityAdapter.getItem(position).toString();
-		                	//getDataInitialize();
-		                }
-		                public void onNothingSelected(AdapterView<?> parent) {
-		                    setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
-		                }
-		            });
-		Button change = (Button) this.findViewById(R.id.change);
-		change.setOnClickListener(new View.OnClickListener() {
+        mChange = (Button) this.findViewById(R.id.change);
+        mChange.setText("北京");
+        mChange.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	url = buildurl(selectdCity);
-            	Log.v(TAG, url);
-            	getDataInitialize();
+
+                new AlertDialog.Builder(mContext).setTitle(R.string.select_dialog).setItems(
+                        R.array.tvcity, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                selectdCity = mContext.getResources()
+                                        .getStringArray(R.array.tvcity)[which];
+                                mChange.setText(selectdCity);
+                                url = buildurl(selectdCity);
+                                Log.v(TAG, url);
+                                getDataInitialize();
+                            }
+                        }).show();
             }
         });
 	}

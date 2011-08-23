@@ -18,7 +18,7 @@
 	<ImageView android:layout_alignParentRight="true"
 		android:layout_centerVertical="true" android:layout_marginRight="5dp"
 		android:id="@+id/favouriteicon" android:layout_height="wrap_content"
-		android:visibility="gone" android:src="@drawable/favouriteicon"
+		android:visibility="gone" android:src="@drawable/favourite_on"
 		android:layout_width="wrap_content">
 	</ImageView>
 </RelativeLayout>

@@ -23,6 +23,12 @@
         <item>Check in,I am Watching</item>
         <item>Comment this tv program</item>
     </string-array>
+    <string-array name="programoptions">
+        <item>Share it to friends</item>
+        <item>Search on google</item>
+        <item>Add to favourite</item>
+        <item>Comment this TV program</item>
+    </string-array>
  	<string-array name="rss">
         <item>View all</item>
         <item>Share</item>

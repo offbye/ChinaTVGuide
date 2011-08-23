@@ -8,9 +8,11 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.widget.Toast;
 
 public final class PreferencesActivity extends PreferenceActivity implements
         OnSharedPreferenceChangeListener {
@@ -51,7 +53,6 @@ public final class PreferencesActivity extends PreferenceActivity implements
         return sp.getBoolean("autosync", true);
     }
 
-    // Prevent the user from turning off both decode options
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         // if (key.equals(KEY_ALARM)) {
         // alarmTimes.setEnabled(alarm.isChecked());
@@ -60,5 +61,22 @@ public final class PreferencesActivity extends PreferenceActivity implements
         // alarm.setEnabled(alarmTimes.isChecked());
         // alarm.setChecked(true);
         // }
+    }
+    
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if(preference.getKey().equals("clearcache")){
+            MydbHelper mydb =new MydbHelper(this);
+            if(mydb.deleteAllPrograms()==true){
+                Toast.makeText(this, R.string.program_data_deleted, Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(this, R.string.no_data_deleted, Toast.LENGTH_LONG).show();
+            }
+            mydb.close();
+            return true;
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        
     }
 }

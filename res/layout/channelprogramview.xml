@@ -5,21 +5,25 @@ xmlns:adsdk="http://schemas.android.com/apk/res/com.offbye.chinatvguide"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent"  android:background="@drawable/home">
 
-	<LinearLayout android:orientation="horizontal"
-		android:layout_width="fill_parent" android:gravity="center_vertical"
+	<RelativeLayout
+		android:layout_width="fill_parent" android:layout_centerVertical="true"
 		android:layout_height="wrap_content" android:background="@drawable/rowbg">
 			
-		<ImageView android:id="@+id/channellogo"
+		<ImageView android:id="@+id/channellogo" android:layout_alignParentLeft="true"
 			android:layout_height="wrap_content" android:src="@drawable/cctv1"
-			android:layout_width="wrap_content">
+			android:layout_width="wrap_content" android:layout_centerVertical="true">
 		</ImageView>
-		<TextView android:id="@+id/cdate"
+		<TextView android:id="@+id/cdate" android:layout_toRightOf="@+id/channellogo"
 			android:layout_width="wrap_content" android:textSize="18sp"
 			android:layout_height="wrap_content" android:padding="5dp" 
 			android:singleLine="true" android:textColor="#ffff0000"
-			android:gravity="center_vertical" android:text="title"
+			android:gravity="center_vertical" android:text="title" android:layout_centerVertical="true"
 			/>
-	</LinearLayout>
+		<Button android:id="@+id/checkin" android:layout_alignParentRight="true" android:background="@drawable/btn_checkin"
+			android:layout_width="wrap_content" android:textSize="16sp" android:layout_centerVertical="true"
+			android:layout_height="wrap_content" android:text="@string/user_checkin"
+			android:textColor="#ffffffff" android:layout_marginRight="5dp"/>	
+	</RelativeLayout>
 	<LinearLayout android:gravity="center" android:layout_marginTop="3dp"
 		android:layout_width="fill_parent" android:layout_marginBottom="5dp"
 		android:layout_height="wrap_content">

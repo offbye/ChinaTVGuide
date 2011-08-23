@@ -2,42 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:spacing="5dp" android:layout_height="fill_parent">
-	<LinearLayout android:layout_width="fill_parent"
+	<RelativeLayout android:layout_width="fill_parent"
 		android:gravity="right" android:layout_height="wrap_content">
-
-		<Spinner android:id="@+id/changecity"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:drawSelectorOnTop="true" />
 		<Button android:text="@string/changecity"
-			android:id="@+id/change" android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+			android:layout_centerVertical="true" android:textSize="14sp"
+			android:layout_margin="5dp" android:id="@+id/change"
+			android:layout_width="wrap_content" android:paddingRight="32dp"
+			android:paddingLeft="2dp" android:layout_height="wrap_content"
+			android:background="@drawable/btn_dropdown">
 		</Button>
-	</LinearLayout>
-	<RelativeLayout android:orientation="horizontal"
+	</RelativeLayout>
+	<RelativeLayout android:orientation="horizontal" android:background="#2acccccc"
 		android:layout_width="fill_parent" android:padding="5dp"
-		android:layout_height="wrap_content">
-		<TextView android:id="@+id/tvrank"
-			android:layout_width="wrap_content" android:paddingLeft="5dp"
-			android:textSize="18sp" android:textColor="#ffff0a00"
+		android:layout_height="wrap_content" >
+		<TextView android:id="@+id/tvrank" android:layout_width="wrap_content"
+			android:paddingLeft="5dp" android:textSize="18sp" android:textColor="#ffff0a00"
 			android:text="@string/tvrank" android:layout_height="wrap_content" />
 		<TextView android:id="@+id/tvprogram"
-			android:layout_toRightOf="@+id/tvrank"
-			android:layout_width="wrap_content" android:paddingLeft="10dp"
-			android:textSize="18sp" android:textColor="#ffff0a00"
-			android:text="@string/tvprogram"
-			android:layout_height="wrap_content" />
+			android:layout_toRightOf="@+id/tvrank" android:layout_width="wrap_content"
+			android:paddingLeft="10dp" android:textSize="18sp" android:textColor="#ffff0a00"
+			android:text="@string/tvprogram" android:layout_height="wrap_content" />
 		<TextView android:id="@+id/tvrate"
-			android:layout_alignParentRight="true"
-			android:layout_width="wrap_content" android:paddingLeft="10dp"
-			android:textSize="18sp" android:textColor="#ffff0a00"
+			android:layout_alignParentRight="true" android:layout_width="wrap_content"
+			android:paddingLeft="10dp" android:textSize="18sp" android:textColor="#ffff0a00"
 			android:text="@string/tvrate" android:layout_height="wrap_content" />
 	</RelativeLayout>
 
-	<ListView android:id="@+id/ListView01"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal">
+	<ListView android:id="@+id/ListView01" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_gravity="center_horizontal">
 	</ListView>
 </LinearLayout>
 

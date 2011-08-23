@@ -77,7 +77,7 @@ public class ChannelProgramView extends Activity {
 	private TelephonyManager tm ;
 	private Date mo,tu,we,th,fr,sa,su;
 	private Button btnmo,btntu,btnwe,btnth,btnfr,btnsa,btnsu;
-
+	private Button mCheckin;
 	private String channelname;
 
 	private String type;
@@ -250,7 +250,18 @@ public class ChannelProgramView extends Activity {
 			}
 		});
 		
-		
+		mCheckin =(Button)findViewById(R.id.checkin);
+		mCheckin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                pd = ProgressDialog.show(mContext, getString(R.string.msg_loading), getString(R.string.msg_wait), true, true);
+                pd.setIcon(R.drawable.icon);
+                String prog = "";
+                if(currentPosition > 0 ){
+                    prog = pl.get(currentPosition).getProgram().trim();
+                }
+                checkin(channelname.trim(),prog);
+            }
+        });
 	}
 	
 
@@ -334,7 +345,7 @@ public class ChannelProgramView extends Activity {
 		SimpleDateFormat df2=new SimpleDateFormat("yyyy年MM月dd日");
 		String currentdate2=df2.format(date);
 		channellogo.setImageBitmap(getImageFromAssetFile(channel+".png"));
-		cdate.setText(currentdate2+"节目");
+		cdate.setText(currentdate2);
 	}
 
 	public ArrayList<TVProgram> getTVProgramsFormURL(String weburl) {
@@ -539,41 +550,28 @@ public class ChannelProgramView extends Activity {
         				
         				new AlertDialog.Builder(mContext)
         	                .setTitle(R.string.select_dialog)
-        	                .setItems(R.array.localoptions, new DialogInterface.OnClickListener() {
+        	                .setItems(R.array.programoptions, new DialogInterface.OnClickListener() {
         	                    public void onClick(DialogInterface dialog, int which) {
 
-        	                        /* User clicked so do some stuff */
-        	                       //String[] items = getResources().getStringArray(R.array.localoptions);
-        	                       if(which==0){
-        	           	            	Intent i = new Intent(mContext, ChannelProgramView.class); 
-        	           	            	i.putExtra("channel", seletedProgram.getChannel());
-        	           					startActivity(i); 
-        	                       }
-        	                       else if(which==1){
+        	                        if(which == 0){
         	                    	   Intent i = new Intent(Intent.ACTION_VIEW);   
         	                    	   i.putExtra("sms_body", seletedProgram.getChannelname().trim()+"节目"+seletedProgram.getProgram().trim()+ "在"+seletedProgram.getStarttime()+"播出，请注意收看啊");   
         	                    	   i.setType("vnd.android-dir/mms-sms");   
         	                    	   startActivity(i);
         	                       }
-        	                       else if(which==2){
+        	                       else if(which == 1){
         	                    	   Intent intent = new Intent();
         	                    	   intent.setAction(Intent.ACTION_WEB_SEARCH);
         	                    	   intent.putExtra(SearchManager.QUERY,seletedProgram.getProgram().trim());
         	                    	   startActivity(intent);
         	                       }
-        	                       else if(which==3){
+        	                       else if(which == 2){
         	                    	   MydbHelper mydb = new MydbHelper(mContext);
         	                    	   mydb.addFavoriteProgram(seletedProgram.getChannel(), seletedProgram.getDate(), seletedProgram.getStarttime(), seletedProgram.getEndtime(), seletedProgram.getProgram(), seletedProgram.getDaynight(), seletedProgram.getChannelname());
         	           				   mydb.close();
         	           				   Toast.makeText(mContext, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
         	                       }
-        	                       else if(which == 4){
-        	                           pd = ProgressDialog.show(mContext, getString(R.string.msg_loading), getString(R.string.msg_wait), true, true);
-        	                           pd.setIcon(R.drawable.icon);
-        	                           checkin(seletedProgram);
-
-                                   }
-        	                       else if(which == 5){
+        	                       else if(which == 3){
                                        Post.addWeibo(mContext, seletedProgram);
                                    }
         	                    }
@@ -641,10 +639,10 @@ public class ChannelProgramView extends Activity {
 		}
 	};
 
-    private void checkin(TVProgram program) {
+    private void checkin(String channel,String program) {
         Comment c = new Comment();
-        c.setChannel(program.getChannelname().trim());
-        c.setProgram(program.getProgram().trim());
+        c.setChannel(channel);
+        c.setProgram(program);
         c.setType("0");
         if ("".equals(UserStore.getUserId(this))) {
             c.setUserid("guest");
@@ -673,7 +671,7 @@ public class ChannelProgramView extends Activity {
          //TODO HOW TO NOTIFY USER WEIBO POST?
         if (!"".equals(UserStore.getUserId(this))) {
             final String msg = mContext.getString(R.string.weibo_watching) + "#"
-                    + program.getChannelname() + "#, #" + program.getProgram() + "#";
+                    + channel + "#, #" + program + "#";
             try {
                 Post.post(mContext, msg);
             } catch (Exception e) {

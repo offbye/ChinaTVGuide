@@ -3,7 +3,7 @@ package com.offbye.chinatvguide.util;
 public class Constants {
 	public static String key = "hiapk20100414";
 	public static String url = "http://www.chinatvguide.mobi/phpmy/tao/tvs.php";
-	public static String url_tvrate = "http://www.chinatvguide.mobi/phpmy/tao/tvrate.php";
+	public static String url_tvrate = "http://wztv.sinaapp.com/ga/tvrate.php";
 	public static String url_tvrecommend = "http://www.chinatvguide.mobi/phpmy/tao/tvrecommend.php";
 	public static String url_thanks = "http://www.chinatvguide.mobi/phpmy/tao/thanks.php";
 	public static String url_local = "http://www.chinatvguide.mobi/phpmy/tao/local.php";
