@@ -208,5 +208,6 @@ ChinaTVGuide provide TV program guide in China,  Quickly get an overview of what
 	<string name="user_password_not_same">两次输入的密码不一致</string>
 	<string name="user_login_success">登录成功</string>
 	<string name="user_login_failed">登录失败</string>
-	
+	<string name="latest_checkin">最新签到</string>
+	<string name="latest_comment">最新评论</string>
 </resources>

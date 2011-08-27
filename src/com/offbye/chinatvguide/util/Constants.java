@@ -20,6 +20,7 @@ public class Constants {
 	public static final String URL_USERINFO = "http://wztv.sinaapp.com/client/userinfo.php";
 	public static final String URL_USER_REG = "http://wztv.sinaapp.com/client/user_reg.php?email=%s&password=%s&screenname=%s";
 	public static final String URL_USER_LOGIN = "http://wztv.sinaapp.com/client/user_login.php?email=%s&password=%s";
+	public static final String URL_COMMENT_LIST = "http://wztv.sinaapp.com/client/comment_list.php";
 	
 	//JIFEN
 	public static final int COMMENT_POINT = 5;

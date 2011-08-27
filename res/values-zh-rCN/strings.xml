@@ -92,7 +92,7 @@
 	<string name="grid_search">电视搜索</string>
 
 	<string name="grid_suggest">提交建议</string>
-	<string name="grid_comment">电视评论</string>
+	<string name="grid_comment">电视互动</string>
 	<string name="grid_favourite">我的收藏</string>
 	<string name="grid_recommend">节目推荐</string>
 	<string name="grid_rss">娱乐资讯</string>
@@ -123,8 +123,8 @@
 	<string name="tvrate">收视率</string>
 	<string name="tvprogram">电视节目和频道</string>
 	<string name="changecity">切换城市</string>
-	<string name="suggest_content">你的建议是对我们最好的支持！</string>
-	<string name="suggest_email">your@youremail.com</string>
+	<string name="suggest_content">您的建议是对我们最好的支持！</string>
+	<string name="suggest_email">您的Email</string>
 
 	<string name="tv_actor">演员</string>
 	<string name="tv_director">导演</string>

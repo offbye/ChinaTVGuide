@@ -1,8 +1,7 @@
 package com.offbye.chinatvguide;
 
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import com.offbye.chinatvguide.channel.ChannelTab;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,20 +22,19 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-import com.offbye.chinatvguide.channel.ChannelTab;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class SearchView extends Activity {
 	private static final String TAG = "SearchView";
-	private ImageView search=null;
+	private Button search=null;
 	private EditText program;
 	private TextView starttime,cdate;
 	private Spinner optionsListView;
@@ -68,7 +66,7 @@ public class SearchView extends Activity {
         starttime = (Button) this.findViewById(R.id.starttime);
         notsearchtime = (CheckBox) this.findViewById(R.id.notsearchtime);
         
-        search = (ImageButton) this.findViewById(R.id.search);
+        search = (Button) this.findViewById(R.id.search);
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);

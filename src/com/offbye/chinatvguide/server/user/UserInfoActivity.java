@@ -38,7 +38,7 @@ public class UserInfoActivity extends Activity {
     private TextView mScreenNameTv;
 
     private String mEmail;
-
+    private String mUserid;
     private TextView mEmailTv;
 
     private TextView mLocationTv;
@@ -60,9 +60,9 @@ public class UserInfoActivity extends Activity {
 
         init();
         mEmail = UserStore.getEmail(mContext);
+        mUserid = UserStore.getUserId(mContext);
 
-        String userid = UserStore.getUserId(mContext);
-        if ("".equals(userid) && "".equals(mEmail)) {
+        if ("".equals(mUserid) && "".equals(mEmail)) {
             new AlertDialog.Builder(this).setIcon(R.drawable.icon).setTitle(R.string.user_login)
                     .setMessage(R.string.user_guest_tip).setPositiveButton(R.string.user_login,
                             new DialogInterface.OnClickListener() {
@@ -160,13 +160,13 @@ public class UserInfoActivity extends Activity {
     private void getUserInfo() {
         new Thread() {
             public void run() {
-                String userid = UserStore.getUserId(mContext);
-                if ("".equals(userid) && "".equals(mEmail)) {
+               
+                if ("".equals(mUserid) && "".equals(mEmail)) {
                     return;
                 }
                 String url = Constants.URL_USERINFO;
-                if (!"".equals(userid)) {
-                    url = url + "?userid=" + userid;
+                if (!"".equals(mUserid)) {
+                    url = url + "?userid=" + mUserid;
                 } else {
                     url = url + "?email=" + mEmail;
                 }

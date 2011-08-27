@@ -63,6 +63,10 @@ public class CommentTask extends Thread {
             sb.append("&screenname=");
             sb.append(URLEncoder.encode(c.getScreenName()));
         }
+        if (null != c.getLocation() && !"".equals(c.getLocation())) {
+            sb.append("&location=");
+            sb.append(URLEncoder.encode(c.getLocation()));
+        }
         sb.append("&type=");
         sb.append(c.getType());
 

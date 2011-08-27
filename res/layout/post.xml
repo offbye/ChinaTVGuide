@@ -2,16 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	android:gravity="center_horizontal" android:orientation="vertical"
-	android:padding="6dp" android:background="@drawable/home">
+	android:background="#ffffffff">
+	<TextView android:gravity="center" android:textSize="18sp"
+		android:textColor="#ffffffff" android:layout_width="fill_parent"
+		android:padding="5dp" android:text="@string/weibo_title"
+		android:background="@drawable/title_background_simple"
+		android:layout_height="wrap_content" android:singleLine="true" />
+	<TextView android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:id="@+id/count"
+		android:text="0/140"></TextView>
 
-	<TextView android:text="@string/weibo_title" android:id="@+id/count"
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-	<EditText android:layout_width="match_parent"
-		android:layout_marginTop="10dp" android:layout_height="wrap_content"
-		android:text="" android:lines="5" android:id="@+id/content"></EditText>
-	<ImageButton android:layout_height="wrap_content" android:src="@drawable/weibo_share"
-		android:layout_marginTop="10dp" android:layout_width="wrap_content"
-		android:id="@+id/post"/>
+	<EditText android:layout_width="fill_parent" android:gravity="top"
+		android:maxLength="140" android:layout_margin="6dp"
+		android:layout_height="wrap_content" android:text="" android:lines="8"
+		android:id="@+id/content"></EditText>
+	<ImageButton android:layout_height="wrap_content"
+		android:src="@drawable/weibo_share" android:layout_margin="6dp"
+		android:layout_width="fill_parent" android:id="@+id/post" />
 
 </LinearLayout>

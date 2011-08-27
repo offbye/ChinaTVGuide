@@ -330,6 +330,8 @@ public class CurrentProgramView extends Activity {
 	        } else {
 	            c.setUserid(UserStore.getUserId(this));
 	        }
+	        c.setLocation(UserStore.getLocation(mContext));
+	        c.setScreenName(UserStore.getScreenName(mContext));
 	        String url = CommentTask.genUrl(c);
 	        if(!"".equals(UserStore.getEmail(mContext))){
 	            url = url + "&email=" + UserStore.getEmail(mContext);

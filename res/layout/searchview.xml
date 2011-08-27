@@ -1,69 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="#ffffffff">
+	<TextView android:gravity="center" android:textSize="18sp"
+		android:textColor="#ffffffff" android:layout_width="fill_parent"
+		android:padding="5dp" android:text="@string/grid_search"
+		android:background="@drawable/title_background_simple"
+		android:layout_height="wrap_content" android:singleLine="true" />
+	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layoutAnimation="@anim/layout_animation_table" android:padding="5dp"
+		android:animationCache="false" android:layout_marginTop="10dp"
+		android:clipToPadding="false" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:stretchColumns="1">
 
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layoutAnimation="@anim/layout_animation_table" android:background="@drawable/home"
-	android:animationCache="false" android:clipToPadding="false"
-	android:padding="12dp" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:stretchColumns="1">
+		<TableRow android:layoutAnimation="@anim/layout_animation_row_right_slide">
+			<TextView android:gravity="right" android:textSize="18dp"
+				android:padding="10dp" android:text="@string/channelname" />
+			<Spinner android:id="@+id/channel" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
+		</TableRow>
 
-	<TableRow
-		android:layoutAnimation="@anim/layout_animation_row_right_slide">
-		<TextView android:gravity="right" android:textSize="18dp"
-			android:padding="10dp" android:text="@string/channelname" />
-		<Spinner android:id="@+id/channel"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:drawSelectorOnTop="true" />
-	</TableRow>
+		<TableRow android:layoutAnimation="@anim/layout_animation_row_left_slide">
+			<TextView android:gravity="right" android:textSize="18dp"
+				android:padding="10dp" android:text="@string/program" />
+			<EditText android:id="@+id/program" android:layout_width="fill_parent"
+				android:padding="10dp" android:layout_height="wrap_content"
+				android:singleLine="true" />
+		</TableRow>
 
-	<TableRow
-		android:layoutAnimation="@anim/layout_animation_row_left_slide">
-		<TextView android:gravity="right" android:textSize="18dp"
-			android:padding="10dp" android:text="@string/program" />
-		<EditText android:id="@+id/program"
-			android:layout_width="fill_parent" android:padding="10dp"
-			android:layout_height="wrap_content" android:singleLine="true" />
-	</TableRow>
+		<TableRow android:layoutAnimation="@anim/layout_animation_row_right_slide">
+			<TextView android:text="@string/starttime"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textSize="18dp" android:padding="10dp" />
 
-	<TableRow
-		android:layoutAnimation="@anim/layout_animation_row_right_slide">
-		<TextView android:text="@string/starttime"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:textSize="18dp"
-			android:padding="10dp" />
+			<Button android:text="" android:id="@+id/starttime"
+				android:layout_width="wrap_content" android:textSize="18dp"
+				android:padding="10dp" android:layout_height="wrap_content">
+			</Button>
+		</TableRow>
 
-		<Button android:text="" android:id="@+id/starttime"
-			android:layout_width="wrap_content" android:textSize="18dp"
-			android:padding="10dp" android:layout_height="wrap_content">
+		<TableRow android:layoutAnimation="@anim/layout_animation_row_left_slide">
+			<TextView android:gravity="right" android:text="@string/date"
+				android:textSize="18dp" android:padding="10dp" />
+			<Button android:id="@+id/cdate" android:text=""
+				android:textSize="18dp" android:layout_width="wrap_content"
+				android:padding="10dp" android:layout_height="wrap_content" />
+		</TableRow>
+		<TableRow android:layoutAnimation="@anim/layout_animation_row_left_slide">
+			<TextView android:gravity="right" android:text=""
+				android:id="@+id/check" />
+			<CheckBox android:text="@string/notsearchtime" android:id="@+id/notsearchtime"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
+			</CheckBox>
+
+		</TableRow>
+
+		<Button android:id="@+id/search" android:text="@string/grid_search"
+			android:layout_margin="10dp" android:textSize="16sp" android:textColor="#ffffffff"
+			android:layout_width="fill_parent" android:background="@drawable/button1"
+			android:layout_height="wrap_content">
 		</Button>
-	</TableRow>
-
-	<TableRow
-		android:layoutAnimation="@anim/layout_animation_row_left_slide">
-		<TextView android:gravity="right" android:text="@string/date"
-			android:textSize="18dp" android:padding="10dp" />
-		<Button android:id="@+id/cdate" android:text=""
-			android:textSize="18dp" android:layout_width="wrap_content"
-			android:padding="10dp" android:layout_height="wrap_content" />
-	</TableRow>
-	<TableRow
-		android:layoutAnimation="@anim/layout_animation_row_left_slide">
-		<TextView android:gravity="right" android:text=""
-			android:id="@+id/check" />
-		<CheckBox android:text="@string/notsearchtime"
-			android:id="@+id/notsearchtime" android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
-		</CheckBox>
-
-	</TableRow>
-
-	<TableRow
-		android:layoutAnimation="@anim/layout_animation_row_left_slide">
-		<TextView android:gravity="right" android:text=""
-			android:id="@+id/c" />
-		<ImageButton android:id="@+id/search"
-			android:layout_width="wrap_content" android:src="@drawable/search"
-			android:layout_height="wrap_content">
-		</ImageButton>
-	</TableRow>
-</TableLayout>
+	</TableLayout>
+</LinearLayout>

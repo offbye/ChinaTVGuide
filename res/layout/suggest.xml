@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:background="@drawable/home">
-	<TextView android:gravity="center" android:textSize="20sp"
+	android:layout_height="fill_parent" android:background="#ffffffff">
+	<TextView android:gravity="center" android:textSize="18sp" android:textColor="#ffffffff"
+		android:layout_width="fill_parent" android:padding="5dp"
+		android:text="@string/grid_suggest" android:background="@drawable/title_background_simple"
+		android:layout_height="wrap_content" android:singleLine="true" />
+	
+	<TextView android:gravity="center" android:textSize="16sp"
 		android:layout_width="fill_parent" android:padding="10dp"
 		android:text="@string/suggest_title"
 		android:layout_height="wrap_content" android:singleLine="true" />
-	<EditText android:id="@+id/content" android:maxLength="100"
+	<EditText android:id="@+id/content" android:maxLength="100" android:gravity="top"
 		android:padding="5dp" android:layout_width="fill_parent"
-		android:layout_margin="5dp" android:singleLine="false"
+		android:layout_margin="6dp" android:singleLine="false"
 		android:layout_height="150dp" android:hint="@string/suggest_content"/>
 	<EditText android:id="@+id/email" android:maxLength="30"
 		android:padding="5dp" android:layout_width="fill_parent"
-		android:layout_margin="5dp" android:layout_height="wrap_content"
+		android:layout_margin="6dp" android:layout_height="wrap_content"
 		android:singleLine="true" android:hint="@string/suggest_email" />
-	<Button android:id="@+id/submit" android:layout_margin="5dp"
-		android:layout_width="fill_parent"
-		android:text="@string/submitsuggest"
+	<Button android:id="@+id/submit" android:layout_margin="6dp" android:textSize="18sp"
+		android:layout_width="fill_parent" android:background="@drawable/button1"
+		android:text="@string/submitsuggest" android:textColor="#ffffffff"
 		android:layout_height="wrap_content">
 	</Button>
 </LinearLayout>

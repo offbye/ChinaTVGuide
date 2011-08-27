@@ -11,7 +11,10 @@ import com.offbye.chinatvguide.favorite.FavouriteTab;
 import com.offbye.chinatvguide.rate.TVRateActivity;
 import com.offbye.chinatvguide.recommend.TVRecommendActivity;
 import com.offbye.chinatvguide.rss.RSSActivity;
+import com.offbye.chinatvguide.server.CommentTab;
+import com.offbye.chinatvguide.server.user.Login;
 import com.offbye.chinatvguide.server.user.UserInfoActivity;
+import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.Shortcut;
 import com.offbye.chinatvguide.weibo.WeiboCheck;
 
@@ -54,11 +57,12 @@ public class Grid extends Activity {
 
 		icons.add(new Icon(R.drawable.grid_rss, R.string.grid_rss));
 		icons.add(new Icon(R.drawable.grid_favourite, R.string.grid_favourite));
-		icons.add(new Icon(R.drawable.grid_comment, R.string.grid_recommend));
+		icons.add(new Icon(R.drawable.grid_recommend, R.string.grid_recommend));
 
 		icons.add(new Icon(R.drawable.grid_rank, R.string.grid_rank));
+		
+		icons.add(new Icon(R.drawable.grid_comment, R.string.grid_comment));
 		icons.add(new Icon(R.drawable.grid_suggest, R.string.submitsuggest));
-		icons.add(new Icon(R.drawable.grid_icon, R.string.grid_about));
 
 		GridView g = (GridView) findViewById(R.id.myGrid);
 		g.setAdapter(new IconAdapter(this, R.layout.grid_row, icons));
@@ -92,20 +96,14 @@ public class Grid extends Activity {
 					Intent i = new Intent(Grid.this, TVRateActivity.class);
 					startActivity(i);
 				} else if (position == 7) {
-					Intent i = new Intent(Grid.this, SuggestView.class);
-					startActivity(i);
+				    Intent i = new Intent();
+                    i.setClass(Grid.this, CommentTab.class);
+                    startActivity(i);
 				} else if (position == 8) {
-					new AlertDialog.Builder(Grid.this).setIcon(R.drawable.icon)
-					.setTitle(R.string.menu_abouttitle).setMessage(
-							R.string.aboutinfo).setPositiveButton(
-							R.string.alert_dialog_ok,
-							new DialogInterface.OnClickListener() {
-								public void onClick(
-										DialogInterface dialog,
-										int whichButton) {
 
-								}
-							}).show();
+				    Intent i = new Intent(Grid.this, SuggestView.class);
+                    startActivity(i);
+		            
 				}
 			}
 		});
@@ -162,9 +160,11 @@ public class Grid extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 0, 0, this.getText(R.string.weibo_menu)).setIcon(R.drawable.weibo);
 		menu.add(0, 1, 1,  this.getText(R.string.menu_help)).setIcon(R.drawable.ic_menu_help);
-		menu.add(0, 2, 2,  this.getText(R.string.menu_exit)).setIcon(R.drawable.ic_menu_close_clear_cancel);
+		menu.add(0, 2, 2,  this.getText(R.string.menu_about)).setIcon(R.drawable.icon);
 		menu.add(0, 3, 3,  this.getText(R.string.preferences_name)).setIcon(R.drawable.ic_menu_preferences);
 		menu.add(0, 4, 4,  this.getText(R.string.user_info)).setIcon(R.drawable.ic_menu_edit);
+		menu.add(0, 5, 5,  this.getText(R.string.menu_exit)).setIcon(R.drawable.ic_menu_close_clear_cancel);
+		       
 		if (10 < Integer.valueOf(Build.VERSION.SDK)) {
 			menu.getItem(0).setShowAsAction(1);
 			menu.getItem(1).setShowAsAction(1);
@@ -194,22 +194,45 @@ public class Grid extends Activity {
 					}).show();
 			break;
 
-		case 2:
-			finish();
-			Shortcut.exit(this);
-			break;
 		case 3:
 		    Intent it = new Intent();
 	        it.setClass(this, PreferencesActivity.class);
 	        this.startActivity(it);
             break;
 		
-	    case 4:
-            Intent it2 = new Intent();
-            it2.setClass(this, UserInfoActivity.class);
-            this.startActivity(it2);
+	    case 2:
+          new AlertDialog.Builder(Grid.this).setIcon(R.drawable.icon)
+          .setTitle(R.string.menu_abouttitle).setMessage(
+                  R.string.aboutinfo).setPositiveButton(
+                  R.string.alert_dialog_ok,
+                  new DialogInterface.OnClickListener() {
+                      public void onClick(
+                              DialogInterface dialog,
+                              int whichButton) {
+
+                      }
+                  }).show();
+            break;
+        case 4:
+            if ("".equals(UserStore.getUserId(Grid.this)) && "".equals(UserStore.getEmail(Grid.this))) {
+                Intent it2 = new Intent();
+                it2.setClass(Grid.this, Login.class);
+                this.startActivity(it2);
+            }
+            else {
+                Intent it2 = new Intent();
+                it2.setClass(Grid.this, UserInfoActivity.class);
+                this.startActivity(it2);
+            }
+            break;
+        case 5:
+            finish();
+            Shortcut.exit(this);
+
             break;
         }
+
+
 		return super.onOptionsItemSelected(item);
 	}
 

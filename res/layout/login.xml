@@ -3,17 +3,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
-	<ImageView android:layout_width="wrap_content" android:id="@+id/imageView1"
-		android:layout_height="wrap_content" android:src="@drawable/icon"></ImageView>
+	<TextView android:gravity="center" android:textSize="18sp"
+		android:textColor="#ffffffff" android:layout_width="fill_parent"
+		android:padding="5dp" android:text="@string/user_login_now"
+		android:background="@drawable/title_background_simple"
+		android:layout_height="wrap_content" android:singleLine="true" />
 
 
 	<LinearLayout android:orientation="vertical"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
-		android:background="@drawable/myshape">
-		<TextView android:gravity="center" android:textSize="20sp"
-			android:layout_width="fill_parent" android:padding="10dp"
-			android:text="@string/user_login_now" android:layout_height="wrap_content"
-			android:singleLine="true" />
+		android:layout_width="fill_parent" android:layout_height="fill_parent">
 		<EditText android:id="@+id/email" android:maxLength="30"
 			android:padding="5dp" android:layout_width="fill_parent"
 			android:layout_margin="5dp" android:layout_height="wrap_content"
@@ -24,13 +22,20 @@
 			android:singleLine="true" android:hint="@string/user_password" />
 
 		<Button android:id="@+id/login" android:layout_margin="5dp"
+			android:textSize="18sp" android:textColor="#ffffffff"
 			android:layout_width="fill_parent" android:text="@string/user_login"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content" android:background="@drawable/button1">
 		</Button>
 
 		<ImageButton android:layout_height="wrap_content"
-			android:layout_margin="5dp" android:src="@drawable/weibo_login"
-			android:layout_gravity="center_horizontal" android:layout_width="fill_parent"
-			android:id="@+id/weiboLogin" />
+			android:layout_margin="5dp"
+			android:src="@drawable/weibo_login" android:layout_gravity="center_horizontal"
+			android:layout_width="fill_parent" android:id="@+id/weiboLogin" />
+	   		
+	   	<Button android:id="@+id/register" android:layout_margin="5dp"
+			android:textSize="18sp"  android:textColor="#ffffffff"  android:background="@drawable/button1"
+			android:layout_width="fill_parent" android:text="@string/user_register_now"
+			android:layout_height="wrap_content" >
+		</Button>
 	</LinearLayout>
 </LinearLayout>

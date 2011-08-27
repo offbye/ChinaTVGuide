@@ -6,8 +6,22 @@ public class Comment {
     private String content;
     private String channel;
     private String program;
-    private String type;    
+    private String type;
+    private String time;
+    private String location;
     
+    public String getLocation() {
+        return location;
+    }
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    public String getTime() {
+        return time;
+    }
+    public void setTime(String time) {
+        this.time = time;
+    }
     public String getUserid() {
         return userid;
     }

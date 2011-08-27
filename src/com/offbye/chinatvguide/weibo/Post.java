@@ -19,6 +19,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -122,6 +124,22 @@ public class Post extends Activity {
         mCount = (TextView) findViewById(R.id.count);
         mContent = (EditText) findViewById(R.id.content);
         mPost = (ImageButton) findViewById(R.id.post);
+        mContent.addTextChangedListener(new TextWatcher(){
+
+            @Override
+            public void afterTextChanged(Editable s) {
+              
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mCount.setText(mContent.length() +"/140");
+            }});
         mPost.setOnClickListener(new OnClickListener() {
 
             @Override

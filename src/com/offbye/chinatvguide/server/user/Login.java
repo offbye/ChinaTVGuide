@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -36,7 +37,7 @@ public class Login extends Activity {
 
     private Button login;
     private ImageButton weiboLogin;
-
+    private Button register;
     private ProgressDialog pd;
 
     @Override
@@ -51,6 +52,7 @@ public class Login extends Activity {
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         login = (Button) findViewById(R.id.login);
+        register = (Button) findViewById(R.id.register);
         weiboLogin = (ImageButton) findViewById(R.id.weiboLogin);
         login.setOnClickListener(new OnClickListener() {
 
@@ -78,6 +80,17 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                WeiboCheck.bindWeibo(mContext);
+            }
+        });
+        
+        register.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent();
+                it.setClass(mContext, Register.class);
+                startActivity(it);
+                finish();
             }
         });
     }

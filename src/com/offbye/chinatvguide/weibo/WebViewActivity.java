@@ -64,7 +64,7 @@ public class WebViewActivity extends Activity
 		    			  setTitle(getString(R.string.msg_wait) + progress + "%");
 		    			  setProgress(progress * 100);
 
-		    			  if (progress == 100)	setTitle(R.string.app_name);
+		    			  if (progress == 100)	setTitle(webView.getTitle());
 		    		  }
 		    	});
 		    }

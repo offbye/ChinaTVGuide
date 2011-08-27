@@ -1,11 +1,15 @@
 package com.offbye.chinatvguide.recommend;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
+
+import com.offbye.chinatvguide.R;
+import com.offbye.chinatvguide.SuggestView;
+import com.offbye.chinatvguide.TVProgram;
+import com.offbye.chinatvguide.channel.ChannelTab;
+import com.offbye.chinatvguide.grid.Grid;
+import com.offbye.chinatvguide.util.AppException;
+import com.offbye.chinatvguide.util.Constants;
+import com.offbye.chinatvguide.util.HttpUtil;
+import com.offbye.chinatvguide.util.MD5;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +17,6 @@ import org.json.JSONException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,23 +29,11 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
-import com.offbye.chinatvguide.ChannelProgramView;
-import com.offbye.chinatvguide.MydbHelper;
-import com.offbye.chinatvguide.R;
-import com.offbye.chinatvguide.SuggestView;
-import com.offbye.chinatvguide.TVProgram;
-import com.offbye.chinatvguide.channel.ChannelTab;
-import com.offbye.chinatvguide.grid.Grid;
-import com.offbye.chinatvguide.util.AppException;
-import com.offbye.chinatvguide.util.Constants;
-import com.offbye.chinatvguide.util.HttpUtil;
-import com.offbye.chinatvguide.util.MD5;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class TVRecommendActivity extends Activity {
 	private static final String TAG = "TVRecommendActivity";
@@ -93,18 +84,18 @@ public class TVRecommendActivity extends Activity {
 					pl.add(tp);
 				}
 			} else {
-				progressHandler.sendEmptyMessage(R.string.notify_newversion);
+				mHandler.sendEmptyMessage(R.string.notify_newversion);
 				Log.d(TAG, "response data err");
 			}
 
 		} catch (IOException e) {
-			progressHandler.sendEmptyMessage(R.string.notify_network_error);
+			mHandler.sendEmptyMessage(R.string.notify_network_error);
 			Log.d(TAG, "network err");
 		} catch (JSONException e) {
-			progressHandler.sendEmptyMessage(R.string.notify_json_error);
+			mHandler.sendEmptyMessage(R.string.notify_json_error);
 			Log.d(TAG, "decode err");
 		} catch (AppException e) {
-			progressHandler.sendEmptyMessage(R.string.notify_no_connection);
+			mHandler.sendEmptyMessage(R.string.notify_no_connection);
 		}
 		return pl;
 	}
@@ -126,65 +117,22 @@ public class TVRecommendActivity extends Activity {
 
 			pl = getTVProgramsFormURL(urlsb.toString());
 			if (pl.size() > 0) {
-				progressHandler.sendEmptyMessage(R.string.notify_succeeded);
+				mHandler.sendEmptyMessage(R.string.notify_succeeded);
 			}
 			else
 			{
-				progressHandler.sendEmptyMessage(R.string.notify_no_result);
+				mHandler.sendEmptyMessage(R.string.notify_no_result);
 			}
 		}
 	}
 
-	// Define the Handler that receives messages from the thread calculation
-	private Handler progressHandler = new Handler() {
+	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case R.string.notify_succeeded:
 				pd.dismiss();
 				TVRecommendAdapter pa=new TVRecommendAdapter(TVRecommendActivity.this,R.layout.local_current_row,pl);
         		optionsListView.setAdapter(pa);
-        		optionsListView.setOnItemClickListener(new OnItemClickListener() {
-        			public void onItemClick(AdapterView<?> arg0, View arg1,int position, long id)
-        			{
-        				seletedProgram = pl.get(position);
-
-        				new AlertDialog.Builder(TVRecommendActivity.this)
-        	                .setTitle(R.string.select_dialog)
-        	                .setItems(R.array.localoptions, new DialogInterface.OnClickListener() {
-        	                    public void onClick(DialogInterface dialog, int which) {
-
-        	                        /* User clicked so do some stuff */
-        	                       //String[] items = getResources().getStringArray(R.array.localoptions);
-        	                       if(which==0){
-        	           	            	Intent i = new Intent(TVRecommendActivity.this, ChannelProgramView.class);
-        	           	            	i.putExtra("channel", seletedProgram.getChannel());
-        	           					startActivity(i);
-        	                       }
-        	                       else if(which==1){
-        	                    	   Intent i = new Intent(Intent.ACTION_VIEW);
-        	                    	   i.putExtra("sms_body", seletedProgram.getChannelname().trim()+"节目"+seletedProgram.getProgram().trim()+ "在"+seletedProgram.getStarttime()+"播出，请注意收看啊");
-        	                    	   i.setType("vnd.android-dir/mms-sms");
-        	                    	   startActivity(i);
-        	                       }
-        	                       else if(which==2){
-        	                    	   Intent intent = new Intent();
-        	                    	   intent.setAction(Intent.ACTION_WEB_SEARCH);
-        	                    	   intent.putExtra(SearchManager.QUERY,seletedProgram.getProgram().trim());
-        	                    	   startActivity(intent);
-        	                       }
-        	                       else if(which==3){
-        	                    	   MydbHelper mydb = new MydbHelper(TVRecommendActivity.this);
-        	                    	   mydb.addFavoriteProgram(seletedProgram.getChannel(), seletedProgram.getDate(), seletedProgram.getStarttime(), seletedProgram.getEndtime(), seletedProgram.getProgram(), seletedProgram.getDaynight(), seletedProgram.getChannelname());
-        	           				   mydb.close();
-        	           				   Toast.makeText(TVRecommendActivity.this, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
-        	                       }
-        	                    }
-        	                }).show();
-
-        			}
-
-        		});
-
 
 				break;
 			case R.string.notify_network_error:
@@ -230,8 +178,6 @@ public class TVRecommendActivity extends Activity {
 			}
 		}
 	};
-
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

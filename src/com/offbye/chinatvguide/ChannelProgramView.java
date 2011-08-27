@@ -644,6 +644,8 @@ public class ChannelProgramView extends Activity {
         c.setChannel(channel);
         c.setProgram(program);
         c.setType("0");
+        c.setLocation(UserStore.getLocation(mContext));
+        c.setScreenName(UserStore.getScreenName(mContext));
         if ("".equals(UserStore.getUserId(this))) {
             c.setUserid("guest");
         } else {
@@ -670,8 +672,11 @@ public class ChannelProgramView extends Activity {
 
          //TODO HOW TO NOTIFY USER WEIBO POST?
         if (!"".equals(UserStore.getUserId(this))) {
-            final String msg = mContext.getString(R.string.weibo_watching) + "#"
-                    + channel + "#, #" + program + "#";
+            String msg = mContext.getString(R.string.weibo_watching) + "#"
+                    + channel + "#";
+            if(!"".equals(program)){
+                msg += ", #" + program + "#";
+            }
             try {
                 Post.post(mContext, msg);
             } catch (Exception e) {
