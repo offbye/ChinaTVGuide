@@ -332,10 +332,9 @@ public class CurrentProgramView extends Activity {
 	        }
 	        c.setLocation(UserStore.getLocation(mContext));
 	        c.setScreenName(UserStore.getScreenName(mContext));
+	        c.setEmail(UserStore.getEmail(mContext));
 	        String url = CommentTask.genUrl(c);
-	        if(!"".equals(UserStore.getEmail(mContext))){
-	            url = url + "&email=" + UserStore.getEmail(mContext);
-	        }
+
 	        Log.d(TAG, "url:" +url);
 	        CommentTask.Callback callback = new CommentTask.Callback() {
 

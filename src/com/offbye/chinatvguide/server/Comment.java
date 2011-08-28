@@ -9,7 +9,14 @@ public class Comment {
     private String type;
     private String time;
     private String location;
+    private String email;
     
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public String getLocation() {
         return location;
     }

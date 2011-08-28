@@ -63,8 +63,8 @@
 
 
 	<string name="aboutinfo">
-ChinaTVGuide provide TV program guide in China,  Quickly get an overview of what TV program is on right now.It also provide  entertainment news, tv rates，and tv program recommendations.Now it covers about 700 TV channels in China.
-	It comparable with android1.5-3.0。
+	ChinaTVGuide is your best friend when you watching TV.It provide TV program guide in China.It also provide  entertainment news, TV rates，and TV program recommendations.Now it covers about 800 TV channels in China.
+	It is comparable with Android 1.5-3.1。
 	</string>
 	<string name="helpinfo">1、手机不能经常联网的用户请在能上网时，按 MENU-同步 把当天节目数据一次性同步到本地，
 	这样软件以后就可以不用联网运行了！\n 2、使用本软件很长时间后请注意使用"清空缓存"功能清除以前的节目缓存数据，节省宝贵的手机内存
@@ -167,15 +167,20 @@ ChinaTVGuide provide TV program guide in China,  Quickly get an overview of what
 	<string name="checkin_succeed">Check in success</string>
 	<string name="comment_failed">Comment failed</string>	
 	<string name="comment_succeed">成功发表电视评论</string>
-	<string name="comment_weibo_failed">同步电视评论到新浪微博失败</string>
-	<string name="comment_weibo_succeed">成功同步电视评论到新浪微博</string>
+	<string name="comment_weibo_failed">发布电视评论到新浪微博失败</string>
+	<string name="comment_weibo_succeed">成功发布电视评论到新浪微博</string>
+	<string name="comment_post">发表评论</string>
+	<string name="comment_have_input">您已经输入 </string>
+	<string name="comment">评论 </string>
+	<string name="comment_post_weibo">同步评论到新浪微博 </string>
+	<string name="comment_min_length">评论至少要输入10个字 ，请支持一下吧</string>
 	
 	<string name="preferences_sync_title">电视节目同步</string>
-	<string name="preferences_autosync_title">启动电视节目同步</string>
-	<string name="preferences_autosync_summary">软件启动自动同步当天的电视节目表</string>
+	<string name="preferences_autosync_title">自动同步当天的电视节目</string>
+	<string name="preferences_autosync_summary">软件启动后自动同步当天的电视节目表</string>
 	
     <string name="preferences_clearcache_title">清除节目数据缓存</string>
-	<string name="preferences_clearcache_summary">清除节目数据缓存，节省手机内存</string>
+	<string name="preferences_clearcache_summary">清除电视节目数据缓存，节省手机内存</string>
 	
 	<string name="user_info">我的资料</string>
 	<string name="user_screen_name">用户名</string>

@@ -51,10 +51,14 @@ import com.offbye.chinatvguide.PreferencesActivity;
 import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.SyncService;
 import com.offbye.chinatvguide.TVProgram;
+import com.offbye.chinatvguide.server.Comment;
+import com.offbye.chinatvguide.server.CommentTask;
+import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.AppException;
 import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
 import com.offbye.chinatvguide.util.MD5;
+import com.offbye.chinatvguide.weibo.Post;
 
 public class LocalCurrentProgramView extends Activity {
 	private static final String TAG = "LocalCurrentProgramView";
@@ -72,11 +76,13 @@ public class LocalCurrentProgramView extends Activity {
 
 	private TVProgram seletedProgram = null;
 	private SharedPreferences prefs;
+	private Context  mContext;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.localview);
+		mContext = this;
 
 		titleText = (TextView) this.findViewById(R.id.currentlocation);
 		optionsListView = (ListView) this.findViewById(R.id.ListView01);
@@ -169,7 +175,7 @@ public class LocalCurrentProgramView extends Activity {
 								PreferencesActivity.KEY_CITY,
 								cityEdit.getText().toString()).commit();
 						
-						Toast.makeText(LocalCurrentProgramView.this, String.format(getString(R.string.set_city_ok), province+city), Toast.LENGTH_SHORT).show();
+						Toast.makeText(mContext, String.format(getString(R.string.set_city_ok), province+city), Toast.LENGTH_SHORT).show();
 						urlsb.append("&province=");
 						urlsb.append(URLEncoder.encode(province));
 						urlsb.append("&city=");
@@ -229,7 +235,7 @@ public class LocalCurrentProgramView extends Activity {
 	public ArrayList<TVProgram> getTVProgramsFromDB(String sql) {
 		ArrayList<TVProgram> pl = new ArrayList<TVProgram>();
 		try {
-			mydb = new MydbHelper(LocalCurrentProgramView.this);
+			mydb = new MydbHelper(mContext);
 			// Log.v(TAG, "sql=" + sql.toString());
 			Cursor programsCursor = mydb.searchLocalPrograms(sql);
 
@@ -295,7 +301,7 @@ public class LocalCurrentProgramView extends Activity {
 			// Address address = null;
 			// try {
 			// address =
-			// LocationUtil.getAddressbyGeoPoint(LocalCurrentProgramView.this,
+			// LocationUtil.getAddressbyGeoPoint(mContext,
 			// point);
 			// } catch (IOException e) {
 			// Log.d(TAG, "location Exception");
@@ -343,7 +349,7 @@ public class LocalCurrentProgramView extends Activity {
 						+ province + city);
 
 				LocalCurrentProgramAdapter pa = new LocalCurrentProgramAdapter(
-						LocalCurrentProgramView.this,
+						mContext,
 						R.layout.local_current_row, pl);
 				optionsListView.setAdapter(pa);
 
@@ -354,68 +360,44 @@ public class LocalCurrentProgramView extends Activity {
 								seletedProgram = pl.get(position);
 
 								new AlertDialog.Builder(
-										LocalCurrentProgramView.this).setTitle(
+										mContext).setTitle(
 										R.string.select_dialog).setItems(
 										R.array.localoptions,
 										new DialogInterface.OnClickListener() {
 											public void onClick(
 													DialogInterface dialog,
 													int which) {
-												// String[] items =
-												// getResources().getStringArray(R.array.localoptions);
-												if (which == 0) {
-													Intent i = new Intent(
-															LocalCurrentProgramView.this,
-															ChannelProgramView.class);
-													i.putExtra(
-																	"channel",
-																	seletedProgram
-																			.getChannel());
-													i.putExtra(
-																	"channelname",
-																	seletedProgram
-																			.getChannelname()
-																			.trim());
-										            i.putExtra("type", "local");
-
-													i.putExtra("province",
-															province);
-													i.putExtra("city", city);
-													startActivity(i);
-												} 
-												if (which == 1) {
-													Intent i = new Intent(
-															Intent.ACTION_VIEW);
-													i
-															.putExtra(
-																	"sms_body",
-																	seletedProgram
-																			.getChannelname()
-																			.trim()
-																			+ "节目"
-																			+ seletedProgram
-																					.getProgram()
-																					.trim()
-																			+ "在"
-																			+ seletedProgram
-																					.getStarttime()
-																			+ "播出，请注意收看啊");
-													i
-															.setType("vnd.android-dir/mms-sms");
-													startActivity(i);
-												}
-												if (which == 2){
-													Intent intent = new Intent();
-													intent
-															.setAction(Intent.ACTION_WEB_SEARCH);
-													intent
-															.putExtra(
-																	SearchManager.QUERY,
-																	seletedProgram
-																			.getProgram()
-																			.trim());
-													startActivity(intent);
-												}
+											    if(which==0){
+			                                        Intent i = new Intent(mContext, ChannelProgramView.class);
+			                                        i.putExtra("channel", seletedProgram.getChannel());
+			                                        startActivity(i);
+			                                   }
+			                                   else if(which==1){
+			                                       Intent i = new Intent(Intent.ACTION_VIEW);
+			                                       i.putExtra("sms_body", seletedProgram.getChannelname().trim()+"节目"+seletedProgram.getProgram().trim()+ "在"+seletedProgram.getStarttime()+"播出，请注意收看啊");
+			                                       i.setType("vnd.android-dir/mms-sms");
+			                                       startActivity(i);
+			                                   }
+			                                   else if(which==2){
+			                                       Intent intent = new Intent();
+			                                       intent.setAction(Intent.ACTION_WEB_SEARCH);
+			                                       intent.putExtra(SearchManager.QUERY,seletedProgram.getProgram().trim());
+			                                       startActivity(intent);
+			                                   }
+			                                   else if(which==3){
+			                                       MydbHelper mydb = new MydbHelper(mContext);
+			                                       mydb.addFavoriteProgram(seletedProgram.getChannel(), seletedProgram.getDate(), seletedProgram.getStarttime(), seletedProgram.getEndtime(), seletedProgram.getProgram(), seletedProgram.getDaynight(), seletedProgram.getChannelname());
+			                                       mydb.close();
+			                                       Toast.makeText(mContext, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
+			                                   }
+			                                   else if(which == 4){
+			                                       pd = ProgressDialog.show(mContext, getString(R.string.msg_loading), getString(R.string.msg_wait), true, true);
+			                                       pd.setIcon(R.drawable.icon);
+			                                       checkin(seletedProgram);
+			                                   }
+			                                   else if(which == 5){
+			                                       Post.addWeibo(mContext, seletedProgram);
+			                                   }
 											}
 										}).show();
 								return true;
@@ -426,33 +408,33 @@ public class LocalCurrentProgramView extends Activity {
 			case R.string.notify_network_error:
 				pd.dismiss();
 				titleText.setText(R.string.notify_network_error);
-				Toast.makeText(LocalCurrentProgramView.this,
+				Toast.makeText(mContext,
 						R.string.notify_network_error, 5).show();
 				break;
 			case R.string.notify_json_error:
 				pd.dismiss();
 				titleText.setText(R.string.notify_json_error);
-				Toast.makeText(LocalCurrentProgramView.this,
+				Toast.makeText(mContext,
 						R.string.notify_json_error, 5).show();
 				break;
 			case R.string.notify_database_error:
 				pd.dismiss();
 				titleText.setText(R.string.notify_database_error);
-				Toast.makeText(LocalCurrentProgramView.this,
+				Toast.makeText(mContext,
 						R.string.notify_database_error, 5).show();
 				break;
 			case R.string.notify_no_result:
 				pd.dismiss();
 				titleText.setText(R.string.notify_no_result);
-				Toast.makeText(LocalCurrentProgramView.this,
+				Toast.makeText(mContext,
 						R.string.notify_no_result, 5).show();
 				break;
 			case R.string.notify_newversion:
 				pd.dismiss();
 				titleText.setText(servermsg.split("--")[4]);
-				Toast.makeText(LocalCurrentProgramView.this,
+				Toast.makeText(mContext,
 						servermsg.split("--")[4], 5).show();
-				new AlertDialog.Builder(LocalCurrentProgramView.this).setIcon(
+				new AlertDialog.Builder(mContext).setIcon(
 						R.drawable.icon).setTitle(servermsg.split("--")[3])
 						.setMessage(servermsg.split("--")[4])
 						.setPositiveButton(R.string.alert_dialog_ok,
@@ -471,20 +453,73 @@ public class LocalCurrentProgramView extends Activity {
 				break;
 			case R.string.notify_no_connection:
 				pd.dismiss();
-				Toast.makeText(LocalCurrentProgramView.this, R.string.notify_no_connection, 5).show();
+				Toast.makeText(mContext, R.string.notify_no_connection, 5).show();
 				break;
 			case R.string.notify_cannot_location:
 				pd.dismiss();
 				titleText.setText(getResources().getText(R.string.no_location));
-				Toast.makeText(LocalCurrentProgramView.this,
+				Toast.makeText(mContext,
 						R.string.no_location, 5).show();
 				break;
+			case R.string.checkin_failed:
+                pd.dismiss();
+                Toast.makeText(mContext, R.string.checkin_failed, 5).show();
+                break;
+            case R.string.checkin_succeed:
+                pd.dismiss();
+                Toast.makeText(mContext, R.string.checkin_succeed, 5).show();
+                break;
 			default:
 				titleText.setText(R.string.notify_network_error);
 			    break;
 			}
 		}
 	};
+	
+	 private void checkin(TVProgram program) {
+         Comment c = new Comment();
+         c.setChannel(program.getChannelname().trim());
+         c.setProgram(program.getProgram().trim());
+         c.setType("0");
+         if ("".equals(UserStore.getUserId(this))) {
+             c.setUserid("guest");
+         } else {
+             c.setUserid(UserStore.getUserId(this));
+         }
+         c.setLocation(UserStore.getLocation(mContext));
+         c.setScreenName(UserStore.getScreenName(mContext));
+         c.setEmail(UserStore.getEmail(mContext));
+         String url = CommentTask.genUrl(c);
+
+         Log.d(TAG, "url:" +url);
+         CommentTask.Callback callback = new CommentTask.Callback() {
+
+             @Override
+             public void update(int status) {
+                 if (status < 0) {
+                     progressHandler.sendMessage(progressHandler.obtainMessage(
+                             R.string.checkin_failed, null));
+                 } else {
+                     progressHandler.sendMessage(progressHandler.obtainMessage(
+                             R.string.checkin_succeed, null));
+                 }
+             }
+         };
+         new CommentTask(this, url, callback).start();
+
+          //TODO HOW TO NOTIFY USER WEIBO POST?
+         if (!"".equals(UserStore.getUserId(this))) {
+             final String msg = mContext.getString(R.string.weibo_watching) + "#"
+                     + program.getChannelname() + "#, #" + program.getProgram() + "#";
+             try {
+                 Post.post(mContext, msg);
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
+         }
+         
+     }
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

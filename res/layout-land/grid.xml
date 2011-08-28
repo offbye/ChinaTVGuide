@@ -21,7 +21,7 @@
 	</RelativeLayout>
 	<GridView android:id="@+id/myGrid" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:padding="10dp"
-		android:verticalSpacing="40dp" android:horizontalSpacing="20dp"
+		android:verticalSpacing="10dp" android:horizontalSpacing="15dp"
 		android:numColumns="4" android:columnWidth="70dp" android:stretchMode="columnWidth"
 		android:gravity="center" />
 </LinearLayout>

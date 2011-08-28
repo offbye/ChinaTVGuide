@@ -2,9 +2,9 @@
 package com.offbye.chinatvguide.server.user;
 
 import com.offbye.chinatvguide.R;
+import com.offbye.chinatvguide.server.CommentList;
 import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
-import com.offbye.chinatvguide.weibo.Post;
 import com.offbye.chinatvguide.weibo.WeiboCheck;
 
 import org.json.JSONException;
@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,20 +49,21 @@ public class UserInfoActivity extends Activity {
     private TextView mCheckinTv;
 
     private TextView mCommentTv;
-
+    private RelativeLayout layoutCheckin;
+    private RelativeLayout layoutComment;
     private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_info);
         mContext = this;
 
-        init();
+       
         mEmail = UserStore.getEmail(mContext);
         mUserid = UserStore.getUserId(mContext);
-
+        init();
+        
         if ("".equals(mUserid) && "".equals(mEmail)) {
             new AlertDialog.Builder(this).setIcon(R.drawable.icon).setTitle(R.string.user_login)
                     .setMessage(R.string.user_guest_tip).setPositiveButton(R.string.user_login,
@@ -211,6 +213,30 @@ public class UserInfoActivity extends Activity {
                 getUserInfo();
             }
         });
+        
+        layoutCheckin = (RelativeLayout)findViewById(R.id.layoutCheckin);
+        layoutComment = (RelativeLayout)findViewById(R.id.layoutComment);
+        layoutCheckin.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(mContext, CommentList.class);
+                i.putExtra("type", "0");
+                i.putExtra("userid", mUserid);
+                startActivity(i);
+            }
+        });
+
+        layoutComment.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(mContext, CommentList.class);
+                i.putExtra("type", "1");
+                i.putExtra("userid", mUserid);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -219,7 +245,7 @@ public class UserInfoActivity extends Activity {
         mScreenNameTv.setText("".equals(sname) ? mContext.getString(R.string.user_guest) : sname);
         mEmailTv.setText("" + UserStore.getEmail(mContext));
         mLocationTv.setText("" + UserStore.getLocation(mContext));
-        mPointTv.setText("" + UserStore.getPoint(mContext) + " points");
+        mPointTv.setText("" + UserStore.getPoint(mContext) + mContext.getString(R.string.user_point));
         mCheckinTv.setText("" + UserStore.getCheckin(mContext));
         mCommentTv.setText("" + UserStore.getComment(mContext));
     }

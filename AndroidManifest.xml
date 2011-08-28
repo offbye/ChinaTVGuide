@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.offbye.chinatvguide" android:versionName="5.9" android:versionCode="15">
+	package="com.offbye.chinatvguide" android:versionName="6.0" android:versionCode="16">
 	<application android:icon="@drawable/icon"
 		android:allowClearUserData="true"
 		android:debuggable="false" android:description="@string/aboutinfo"
 		android:label="@string/app_name">
-		<activity android:name=".ChinaTVGuide"
+		<activity android:name=".ChinaTVGuide" android:screenOrientation="portrait"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
 		<activity android:name=".favorite.FavouriteTab" android:label="@string/grid_favourite"/>
 		<activity android:name=".favorite.FavouriteChannelActivity" />
 		<activity android:name=".favorite.FavoriteProgramActivity" />
-		<activity android:name=".grid.Grid" android:launchMode="singleTask"/>
+		<activity android:name=".grid.Grid" android:launchMode="singleTask" android:windowSoftInputMode="adjustPan"/>
 
         <activity android:name=".rss.RSSActivity" android:label="@string/grid_rss"/>
 		<activity android:name=".rss.RSSReader" />
@@ -59,7 +59,7 @@
        <activity android:name=".server.user.UserInfoActivity" android:label="@string/user_info" android:theme="@android:style/Theme.Light.NoTitleBar" />
        <activity android:name=".server.user.Login" android:label="@string/user_login" android:theme="@android:style/Theme.Light.NoTitleBar" />
        <activity android:name=".server.user.Register" android:label="@string/user_register_now" android:theme="@android:style/Theme.Light.NoTitleBar" />
-       <activity android:name=".server.CommentList" />
+       <activity android:name=".server.CommentList"  android:theme="@android:style/Theme.Light"/>
        <activity android:name=".server.CommentTab" />
 		<receiver android:name="widget.TVWidget"
 			android:label="@string/widget_name">

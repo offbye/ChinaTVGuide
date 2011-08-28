@@ -144,8 +144,9 @@ public class Login extends Activity {
                         Toast.makeText(mContext, R.string.user_login_success, Toast.LENGTH_SHORT)
                                 .show();
                     }
-                    
-                    UserStore.setEmail(mContext, email.getText().toString());
+                    //if login or regiser, email is dame with userid.
+                    UserStore.setEmail(mContext, email.getText().toString().trim());
+                    UserStore.setUserId(mContext, email.getText().toString().trim());
                     break;
                 default:
                     if (null != pd) {

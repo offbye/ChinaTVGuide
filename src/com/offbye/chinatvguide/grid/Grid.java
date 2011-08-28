@@ -57,16 +57,16 @@ public class Grid extends Activity {
 
 		icons.add(new Icon(R.drawable.grid_rss, R.string.grid_rss));
 		icons.add(new Icon(R.drawable.grid_favourite, R.string.grid_favourite));
-		icons.add(new Icon(R.drawable.grid_recommend, R.string.grid_recommend));
+		icons.add(new Icon(R.drawable.grid_comment, R.string.grid_comment));
 
 		icons.add(new Icon(R.drawable.grid_rank, R.string.grid_rank));
+	    icons.add(new Icon(R.drawable.grid_recommend, R.string.grid_recommend));
 		
-		icons.add(new Icon(R.drawable.grid_comment, R.string.grid_comment));
 		icons.add(new Icon(R.drawable.grid_suggest, R.string.submitsuggest));
 
 		GridView g = (GridView) findViewById(R.id.myGrid);
 		g.setAdapter(new IconAdapter(this, R.layout.grid_row, icons));
-		g.setNumColumns(3);
+		//g.setNumColumns(3);
 		g.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long id) {
@@ -88,7 +88,7 @@ public class Grid extends Activity {
 					Intent i = new Intent(Grid.this, FavouriteTab.class);
 					startActivity(i);
 				} else if (position == 5) {
-					Intent i = new Intent(Grid.this, TVRecommendActivity.class);
+					Intent i = new Intent(Grid.this, CommentTab.class);
 					startActivity(i);
 				}
 				// 第三行
@@ -97,7 +97,7 @@ public class Grid extends Activity {
 					startActivity(i);
 				} else if (position == 7) {
 				    Intent i = new Intent();
-                    i.setClass(Grid.this, CommentTab.class);
+                    i.setClass(Grid.this, TVRecommendActivity.class);
                     startActivity(i);
 				} else if (position == 8) {
 
@@ -155,14 +155,21 @@ public class Grid extends Activity {
             }
         });
 	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+	    menu.getItem(4).setTitle(("".equals(UserStore.getUserId(Grid.this))) ?R.string.user_login:R.string.user_info);
+	    return super.onPrepareOptionsMenu(menu);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+	    int userlabel = ("".equals(UserStore.getUserId(Grid.this))) ?R.string.user_login:R.string.user_info;
 		menu.add(0, 0, 0, this.getText(R.string.weibo_menu)).setIcon(R.drawable.weibo);
 		menu.add(0, 1, 1,  this.getText(R.string.menu_help)).setIcon(R.drawable.ic_menu_help);
 		menu.add(0, 2, 2,  this.getText(R.string.menu_about)).setIcon(R.drawable.icon);
 		menu.add(0, 3, 3,  this.getText(R.string.preferences_name)).setIcon(R.drawable.ic_menu_preferences);
-		menu.add(0, 4, 4,  this.getText(R.string.user_info)).setIcon(R.drawable.ic_menu_edit);
+		menu.add(0, 4, 4,  this.getText(userlabel)).setIcon(R.drawable.ic_menu_user);
 		menu.add(0, 5, 5,  this.getText(R.string.menu_exit)).setIcon(R.drawable.ic_menu_close_clear_cancel);
 		       
 		if (10 < Integer.valueOf(Build.VERSION.SDK)) {

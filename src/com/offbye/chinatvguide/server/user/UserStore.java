@@ -80,6 +80,10 @@ public class UserStore {
         sp.edit().putString(EMAIL, email).commit();
     }
     
+    public static void setUserId(Context context,String userid) {
+        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
+        sp.edit().putString(USERID, userid).commit();
+    }
 
     public static void setLocation(Context context, String location) {
         SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);

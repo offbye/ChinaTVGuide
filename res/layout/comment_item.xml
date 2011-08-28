@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" android:layout_margin="0dp" android:padding="5dp" 
+	android:background="@drawable/list_item_bg2">
+
+	<TextView android:id="@+id/screenname"  android:textColor="#ff000000"
+		android:layout_alignParentLeft="true" android:layout_height="wrap_content"
+		android:paddingLeft="5dp" android:text="screenname" android:padding="5dp"
+		android:layout_width="wrap_content" android:textSize="14dp">
+	</TextView>
+
+	<TextView android:id="@+id/time" android:layout_width="wrap_content"
+		android:textSize="14dp" android:layout_height="wrap_content"
+		android:padding="5dp" android:textColor="#ffcccccc"
+		android:textColorHighlight="#ff00ffff" android:text="13:08"
+		android:layout_alignParentRight="true" />
+	<TextView android:id="@+id/content" android:layout_below="@+id/time"
+		android:layout_height="wrap_content" android:padding="5dp"
+		android:text="content" android:layout_width="fill_parent"
+		android:textSize="16dp"  android:textColor="#ff000000">
+	</TextView>
+
+	<TextView android:id="@+id/channel" android:layout_below="@+id/content"
+		android:layout_height="wrap_content" android:padding="5dp"
+		android:text="channel" android:layout_width="fill_parent"
+		android:textSize="14dp"  android:textColor="#ff000000">
+	</TextView>
+
+</RelativeLayout>

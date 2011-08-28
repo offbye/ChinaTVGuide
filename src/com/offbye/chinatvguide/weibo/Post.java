@@ -24,8 +24,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,13 +40,9 @@ public class Post extends Activity {
 
     private EditText mContent;
 
-    private ImageButton mPost;
-
+    private Button mPost;
+    private CheckBox isPostWeibo;
     private ProgressDialog pd;
-
-    private String token;
-
-    private String secret;
 
     private String mChannel;
 
@@ -54,20 +51,12 @@ public class Post extends Activity {
     private Context mContext;
 
     public static void addWeibo(Context context, TVProgram p) {
+        Intent it = new Intent();
+        it.putExtra("channel", p.getChannelname());
+        it.putExtra("program", p.getProgram());
 
-        if (!"".equals(UserStore.getAccessToken(context))) {
-            Intent it = new Intent();
-            it.putExtra("channel", p.getChannelname());
-            it.putExtra("program", p.getProgram());
-            it.putExtra("msg", context.getString(R.string.weibo_watching) + "#"
-                    + p.getChannelname().trim() + "#, #" + p.getProgram().trim() + "#");
-            it.setClass(context, Post.class);
-            context.startActivity(it);
-        } else {
-            Intent it = new Intent();
-            it.setClass(context, WeiboCheck.class);
-            context.startActivity(it);
-        }
+        it.setClass(context, Post.class);
+        context.startActivity(it);
     }
 
     public static Status post(Context context, String content) throws WeiboException {
@@ -101,29 +90,21 @@ public class Post extends Activity {
         System.setProperty("weibo4j.oauth.consumerSecret", Weibo.CONSUMER_SECRET);
 
         init();
-        String msg = getIntent().getStringExtra("msg");
+
         mChannel = getIntent().getStringExtra("channel");
         mProgram = getIntent().getStringExtra("program");
 
-        if (!"".equals(msg)) {
-            mContent.setText(msg);
-        }
-
-        if (!"".equals(UserStore.getAccessToken(mContext))) {
-            token = UserStore.getAccessToken(mContext);
-            secret = UserStore.getAccessSecret(mContext);
-        } else {
-            Intent it = new Intent();
-            it.setClass(getApplicationContext(), WeiboCheck.class);
-            this.startActivity(it);
-            finish();
-        }
     }
 
     private void init() {
         mCount = (TextView) findViewById(R.id.count);
         mContent = (EditText) findViewById(R.id.content);
-        mPost = (ImageButton) findViewById(R.id.post);
+        mPost = (Button) findViewById(R.id.post);
+        isPostWeibo = (CheckBox) findViewById(R.id.isPostWeibo);
+        if (!"".equals( UserStore.getAccessToken(mContext))){
+            isPostWeibo.setChecked(true);
+        }
+
         mContent.addTextChangedListener(new TextWatcher(){
 
             @Override
@@ -138,23 +119,43 @@ public class Post extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCount.setText(mContent.length() +"/140");
+                mCount.setText(mContext.getString(R.string.comment_have_input) + mContent.length() +"/140");
             }});
         mPost.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                if(mContent.getText().toString().trim().length() < 10){
+                    Toast.makeText(mContext, R.string.comment_min_length, Toast.LENGTH_LONG).show();
+                    return;
+                }
+                
                 showProgressDialog();
 
                 Comment c = new Comment();
                 c.setChannel(mChannel);
                 c.setProgram(mProgram);
-                c.setUserid(UserStore.getUserId(mContext));
                 c.setContent(mContent.getText().toString());
                 c.setType("1");
+                c.setLocation(UserStore.getLocation(mContext));
+                c.setScreenName(UserStore.getScreenName(mContext));
+                if ("".equals(UserStore.getUserId(mContext))) {
+                    c.setUserid("guest");
+                } else {
+                    c.setUserid(UserStore.getUserId(mContext));
+                }
+                c.setEmail(UserStore.getEmail(mContext));
+             
                 new CommentTask(getApplicationContext(), CommentTask.genUrl(c), mCallback).start();
-
-                post(mContent.getText().toString());
+                
+                if (!"".equals( UserStore.getAccessToken(mContext)) && isPostWeibo.isChecked()){
+                    String msg = "";
+                    if (null != mChannel && !"".equals(mChannel) && null != mProgram && !"".equals(mProgram)){
+                        msg = "\n " + mContext.getString(R.string.comment) + " #"
+                        + mChannel.trim() + "#, #" + mProgram.trim() + "#";
+                    }
+                    post(mContent.getText().toString() + msg);
+                }
             }
         });
     }
@@ -164,11 +165,10 @@ public class Post extends Activity {
         @Override
         public void update(int status) {
             if (status < 0) {
-                mHandler.sendMessage(mHandler.obtainMessage(1, null));
+                mHandler.sendMessage(mHandler.obtainMessage(-2, null));
             } else {
-                mHandler.sendMessage(mHandler.obtainMessage(0, null));
+                mHandler.sendMessage(mHandler.obtainMessage(2, null));
             }
-
         }
     };
 
@@ -182,6 +182,8 @@ public class Post extends Activity {
 
     private void post(String content) {
         Weibo weibo = OAuthConstant.getInstance().getWeibo();
+        String token = UserStore.getAccessToken(mContext);
+        String secret = UserStore.getAccessSecret(mContext);
         OAuthConstant.getInstance().setToken(token);
         OAuthConstant.getInstance().setTokenSecret(secret);
         weibo.setToken(token, secret);
@@ -198,19 +200,19 @@ public class Post extends Activity {
             } else {
                 status = weibo.updateStatus(content);
             }
-            Log.i("post", "status=" + status);
-            mHandler.sendMessage(mHandler.obtainMessage(0, status));
+            Log.d("post", "status=" + status);
+            mHandler.sendMessage(mHandler.obtainMessage(1, status));
 
         } catch (WeiboException e) {
             mHandler.sendMessage(mHandler.obtainMessage(-1, e));
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
         }
     }
 
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
-                case 0:
+                case 1:
                     if (null != pd) {
                         pd.dismiss();
                         Toast.makeText(Post.this, R.string.weibo_post_ok, Toast.LENGTH_SHORT)
@@ -219,7 +221,7 @@ public class Post extends Activity {
                     break;
                 case -1:
                     if (null != pd) {
-                        Toast.makeText(Post.this, ((WeiboException) msg.obj).getLocalizedMessage(),
+                        Toast.makeText(Post.this, R.string.comment_weibo_failed,
                                 Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
@@ -228,6 +230,13 @@ public class Post extends Activity {
                     if (null != pd) {
                         pd.dismiss();
                         Toast.makeText(Post.this, R.string.comment_succeed, Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                    break;
+                case -2:
+                    if (null != pd) {
+                        pd.dismiss();
+                        Toast.makeText(Post.this, R.string.comment_failed, Toast.LENGTH_SHORT)
                                 .show();
                     }
                     break;

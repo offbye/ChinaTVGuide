@@ -553,7 +553,7 @@ public class ChannelProgramView extends Activity {
         	                .setItems(R.array.programoptions, new DialogInterface.OnClickListener() {
         	                    public void onClick(DialogInterface dialog, int which) {
 
-        	                        if(which == 0){
+        	                       if(which == 0){
         	                    	   Intent i = new Intent(Intent.ACTION_VIEW);   
         	                    	   i.putExtra("sms_body", seletedProgram.getChannelname().trim()+"节目"+seletedProgram.getProgram().trim()+ "在"+seletedProgram.getStarttime()+"播出，请注意收看啊");   
         	                    	   i.setType("vnd.android-dir/mms-sms");   
@@ -651,10 +651,9 @@ public class ChannelProgramView extends Activity {
         } else {
             c.setUserid(UserStore.getUserId(this));
         }
+        c.setEmail(UserStore.getEmail(mContext));
         String url = CommentTask.genUrl(c);
-        if(!"".equals(UserStore.getEmail(mContext))){
-            url = url + "&email=" + UserStore.getEmail(mContext);
-        }
+
         CommentTask.Callback callback = new CommentTask.Callback() {
 
             @Override

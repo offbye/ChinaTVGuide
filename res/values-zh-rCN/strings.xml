@@ -31,7 +31,7 @@
 	<string name="suggest">建议</string>
 	<string name="suggest_title">请提出您的宝贵建议</string>
 	<string name="invalid_content_title">请填写您的建议</string>
-	<string name="invalid_content_msg">建议不能少于5个字,请认真填写！</string>
+	<string name="invalid_content_msg">建议不能少于5个字,请好好写啊</string>
 	<string name="invalid_email_title">请输入Email</string>
 	<string name="invalid_email_msg">Email没有填写或格式错误</string>
 	<string name="submitsuggest">提交建议</string>
@@ -62,15 +62,14 @@
 	<string name="notify_no_connection">没有网络连接</string>
 
 
-	<string name="aboutinfo">玩转电视提供中国电视节目预告，可以查看当前正在播出的节目，
-	最新的娱乐资讯，收视率排行，热点节目推荐等，可以设置节目播出前定时提醒，让您不错过想看的节目。软件现在提供中央电视台，
-	中国教育电视台，省级卫视频道,港澳台频道，数字电视，以及600多个地面频道节目预告信息，现在已经基本覆盖中国主要城市。
-	本软件支持cmwap网络，完全兼容android1.5-3.1。玩转电视支持在新浪微博上分享电视评论。
+	<string name="aboutinfo">玩转电视是看电视时最好的伙伴。玩转电视提供中国电视节目预告，可以查看当前正在播出的节目，
+	电视娱乐资讯，收视率排行，热点节目推荐等，可以设置节目播出前定时提醒，让您不错过想看的节目。软件现在提供中央电视台，
+	省级卫视频道,港澳台频道，数字电视，以及800多个地面频道节目预告信息。\n  玩转电视支持电视评论和签到功能，并支持在新浪微博上分享电视评论。
+	\n   玩转电视支持Wifi，3G和cmwap网络，完全兼容android1.5-3.1。
 	</string>
-	<string name="helpinfo">1、手机不能经常联网的用户请在能上网时，按 MENU-同步 把当天节目数据一次性同步到本地，
-	这样软件以后就可以不用联网运行了！\n 2、使用本软件很长时间后请注意使用"清空缓存"功能清除以前的节目缓存数据，节省宝贵的手机内存
-	\n 3、目前只能设置一个节目提醒，以最后设置的为准 \n 4、在节目列表页面长按节目项会出现菜单，可以查看本频道其他节目，在网上搜索节目，发送节目短信给朋友 \n 5、在频道列表上长按可以把该频道加入或删除收藏夹,收藏的频道可以在桌面widget显示\n
-	6 连接到新浪微博后可以在正在播出页面长按某个节目发布到新浪微博。</string>
+	<string name="helpinfo">1、软件启动后会自动同步当天的节目数据，以方便手机不能经常联网的用户。你可以在设置中关掉“启动电视节目同步”选项禁用此功能。\n 2、使用本软件很长时间后请注意使用"清空缓存"功能清除以前的节目缓存数据，节省宝贵的手机内存
+	\n 3、目前只能设置一个节目提醒，以最后设置的为准 \n 4、在节目列表页面长按节目项会出现菜单，可以查看本频道其他节目，分享电视节目给朋友，在网上搜索这个节目，签到，对电视节目发表评论等功能  \n 5、在频道列表上长按可以把该频道加入或删除收藏夹,收藏的频道可以在桌面widget显示\n
+	6、 连接到新浪微博后，签到和发表评论可以同步到新浪微博。</string>
 	<string name="msg_no_connenction">没有网络连接</string>
   	<string name="msg_no_connenction_detail">目前没有可用的网络连接，本程序只能从本地缓存中读取节目数据，部分功能将不可用</string>
 
@@ -169,15 +168,20 @@
 	<string name="checkin_succeed">签到成功</string>
 	<string name="comment_failed">发表电视评论失败</string>
 	<string name="comment_succeed">成功发表电视评论</string>
-	<string name="comment_weibo_failed">同步电视评论到新浪微博失败</string>
-	<string name="comment_weibo_succeed">成功同步电视评论到新浪微博</string>
+	<string name="comment_weibo_failed">发布电视评论到新浪微博失败</string>
+	<string name="comment_weibo_succeed">成功发布电视评论到新浪微博</string>
+	<string name="comment_post">发表评论</string>
+	<string name="comment_have_input">您已经输入 </string>
+	<string name="comment">评论 </string>
+	<string name="comment_post_weibo">同步评论到新浪微博 </string>
+	<string name="comment_min_length">评论至少要输入10个字 ，请支持一下吧</string>
 	
 	<string name="preferences_sync_title">电视节目同步</string>
-	<string name="preferences_autosync_title">启动电视节目同步</string>
-	<string name="preferences_autosync_summary">软件启动自动同步当天的电视节目表</string>
+	<string name="preferences_autosync_title">自动同步当天的电视节目</string>
+	<string name="preferences_autosync_summary">软件启动后自动同步当天的电视节目表</string>
 	
     <string name="preferences_clearcache_title">清除节目数据缓存</string>
-	<string name="preferences_clearcache_summary">清除节目数据缓存，节省手机内存</string>
+	<string name="preferences_clearcache_summary">清除电视节目数据缓存，节省手机内存</string>
 	
 	<string name="user_info">我的资料</string>
 	<string name="user_screen_name">用户名</string>
@@ -210,6 +214,7 @@
 	<string name="user_password_not_same">两次输入的密码不一致</string>
 	<string name="user_login_success">登录成功</string>
 	<string name="user_login_failed">登录失败</string>
-	
+	<string name="latest_checkin">最新签到</string>
+	<string name="latest_comment">最新评论</string>
 	
 </resources>

@@ -62,14 +62,14 @@
 	<string name="notify_no_connection">沒有網路連接</string>
 
 
-	<string name="aboutinfo">本軟體提供中國電視節目預告，可以查看當前正在播出的節目，
-	最新的娛樂資訊，收視率排行，熱點節目推薦等，可以設置節目播出前定時提醒，讓您不錯過想看的節目。軟體現在提供中央電視臺，
-	中國教育電視臺，省級衛視頻道,港澳臺頻道，數位電視，以及600多個地面頻道節目預告資訊，現在已經基本覆蓋中國主要城市。
-	本軟體支援cmwap網路，完全相容android1.5-3.0。
+	<string name="aboutinfo">玩轉電視是看電視時最好的夥伴。玩轉電視提供中國電視節目預告，可以查看當前正在播出的節目，	電視娛樂資訊，
+	收視率排行，熱點節目推薦等，可以設置節目播出前定時提醒，讓您不錯過想看的節目。軟體現在提供中央電視臺，省級衛視頻道,港澳臺頻道，數位電視，以及800多個地面頻道節目預告資訊。\n  玩轉電視支援電視評論和簽到功能，並支持在新浪微博上分享電視評論。
+	\n   玩轉電視支援Wifi，3G和cmwap網路，完全相容android1.5-3.1。
 	</string>
-	<string name="helpinfo">1、手機不能經常聯網的用戶請在能上網時，按 MENU-同步 把當天節目資料一次性同步到本地，
-	這樣軟體以後就可以不用聯網運行了！\n 2、使用本軟體很長時間後請注意使用"清空緩存"功能清除以前的節目緩存資料，節省寶貴的手機記憶體
-	\n 3、目前只能設置一個節目提醒，以最後設置的為准 \n 4、在節目清單頁面長按節目項會出現功能表，可以查看本頻道其他節目，在網上搜索節目，發送節目短信給朋友 \n 5、在頻道清單上長按可以把該頻道加入或刪除我的最愛,收藏的頻道可以在桌面widget顯示</string>
+	<string name="helpinfo">1、軟體啟動後會自動同步當天的節目資料，以方便手機不能經常聯網的用戶。你可以在設置中關掉“啟動電視節目同步”選項禁用此功能。\n 2、使用本軟體很長時間後請注意使用"清空緩存"功能清除以前的節目緩存資料，節省寶貴的手機記憶體
+	\n 3、目前只能設置一個節目提醒，以最後設置的為准 \n 4、在節目清單頁面長按節目項會出現功能表，可以查看本頻道其他節目，分享電視節目給朋友，在網上搜索這個節目，簽到，對電視節目發表評論等功能  \n 5、在頻道清單上長按可以把該頻道加入或刪除我的最愛,收藏的頻道可以在桌面widget顯示\n
+	6、 連接到新浪微博後，簽到和發表評論可以同步到新浪微博。
+	</string>
 	<string name="msg_no_connenction">沒有網路連接</string>
   	<string name="msg_no_connenction_detail">目前沒有可用的網路連接，本程式只能從本地緩存中讀取節目資料，部分功能將不可用</string>
 
@@ -160,4 +160,61 @@
 	<string name="weibo_connect_ok">您已經連接到新浪微博，現在您可以發布評論了</string>
 	<string name="weibo_menu">新浪微博</string>
 	<string name="weibo_re_binding">您已經連接到新浪微博，是否使用新的帳號重新連接？</string>
+	
+	<string name="search_hint">搜索今天的電視節目</string>
+	<string name="search_not_blank">請輸入要搜索的電視節目</string>
+	
+	<string name="checkin_failed">簽到失敗</string>
+	<string name="checkin_succeed">簽到成功</string>
+	<string name="comment_failed">發表電視評論失敗</string>
+	<string name="comment_succeed">成功發表電視評論</string>
+	<string name="comment_weibo_failed">發佈電視評論到新浪微博失敗</string>
+	<string name="comment_weibo_succeed">成功發佈電視評論到新浪微博</string>
+	<string name="comment_post">發表評論</string>
+	<string name="comment_have_input">您已經輸入 </string>
+	<string name="comment">評論 </string>
+	<string name="comment_post_weibo">同步評論到新浪微博 </string>
+	<string name="comment_min_length">評論至少要輸入10個字 ，請支持一下吧</string>
+	
+	<string name="preferences_sync_title">電視節目同步</string>
+	<string name="preferences_autosync_title">自動同步當天的電視節目</string>
+	<string name="preferences_autosync_summary">軟體啟動後自動同步當天的電視節目表</string>
+	
+    <string name="preferences_clearcache_title">清除節目資料緩存</string>
+	<string name="preferences_clearcache_summary">清除電視節目資料緩存，節省手機記憶體</string>
+	
+	<string name="user_info">我的資料</string>
+	<string name="user_screen_name">用戶名</string>
+	<string name="user_email">Email</string>
+	<string name="user_location">所在地</string>
+	<string name="user_point">積分</string>
+	<string name="user_checkin">簽到</string>
+	<string name="user_comment">評論</string>
+	<string name="user_guest">遊客</string>
+	<string name="user_get_success">獲取使用者資料成功</string>
+	<string name="user_get_fail">獲取使用者資料失敗</string>
+	<string name="user_guest_tip">您現在是遊客身份，無法獲取使用者資料，如果您以前註冊過，您可以直接登錄。如果您沒有註冊，您可以註冊用戶或使用新浪微博用戶登錄。</string>
+	<string name="user_weibo_login_failed">使用新浪微博帳戶登錄失敗，請退出軟體後重試</string>
+	<string name="user_refresh">刷新</string>
+	
+	<string name="user_reg">註冊</string>
+	<string name="user_register_now">立即註冊</string>
+	<string name="user_password">密碼</string>
+	<string name="user_password_again">重複密碼</string>
+	<string name="user_protocol">同意註冊條款</string>
+	<string name="user_register">完成註冊</string>
+	<string name="user_register_success">註冊成功</string>
+	<string name="user_register_failed">註冊失敗</string>
+	
+	<string name="user_login_now">立即登錄</string>
+	<string name="user_login">登錄</string>
+	<string name="user_findpassword">找回密碼</string>
+	<string name="user_screenname_invalid">無效的用戶名，用戶名至少2個字元</string>
+	<string name="user_password_invalid">無效的密碼，密碼至少6個字元</string>
+	<string name="user_password_not_same">兩次輸入的密碼不一致</string>
+	<string name="user_login_success">登錄成功</string>
+	<string name="user_login_failed">登錄失敗</string>
+	<string name="latest_checkin">最新簽到</string>
+	<string name="latest_comment">最新評論</string>
+	
 </resources>

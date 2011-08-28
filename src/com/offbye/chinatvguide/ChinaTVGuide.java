@@ -29,7 +29,7 @@ public class ChinaTVGuide extends Activity {
         new Thread(new Runnable() { 
             public void run() { 
                 initApp(); //初始化程序 
-                mHandler.sendMessageDelayed(mHandler.obtainMessage(),3000); 
+                mHandler.sendMessageDelayed(mHandler.obtainMessage(),2000); 
             } 
         }).start(); 
         
@@ -40,14 +40,15 @@ public class ChinaTVGuide extends Activity {
         }.start();
 
 
-        if(PreferencesActivity.isAutoSyncOn(this)){
-            this.startService(new Intent(this, SyncService.class));
-        }
+
     } 
     private Handler mHandler = new Handler() { 
         @Override 
         public void handleMessage(Message msg) { 
             super.handleMessage(msg); 
+            if(PreferencesActivity.isAutoSyncOn(ChinaTVGuide.this)){
+                startService(new Intent(ChinaTVGuide.this, SyncService.class));
+            }
             updateApp();
         } 
     }; 

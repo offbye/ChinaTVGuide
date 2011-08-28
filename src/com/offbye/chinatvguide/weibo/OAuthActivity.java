@@ -56,7 +56,8 @@ public class OAuthActivity extends Activity {
                 sp.edit().putString(UserStore.ACCESS_TPKEN, accessToken.getToken()).commit();
                 sp.edit().putString(UserStore.ACCESS_TPKEN_SECRET, accessToken.getTokenSecret()).commit();
                 sp.edit().putString(UserStore.USERID, "" + accessToken.getUserId()).commit();
-                sp.edit().putString(UserStore.SCREEN_NAME, accessToken.getScreenName()).commit();
+                //sp.edit().putString(UserStore.SCREEN_NAME, accessToken.getScreenName()).commit();
+
             } else {
                 textView.setText("connect failed");
                 Log.d(TAG,"connect failed");

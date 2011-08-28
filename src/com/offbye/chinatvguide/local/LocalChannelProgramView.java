@@ -1,11 +1,17 @@
 package com.offbye.chinatvguide.local;
 
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import com.offbye.chinatvguide.MydbHelper;
+import com.offbye.chinatvguide.PreferencesActivity;
+import com.offbye.chinatvguide.ProgramAdapter;
+import com.offbye.chinatvguide.R;
+import com.offbye.chinatvguide.SyncService;
+import com.offbye.chinatvguide.TVAlarm;
+import com.offbye.chinatvguide.TVProgram;
+import com.offbye.chinatvguide.util.AppException;
+import com.offbye.chinatvguide.util.Constants;
+import com.offbye.chinatvguide.util.HttpUtil;
+import com.offbye.chinatvguide.util.MD5;
+import com.offbye.chinatvguide.weibo.Post;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,6 +22,7 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -34,18 +41,12 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-import com.offbye.chinatvguide.ChannelProgramView;
-import com.offbye.chinatvguide.MydbHelper;
-import com.offbye.chinatvguide.PreferencesActivity;
-import com.offbye.chinatvguide.ProgramAdapter;
-import com.offbye.chinatvguide.R;
-import com.offbye.chinatvguide.SyncService;
-import com.offbye.chinatvguide.TVAlarm;
-import com.offbye.chinatvguide.TVProgram;
-import com.offbye.chinatvguide.util.AppException;
-import com.offbye.chinatvguide.util.Constants;
-import com.offbye.chinatvguide.util.HttpUtil;
-import com.offbye.chinatvguide.util.MD5;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class LocalChannelProgramView extends Activity {
 	private static final String TAG = "LocalChannelProgramView";
@@ -66,13 +67,14 @@ public class LocalChannelProgramView extends Activity {
 
 	private TVProgram seletedProgram=null;
 	private int seletedinterval=0;
+	private Context mContext;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.channelview);
 
-		
+		mContext = this;
 
 		cdate = (TextView) this.findViewById(R.id.TextView01);
 		optionsListView = (ListView) this.findViewById(R.id.ListView01);
@@ -318,23 +320,27 @@ public class LocalChannelProgramView extends Activity {
         	                .setTitle(R.string.select_dialog)
         	                .setItems(R.array.localoptions, new DialogInterface.OnClickListener() {
         	                    public void onClick(DialogInterface dialog, int which) {
-        	                       if(which==0){
-        	           	            	Intent i = new Intent(LocalChannelProgramView.this, ChannelProgramView.class); 
-        	           	            	i.putExtra("channel", seletedProgram.getChannel());
-        	           					startActivity(i); 
-        	                       }
-        	                       else if(which==1){
-        	                    	   Intent i = new Intent(Intent.ACTION_VIEW);   
-        	                    	   i.putExtra("sms_body", seletedProgram.getChannelname().trim()+"节目"+seletedProgram.getProgram().trim()+ "在"+seletedProgram.getStarttime()+"播出，请注意收看啊");   
-        	                    	   i.setType("vnd.android-dir/mms-sms");   
-        	                    	   startActivity(i);
-        	                       }
-        	                       else{
-        	                    	   Intent intent = new Intent();
-        	                    	   intent.setAction(Intent.ACTION_WEB_SEARCH);
-        	                    	   intent.putExtra(SearchManager.QUERY,seletedProgram.getProgram().trim());
-        	                    	   startActivity(intent);
-        	                       }
+        	                        if(which == 0){
+                                        Intent i = new Intent(Intent.ACTION_VIEW);   
+                                        i.putExtra("sms_body", seletedProgram.getChannelname().trim()+"节目"+seletedProgram.getProgram().trim()+ "在"+seletedProgram.getStarttime()+"播出，请注意收看啊");   
+                                        i.setType("vnd.android-dir/mms-sms");   
+                                        startActivity(i);
+                                    }
+                                    else if(which == 1){
+                                        Intent intent = new Intent();
+                                        intent.setAction(Intent.ACTION_WEB_SEARCH);
+                                        intent.putExtra(SearchManager.QUERY,seletedProgram.getProgram().trim());
+                                        startActivity(intent);
+                                    }
+                                    else if(which == 2){
+                                        MydbHelper mydb = new MydbHelper(mContext);
+                                        mydb.addFavoriteProgram(seletedProgram.getChannel(), seletedProgram.getDate(), seletedProgram.getStarttime(), seletedProgram.getEndtime(), seletedProgram.getProgram(), seletedProgram.getDaynight(), seletedProgram.getChannelname());
+                                        mydb.close();
+                                        Toast.makeText(mContext, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
+                                    }
+                                    else if(which == 3){
+                                        Post.addWeibo(mContext, seletedProgram);
+                                    }
         	                    }
         	                }).show();
 						return true;

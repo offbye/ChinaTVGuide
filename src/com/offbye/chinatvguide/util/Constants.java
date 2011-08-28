@@ -4,7 +4,7 @@ public class Constants {
 	public static String key = "hiapk20100414";
 	public static String url = "http://www.chinatvguide.mobi/phpmy/tao/tvs.php";
 	public static String url_tvrate = "http://wztv.sinaapp.com/ga/tvrate.php";
-	public static String url_tvrecommend = "http://www.chinatvguide.mobi/phpmy/tao/tvrecommend.php";
+	public static String url_tvrecommend = "http://wztv.sinaapp.com/ga/tvrecommend.php";
 	public static String url_thanks = "http://www.chinatvguide.mobi/phpmy/tao/thanks.php";
 	public static String url_local = "http://www.chinatvguide.mobi/phpmy/tao/local.php";
 	public static String url_broadcast = "http://www.chinatvguide.mobi/phpmy/tao/tvbroadcast.php";
@@ -22,9 +22,4 @@ public class Constants {
 	public static final String URL_USER_LOGIN = "http://wztv.sinaapp.com/client/user_login.php?email=%s&password=%s";
 	public static final String URL_COMMENT_LIST = "http://wztv.sinaapp.com/client/comment_list.php";
 	
-	//JIFEN
-	public static final int COMMENT_POINT = 5;
-	public static final int COMMENT_WEIBO_POINT = 5;
-	public static final int CHECKIN_POINT = 2;
-	public static final int CHECKIN_WEIBO_POINT = 2;
 }

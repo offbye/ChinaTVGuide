@@ -16,7 +16,7 @@
 			android:padding="5dp" android:layout_width="fill_parent"
 			android:layout_margin="5dp" android:layout_height="wrap_content"
 			android:singleLine="true" android:hint="@string/user_email" />
-		<EditText android:id="@+id/password" android:maxLength="30"
+		<EditText android:id="@+id/password" android:maxLength="30" android:inputType="textPassword"
 			android:padding="5dp" android:layout_width="fill_parent"
 			android:layout_margin="5dp" android:layout_height="wrap_content"
 			android:singleLine="true" android:hint="@string/user_password" />

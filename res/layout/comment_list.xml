@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:adsdk="http://schemas.android.com/apk/res/com.offbye.chinatvguide"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent"  android:background="@drawable/home">
+
+	<LinearLayout android:gravity="center" android:visibility="gone"
+		android:layout_width="fill_parent" android:layout_centerVertical="true"
+		android:layout_height="wrap_content" android:background="@drawable/rowbg">
+			
+		<Button android:id="@+id/lastestCheckin"  
+			android:layout_width="wrap_content" android:textSize="16sp" android:layout_centerVertical="true"
+			android:layout_height="wrap_content" android:text="@string/user_checkin"
+			android:textColor="#ffffffff" android:layout_marginRight="5dp"/>	
+		<Button android:id="@+id/latestComment" 
+			android:layout_width="wrap_content" android:textSize="16sp" android:layout_centerVertical="true"
+			android:layout_height="wrap_content" android:text="@string/user_checkin"
+			android:textColor="#ffffffff" android:layout_marginRight="5dp"/>	
+	</LinearLayout>
+
+	<ListView android:id="@+id/ListView01" android:cacheColorHint="#00000000"
+		android:layout_width="fill_parent" android:dividerHeight="2dp" android:divider="#cccccc"
+		android:layout_height="wrap_content" android:layout_weight="1"
+		android:layout_gravity="center_horizontal">
+	</ListView>
+
+</LinearLayout>
+

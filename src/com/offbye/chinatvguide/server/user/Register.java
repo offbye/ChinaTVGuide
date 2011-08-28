@@ -137,7 +137,8 @@ public class Register extends Activity {
                         Toast.makeText(mContext, R.string.user_register_success, Toast.LENGTH_LONG)
                                 .show();
                         UserStore.setScreenName(mContext, screenName.getText().toString());
-                        UserStore.setEmail(mContext, email.getText().toString());
+                        UserStore.setEmail(mContext, email.getText().toString().trim());
+                        UserStore.setUserId(mContext, email.getText().toString().trim());
                         finish();
                     }
 

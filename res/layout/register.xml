@@ -14,16 +14,15 @@
 		android:padding="5dp" android:layout_width="fill_parent"
 		android:layout_margin="5dp" android:layout_height="wrap_content"
 		android:singleLine="true" android:hint="@string/user_email" />
-	<EditText android:id="@+id/password" android:maxLength="30"
+	<EditText android:id="@+id/password" android:maxLength="20"  android:inputType="textPassword"
 		android:padding="5dp" android:layout_width="fill_parent"
 		android:layout_margin="5dp" android:layout_height="wrap_content"
 		android:singleLine="true" android:hint="@string/user_password" />
 
-	<EditText android:id="@+id/passwordAgain" android:maxLength="30"
+	<EditText android:id="@+id/passwordAgain" android:maxLength="20"  android:inputType="textPassword"
 		android:padding="5dp" android:layout_width="fill_parent"
 		android:layout_margin="5dp" android:layout_height="wrap_content"
 		android:singleLine="true" android:hint="@string/user_password_again" />
-
 
 	<Button android:id="@+id/register" android:layout_margin="5dp" 
 		android:textSize="18sp"  android:textColor="#ffffffff"  android:background="@drawable/button1"
