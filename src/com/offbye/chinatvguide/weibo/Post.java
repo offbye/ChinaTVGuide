@@ -47,6 +47,7 @@ public class Post extends Activity {
     private String mChannel;
 
     private String mProgram;
+    private String msg;
 
     private Context mContext;
 
@@ -93,6 +94,13 @@ public class Post extends Activity {
 
         mChannel = getIntent().getStringExtra("channel");
         mProgram = getIntent().getStringExtra("program");
+        
+        msg = "";
+        if (null != mChannel && !"".equals(mChannel) && null != mProgram && !"".equals(mProgram)){
+            msg = "\n " + mContext.getString(R.string.comment) + " #"
+            + mChannel.trim() + "#, #" + mProgram.trim() + "#";
+            mContent.setHint(msg);
+        }
 
     }
 
@@ -149,11 +157,7 @@ public class Post extends Activity {
                 new CommentTask(getApplicationContext(), CommentTask.genUrl(c), mCallback).start();
                 
                 if (!"".equals( UserStore.getAccessToken(mContext)) && isPostWeibo.isChecked()){
-                    String msg = "";
-                    if (null != mChannel && !"".equals(mChannel) && null != mProgram && !"".equals(mProgram)){
-                        msg = "\n " + mContext.getString(R.string.comment) + " #"
-                        + mChannel.trim() + "#, #" + mProgram.trim() + "#";
-                    }
+                    
                     post(mContent.getText().toString() + msg);
                 }
             }

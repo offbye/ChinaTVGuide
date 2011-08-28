@@ -274,72 +274,19 @@ public class LocalCurrentProgramView extends Activity {
 
 	private class GetDataBody implements Runnable {
 		public void run() {
-			// 4. the working
-
-			// Log.v(TAG,address.getLocality());
-			// Log.v(TAG,urlsb.toString());
-
 			pl = getTVProgramsFromDB(sql.toString());
 			if (pl.size() > 0) {
 				progressHandler.sendEmptyMessage(R.string.notify_succeeded);
 			} else {
 				pl = getTVProgramsFormURL(urlsb.toString());
-				// Log.v(TAG, "load from web");
 				if (pl.size() > 0) {
-					// 5. to call sendEmptyMessage() to notificate this working
-					// is done
 					progressHandler.sendEmptyMessage(R.string.notify_succeeded);
 				}
 			}
-			// LocationManager locationManager = (LocationManager)
-			// getSystemService(Context.LOCATION_SERVICE);
-			// /* 第一次运行向Location Provider取得Location */
-			// Location location =
-			// LocationUtil.getLocationProvider(locationManager);
-			// if (location != null) {
-			// GeoPoint point = LocationUtil.getGeoByLocation(location);
-			// Address address = null;
-			// try {
-			// address =
-			// LocationUtil.getAddressbyGeoPoint(mContext,
-			// point);
-			// } catch (IOException e) {
-			// Log.d(TAG, "location Exception");
-			// progressHandler.sendEmptyMessage(R.string.notify_cannot_location);
-			// }
-			// if (address != null) {
-			// //Log.v(TAG,address.getAdminArea());
-			//	            	 
-			// province = address.getAdminArea();
-			// city = address.getLocality();
-			//	            	 
-			// urlsb.append("&province=");
-			// urlsb.append(URLEncoder.encode(address.getAdminArea()));
-			// urlsb.append("&city=");
-			// urlsb.append(URLEncoder.encode(address.getLocality()));
-			// //Log.v(TAG,address.getLocality());
-			// //Log.v(TAG,urlsb.toString());
-			//	            		
-			// pl = getTVProgramsFromDB(sql.toString());
-			// if (pl.size() > 0) {
-			// progressHandler.sendEmptyMessage(R.string.notify_succeeded);
-			// } else {
-			// pl = getTVProgramsFormURL(urlsb.toString());
-			// //Log.v(TAG, "load from web");
-			// if (pl.size() > 0) {
-			// // 5. to call sendEmptyMessage() to notificate this working is
-			// done
-			// progressHandler.sendEmptyMessage(R.string.notify_succeeded);
-			// }
-			// }
-			// }
-			// }
-
 		}
 
 	}
 
-	// Define the Handler that receives messages from the thread
 	private Handler progressHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -364,38 +311,47 @@ public class LocalCurrentProgramView extends Activity {
 										R.string.select_dialog).setItems(
 										R.array.localoptions,
 										new DialogInterface.OnClickListener() {
-											public void onClick(
-													DialogInterface dialog,
-													int which) {
-											    if(which==0){
-			                                        Intent i = new Intent(mContext, ChannelProgramView.class);
-			                                        i.putExtra("channel", seletedProgram.getChannel());
-			                                        startActivity(i);
+										    public void onClick(DialogInterface dialog,int which) {
+										        
+											   if(which == 0){
+											       Intent i = new Intent(
+                                                           LocalCurrentProgramView.this,
+                                                           ChannelProgramView.class);
+                                                   i.putExtra("channel", seletedProgram
+                                                           .getChannel());
+                                                   i.putExtra("channelname", seletedProgram
+                                                           .getChannelname().trim());
+                                                   i.putExtra("type", "local");
+
+                                                   i.putExtra("province", province);
+                                                   i.putExtra("city", city);
+                                                   startActivity(i);     
+                                                        
 			                                   }
-			                                   else if(which==1){
+			                                   else if (which == 1){
 			                                       Intent i = new Intent(Intent.ACTION_VIEW);
 			                                       i.putExtra("sms_body", seletedProgram.getChannelname().trim()+"节目"+seletedProgram.getProgram().trim()+ "在"+seletedProgram.getStarttime()+"播出，请注意收看啊");
 			                                       i.setType("vnd.android-dir/mms-sms");
 			                                       startActivity(i);
 			                                   }
-			                                   else if(which==2){
+			                                   else if (which == 2){
 			                                       Intent intent = new Intent();
 			                                       intent.setAction(Intent.ACTION_WEB_SEARCH);
 			                                       intent.putExtra(SearchManager.QUERY,seletedProgram.getProgram().trim());
 			                                       startActivity(intent);
 			                                   }
-			                                   else if(which==3){
+			                                   else if (which == 3){
 			                                       MydbHelper mydb = new MydbHelper(mContext);
 			                                       mydb.addFavoriteProgram(seletedProgram.getChannel(), seletedProgram.getDate(), seletedProgram.getStarttime(), seletedProgram.getEndtime(), seletedProgram.getProgram(), seletedProgram.getDaynight(), seletedProgram.getChannelname());
 			                                       mydb.close();
 			                                       Toast.makeText(mContext, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
 			                                   }
-			                                   else if(which == 4){
+			                                   else if (which == 4){
 			                                       pd = ProgressDialog.show(mContext, getString(R.string.msg_loading), getString(R.string.msg_wait), true, true);
 			                                       pd.setIcon(R.drawable.icon);
 			                                       checkin(seletedProgram);
 			                                   }
-			                                   else if(which == 5){
+			                                   else if (which == 5){
 			                                       Post.addWeibo(mContext, seletedProgram);
 			                                   }
 											}

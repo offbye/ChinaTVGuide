@@ -62,7 +62,7 @@
 	<string name="notify_no_connection">沒有網路連接</string>
 
 
-	<string name="aboutinfo">玩轉電視是看電視時最好的夥伴。玩轉電視提供中國電視節目預告，可以查看當前正在播出的節目，	電視娛樂資訊，
+	<string name="aboutinfo">玩轉電視是您看電視時最好的夥伴。玩轉電視是最好的電視預告軟體，是基於位置的電視互動交流平臺。玩轉電視提供中國電視節目預告，可以查看當前正在播出的節目，	電視娛樂資訊，
 	收視率排行，熱點節目推薦等，可以設置節目播出前定時提醒，讓您不錯過想看的節目。軟體現在提供中央電視臺，省級衛視頻道,港澳臺頻道，數位電視，以及800多個地面頻道節目預告資訊。\n  玩轉電視支援電視評論和簽到功能，並支持在新浪微博上分享電視評論。
 	\n   玩轉電視支援Wifi，3G和cmwap網路，完全相容android1.5-3.1。
 	</string>
@@ -151,7 +151,7 @@
 	<string name="widget_info">顯示您收藏的頻道的節目預告，請在頻道清單長按某個頻道添加或取消收藏</string>
 	<string name="create_shortcut">創建桌面快捷圖示</string>
 	<string name="create_shortcut_body">點擊確定在桌面創建一個玩轉電視的快捷圖示</string>
-	<string name="connect_info">您還沒有連接玩轉電視到您的新浪微博，因此無法通過玩轉電視分享您的留言到新浪微博。點擊下面的按鈕連接到新浪微博</string>
+	<string name="connect_info">您還沒有授權使用您的新浪微博帳戶登錄玩轉電視，因此無法通過玩轉電視分享您的簽到和評論到新浪微博。請點擊下面的按鈕使用新浪微博帳戶登錄玩轉電視。</string>
 	<string name="connect">連接到新浪微博</string>
 	<string name="weibo_promotion">我正在使用玩轉電視，再也不會錯過想看的電視了!</string>
 	<string name="weibo_post">發布到新浪微博</string>

@@ -62,7 +62,7 @@
 	<string name="notify_no_connection">没有网络连接</string>
 
 
-	<string name="aboutinfo">玩转电视是看电视时最好的伙伴。玩转电视提供中国电视节目预告，可以查看当前正在播出的节目，
+	<string name="aboutinfo">玩转电视是您看电视时最好的伙伴。玩转电视是最好的电视预告软件，是基于位置的电视互动交流平台。\n  玩转电视提供中国电视节目预告，可以查看当前正在播出的节目，
 	电视娱乐资讯，收视率排行，热点节目推荐等，可以设置节目播出前定时提醒，让您不错过想看的节目。软件现在提供中央电视台，
 	省级卫视频道,港澳台频道，数字电视，以及800多个地面频道节目预告信息。\n  玩转电视支持电视评论和签到功能，并支持在新浪微博上分享电视评论。
 	\n   玩转电视支持Wifi，3G和cmwap网络，完全兼容android1.5-3.1。
@@ -151,7 +151,7 @@
 	<string name="widget_info">显示您收藏的频道的节目预告，请在频道列表长按某个频道添加或取消收藏</string>
 	<string name="create_shortcut">创建桌面快捷图标</string>
 	<string name="create_shortcut_body">点击确定在桌面创建一个玩转电视的快捷图标</string>
-	<string name="connect_info">您还没有连接玩转电视到您的新浪微博，因此无法通过玩转电视分享您的留言到新浪微博。点击下面的按钮连接到新浪微博</string>
+	<string name="connect_info">您还没有授权使用您的新浪微博账户登录玩转电视，因此无法通过玩转电视分享您的签到和评论到新浪微博。请点击下面的按钮使用新浪微博账户登录玩转电视。</string>
 	<string name="connect">连接到新浪微博</string>
 	<string name="weibo_promotion">我正在使用#玩转电视#，再也不会错过想看的电视了!</string>
 	<string name="weibo_post">发布到新浪微博</string>
