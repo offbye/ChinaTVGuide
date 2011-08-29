@@ -19,7 +19,7 @@ xmlns:adsdk="http://schemas.android.com/apk/res/com.offbye.chinatvguide"
 			android:textColor="#ffffffff" android:layout_marginRight="5dp"/>	
 	</LinearLayout>
 
-	<ListView android:id="@+id/ListView01" android:cacheColorHint="#00000000"
+	<ListView android:id="@+id/ListView01"
 		android:layout_width="fill_parent" android:dividerHeight="2dp" android:divider="#cccccc"
 		android:layout_height="wrap_content" android:layout_weight="1"
 		android:layout_gravity="center_horizontal">
