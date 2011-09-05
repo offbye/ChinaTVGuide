@@ -182,37 +182,45 @@
     <string name="preferences_clearcache_title">清除节目数据缓存</string>
 	<string name="preferences_clearcache_summary">清除电视节目数据缓存，节省手机内存</string>
 	
-	<string name="user_info">我的资料</string>
-	<string name="user_screen_name">用户名</string>
+	<string name="user_info">User Center</string>
+	<string name="user_screen_name">Name</string>
 	<string name="user_email">Email</string>
-	<string name="user_location">所在地</string>
-	<string name="user_point">积分</string>
-	<string name="user_checkin">签到</string>
-	<string name="user_comment">评论</string>
-	<string name="user_guest">游客</string>
-	<string name="user_get_success">获取用户资料成功</string>
-	<string name="user_get_fail">获取用户资料失败</string>
+	<string name="user_location">Location</string>
+	<string name="user_point">points</string>
+	<string name="user_checkin">Checkin</string>
+	<string name="user_comment">Comment</string>
+	<string name="user_guest">Guest</string>
+	<string name="user_get_success">Get user info ok.</string>
+	<string name="user_get_fail">Get user info failed</string>
 	<string name="user_guest_tip">您现在是游客身份，无法获取用户资料，如果您以前注册过，您可以直接登录。如果您没有注册，您可以注册用户或使用新浪微博用户登录。</string>
 	<string name="user_weibo_login_failed">使用新浪微博账户登录失败，请退出软件后重试</string>
-	<string name="user_refresh">刷新</string>
+	<string name="user_refresh">Refresh</string>
 	
-	<string name="user_reg">注册</string>
-	<string name="user_register_now">立即注册</string>
-	<string name="user_password">密码</string>
-	<string name="user_password_again">重复密码</string>
+	<string name="user_reg">Register</string>
+	<string name="user_register_now">Register Now</string>
+	<string name="user_password">Password</string>
+	<string name="user_password_again">Repeat Password</string>
 	<string name="user_protocol">同意注册条款</string>
 	<string name="user_register">完成注册</string>
-	<string name="user_register_success">注册成功</string>
-	<string name="user_register_failed">注册失败</string>
+	<string name="user_register_success">Register success</string>
+	<string name="user_register_failed">Register failed</string>
 	
-	<string name="user_login_now">立即登录</string>
-	<string name="user_login">登录</string>
-	<string name="user_findpassword">找回密码</string>
-	<string name="user_screenname_invalid">无效的用户名，用户名至少2个字符</string>
-	<string name="user_password_invalid">无效的密码，密码至少6个字符</string>
-	<string name="user_password_not_same">两次输入的密码不一致</string>
-	<string name="user_login_success">登录成功</string>
-	<string name="user_login_failed">登录失败</string>
-	<string name="latest_checkin">最新签到</string>
-	<string name="latest_comment">最新评论</string>
+	<string name="user_login_now">Login Now</string>
+	<string name="user_login">Login</string>
+	<string name="user_findpassword">Find password</string>
+	<string name="user_screenname_invalid">Invalid user name，at least 2 characters</string>
+	<string name="user_password_invalid">Invalid password,at least 6 characters</string>
+	<string name="user_password_not_same">Password entered not same.</string>
+	<string name="user_login_success">Login success</string>
+	<string name="user_login_failed">Login failed</string>
+	<string name="latest_checkin">Lastest Checkin</string>
+	<string name="latest_comment">Lastest Comment</string>
+	
+	<string name="pull_to_refresh_pull_label">Pull to refresh...</string>
+    <string name="pull_to_refresh_release_label">Release to refresh...</string>
+    <string name="pull_to_refresh_refreshing_label">Loading...</string>
+    <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
+    <string name="pull_to_refresh_more_label">More</string>
+    
+    <string name="checkin_time_too_short">Time too short after last checkin.</string>
 </resources>

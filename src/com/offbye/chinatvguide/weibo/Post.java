@@ -53,8 +53,10 @@ public class Post extends Activity {
 
     public static void addWeibo(Context context, TVProgram p) {
         Intent it = new Intent();
-        it.putExtra("channel", p.getChannelname());
-        it.putExtra("program", p.getProgram());
+        if (null != p){
+            it.putExtra("channel", p.getChannelname());
+            it.putExtra("program", p.getProgram());
+        }
 
         it.setClass(context, Post.class);
         context.startActivity(it);

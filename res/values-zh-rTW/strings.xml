@@ -217,4 +217,11 @@
 	<string name="latest_checkin">最新簽到</string>
 	<string name="latest_comment">最新評論</string>
 	
+	<string name="pull_to_refresh_pull_label">下拉刷新...</string>
+    <string name="pull_to_refresh_release_label">鬆開即可刷新...</string>
+    <string name="pull_to_refresh_refreshing_label">載入中...</string>
+    <string name="pull_to_refresh_tap_label">輕觸刷新...</string>
+    <string name="pull_to_refresh_more_label">更多</string>
+      
+    <string name="checkin_time_too_short">距離上次簽到的時間太短了，等一會再來簽到吧</string>
 </resources>

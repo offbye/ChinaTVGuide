@@ -52,6 +52,16 @@ public final class PreferencesActivity extends PreferenceActivity implements
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         return sp.getBoolean("autosync", true);
     }
+    
+    public static String getSyncToday(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getString("sync_today", "");
+    }
+    
+    public static void setSyncToday(Context context,String today) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        sp.edit().putString("sync_today", today).commit();
+    }
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         // if (key.equals(KEY_ALARM)) {

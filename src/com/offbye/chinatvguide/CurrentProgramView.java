@@ -3,6 +3,7 @@ package com.offbye.chinatvguide;
 import com.offbye.chinatvguide.channel.ChannelTab;
 import com.offbye.chinatvguide.grid.Grid;
 import com.offbye.chinatvguide.server.Comment;
+import com.offbye.chinatvguide.server.CommentList;
 import com.offbye.chinatvguide.server.CommentTask;
 import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.AppException;
@@ -61,7 +62,8 @@ public class CurrentProgramView extends Activity {
 	private StringBuffer urlsb  =null;
 	private StringBuffer sql = null;
 	private ProgressDialog pd;
-	private TVProgram seletedProgram=null;
+	private TVProgram seletedProgram;
+	private long lastCheckinTime;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -234,16 +236,21 @@ public class CurrentProgramView extends Activity {
         	                    	   intent.putExtra(SearchManager.QUERY,seletedProgram.getProgram().trim());
         	                    	   startActivity(intent);
         	                       }
-        	                       else if(which==3){
-        	                    	   MydbHelper mydb = new MydbHelper(mContext);
-        	                    	   mydb.addFavoriteProgram(seletedProgram.getChannel(), seletedProgram.getDate(), seletedProgram.getStarttime(), seletedProgram.getEndtime(), seletedProgram.getProgram(), seletedProgram.getDaynight(), seletedProgram.getChannelname());
-        	           				   mydb.close();
-        	           				   Toast.makeText(mContext, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
+        	                       else if(which == 3){
+        	                           Intent intent = new Intent(mContext, CommentList.class);
+                                       intent.putExtra("type", "0");
+                                       intent.putExtra("program", seletedProgram.getProgram().trim());
+                                       startActivity(intent);
         	                       }
         	                       else if(which == 4){
+        	                           if (lastCheckinTime != 0 && System.currentTimeMillis() - lastCheckinTime < 60000){
+        	                               Toast.makeText(mContext, R.string.checkin_time_too_short, Toast.LENGTH_LONG).show();
+        	                               return;
+        	                           }
         	                           pd = ProgressDialog.show(mContext, getString(R.string.msg_loading), getString(R.string.msg_wait), true, true);
                                        pd.setIcon(R.drawable.icon);
                                        checkin(seletedProgram);
+                                       lastCheckinTime = System.currentTimeMillis();
                                    }
         	                       else if(which == 5){
         	                           Post.addWeibo(mContext, seletedProgram);
@@ -373,12 +380,12 @@ public class CurrentProgramView extends Activity {
 		menu.add(0, 3, 3, this.getText(R.string.menu_sync)).setIcon(R.drawable.ic_menu_refresh);
 		menu.add(0, 4, 4, this.getText(R.string.menu_clean)).setIcon(android.R.drawable.ic_menu_delete);
 		menu.add(0, 5, 5,  this.getText(R.string.menu_exit)).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
-		if (10 < Integer.valueOf(Build.VERSION.SDK)) {
-			menu.getItem(0).setShowAsAction(1);
-			menu.getItem(1).setShowAsAction(1);
-			menu.getItem(2).setShowAsAction(1);
-			menu.getItem(5).setShowAsAction(1);
-		}
+//		if (10 < Integer.valueOf(Build.VERSION.SDK)) {
+//			menu.getItem(0).setShowAsAction(1);
+//			menu.getItem(1).setShowAsAction(1);
+//			menu.getItem(2).setShowAsAction(1);
+//			menu.getItem(5).setShowAsAction(1);
+//		}
 		return super.onCreateOptionsMenu(menu);
 
 	}

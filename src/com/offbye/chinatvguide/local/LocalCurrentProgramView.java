@@ -52,6 +52,7 @@ import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.SyncService;
 import com.offbye.chinatvguide.TVProgram;
 import com.offbye.chinatvguide.server.Comment;
+import com.offbye.chinatvguide.server.CommentList;
 import com.offbye.chinatvguide.server.CommentTask;
 import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.AppException;
@@ -341,10 +342,10 @@ public class LocalCurrentProgramView extends Activity {
 			                                       startActivity(intent);
 			                                   }
 			                                   else if (which == 3){
-			                                       MydbHelper mydb = new MydbHelper(mContext);
-			                                       mydb.addFavoriteProgram(seletedProgram.getChannel(), seletedProgram.getDate(), seletedProgram.getStarttime(), seletedProgram.getEndtime(), seletedProgram.getProgram(), seletedProgram.getDaynight(), seletedProgram.getChannelname());
-			                                       mydb.close();
-			                                       Toast.makeText(mContext, R.string.msg_setfavourate_ok, Toast.LENGTH_LONG).show();
+			                                       Intent intent = new Intent(mContext, CommentList.class);
+			                                       intent.putExtra("type", "0");
+			                                       intent.putExtra("program", seletedProgram.getProgram().trim());
+			                                       startActivity(intent);
 			                                   }
 			                                   else if (which == 4){
 			                                       pd = ProgressDialog.show(mContext, getString(R.string.msg_loading), getString(R.string.msg_wait), true, true);

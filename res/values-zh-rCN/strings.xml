@@ -65,7 +65,7 @@
 	<string name="aboutinfo">玩转电视是您看电视时最好的伙伴。玩转电视是最好的电视预告软件，是基于位置的电视互动交流平台。\n  玩转电视提供中国电视节目预告，可以查看当前正在播出的节目，
 	电视娱乐资讯，收视率排行，热点节目推荐等，可以设置节目播出前定时提醒，让您不错过想看的节目。软件现在提供中央电视台，
 	省级卫视频道,港澳台频道，数字电视，以及800多个地面频道节目预告信息。\n  玩转电视支持电视评论和签到功能，并支持在新浪微博上分享电视评论。
-	\n   玩转电视支持Wifi，3G和cmwap网络，完全兼容android1.5-3.1。
+	\n   玩转电视支持Wifi，3G和cmwap网络，完全兼容android1.5-3.1。 \n 请关注新浪微博 http://weibo.com/cntvguide
 	</string>
 	<string name="helpinfo">1、软件启动后会自动同步当天的节目数据，以方便手机不能经常联网的用户。你可以在设置中关掉“启动电视节目同步”选项禁用此功能。\n 2、使用本软件很长时间后请注意使用"清空缓存"功能清除以前的节目缓存数据，节省宝贵的手机内存
 	\n 3、目前只能设置一个节目提醒，以最后设置的为准 \n 4、在节目列表页面长按节目项会出现菜单，可以查看本频道其他节目，分享电视节目给朋友，在网上搜索这个节目，签到，对电视节目发表评论等功能  \n 5、在频道列表上长按可以把该频道加入或删除收藏夹,收藏的频道可以在桌面widget显示\n
@@ -217,4 +217,11 @@
 	<string name="latest_checkin">最新签到</string>
 	<string name="latest_comment">最新评论</string>
 	
+	<string name="pull_to_refresh_pull_label">下拉刷新...</string>
+    <string name="pull_to_refresh_release_label">松开即可刷新...</string>
+    <string name="pull_to_refresh_refreshing_label">加载中...</string>
+    <string name="pull_to_refresh_tap_label">轻触刷新...</string>
+    <string name="pull_to_refresh_more_label">更多</string>
+      
+    <string name="checkin_time_too_short">距离上次签到的时间太短了，等一会再来签到吧</string>
 </resources>

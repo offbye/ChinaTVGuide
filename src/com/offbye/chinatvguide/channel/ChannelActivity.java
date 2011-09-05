@@ -163,12 +163,12 @@ public class ChannelActivity extends Activity {
 		menu.add(0, 4, 4, this.getText(R.string.menu_clean)).setIcon(android.R.drawable.ic_menu_delete);
 		menu.add(0, 5, 5,  this.getText(R.string.menu_exit)).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
 
-		if (10 < Integer.valueOf(Build.VERSION.SDK)) {
-			menu.getItem(0).setShowAsAction(1);
-			menu.getItem(1).setShowAsAction(1);
-			menu.getItem(2).setShowAsAction(1);
-			menu.getItem(5).setShowAsAction(1);
-		}
+//		if (10 < Integer.valueOf(Build.VERSION.SDK)) {
+//			menu.getItem(0).setShowAsAction(1);
+//			menu.getItem(1).setShowAsAction(1);
+//			menu.getItem(2).setShowAsAction(1);
+//			menu.getItem(5).setShowAsAction(1);
+//		}
 		return super.onCreateOptionsMenu(menu);
 
 	}

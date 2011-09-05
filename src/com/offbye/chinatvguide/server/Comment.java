@@ -10,6 +10,13 @@ public class Comment {
     private String time;
     private String location;
     private String email;
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+    private long id;
     
     public String getEmail() {
         return email;
@@ -65,5 +72,6 @@ public class Comment {
     public void setType(String type) {
         this.type = type;
     }
+
 
 }

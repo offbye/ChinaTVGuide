@@ -172,11 +172,11 @@ public class Grid extends Activity {
 		menu.add(0, 4, 4,  this.getText(userlabel)).setIcon(R.drawable.ic_menu_user);
 		menu.add(0, 5, 5,  this.getText(R.string.menu_exit)).setIcon(R.drawable.ic_menu_close_clear_cancel);
 		       
-		if (10 < Integer.valueOf(Build.VERSION.SDK)) {
-			menu.getItem(0).setShowAsAction(1);
-			menu.getItem(1).setShowAsAction(1);
-			menu.getItem(2).setShowAsAction(1);
-		}
+//		if (10 < Integer.valueOf(Build.VERSION.SDK)) {
+//			menu.getItem(0).setShowAsAction(1);
+//			menu.getItem(1).setShowAsAction(1);
+//			menu.getItem(2).setShowAsAction(1);
+//		}
 		return super.onCreateOptionsMenu(menu);
 
 	}

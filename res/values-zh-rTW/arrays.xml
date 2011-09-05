@@ -1,44 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="colors">
-        <item>red</item>
-        <item>orange</item>
-        <item>yellow</item>
-        <item>green</item>
-        <item>blue</item>
-        <item>violet</item>
-    </string-array>
+	<string-array name="colors">
+		<item>red</item>
+		<item>orange</item>
+		<item>yellow</item>
+		<item>green</item>
+		<item>blue</item>
+		<item>violet</item>
+	</string-array>
 
-    <string-array name="alarmtimes">
-        <item>節目開始時提醒</item>
-        <item>提前10分鐘提醒</item>
-        <item>提前1小時提醒</item>
-        <item>提前3小時提醒</item>
-    </string-array>
-    <string-array name="localoptions">
-        <item>查看當前頻道其它節目</item>
-        <item>分享電視節目給朋友</item>
-        <item>在網路上搜索該節目</item>
-        <item>把這個節目加入我的最愛</item>
-        <item>我正在收看</item>
-    </string-array>
- 	<string-array name="rss">
-        <item>查看全文</item>
-        <item>分享給朋友</item>
-    </string-array>
-    <string-array name="tvcity">
-        <item>北京</item>
-        <item>上海</item>
-        <item>廣州</item>
-        <item>重慶</item>
-        <item>天津</item>
-        <item>武漢</item>
-        <item>長沙</item>
-        <item>成都</item>
-        <item>西安</item>
-        <item>瀋陽</item>
-        <item>南京</item>
-        <item>杭州</item>
-    </string-array>
+	<string-array name="alarmtimes">
+		<item>節目開始時提醒</item>
+		<item>提前10分鐘提醒</item>
+		<item>提前1小時提醒</item>
+		<item>提前3小時提醒</item>
+	</string-array>
+	<string-array name="localoptions">
+		<item>查看當前頻道其它節目</item>
+		<item>分享電視節目給朋友</item>
+		<item>在網路上搜索這個節目</item>
+		<item>查看該節目的簽到</item>
+		<item>簽到（我正在收看）</item>
+		<item>對電視節目發表評論</item>
+	</string-array>
+	<string-array name="programoptions">
+		<item>分享電視節目給朋友</item>
+		<item>在網路上搜索這個節目</item>
+		<item>把這個節目加入我的最愛</item>
+		<item>對該節目發表評論</item>
+		<item>查看該節目的簽到</item>
+		<item>查看該節目的評論</item>
+	</string-array>
+	<string-array name="rss">
+		<item>查看全文</item>
+		<item>分享給朋友</item>
+	</string-array>
+	<string-array name="tvcity">
+		<item>北京</item>
+		<item>上海</item>
+		<item>廣州</item>
+		<item>重慶</item>
+		<item>天津</item>
+		<item>武漢</item>
+		<item>長沙</item>
+		<item>成都</item>
+		<item>西安</item>
+		<item>瀋陽</item>
+		<item>南京</item>
+		<item>杭州</item>
+	</string-array>
 </resources>
 

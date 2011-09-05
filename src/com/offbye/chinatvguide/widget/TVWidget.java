@@ -36,7 +36,7 @@ public class TVWidget extends AppWidgetProvider {
     private AppWidgetManager mWidgetManager = null;
     private int[] mWidgetIds;
     private RemoteViews rv;
-    private boolean updated = false;
+    private volatile boolean updated = false;
 
     @Override
 	 public void onReceive(Context context, Intent intent) {

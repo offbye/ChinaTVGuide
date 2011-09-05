@@ -2,6 +2,7 @@ package com.offbye.chinatvguide;
 
 import com.offbye.chinatvguide.channel.ChannelTab;
 import com.offbye.chinatvguide.server.Comment;
+import com.offbye.chinatvguide.server.CommentList;
 import com.offbye.chinatvguide.server.CommentTask;
 import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.AppException;
@@ -86,6 +87,7 @@ public class ChannelProgramView extends Activity {
 
 	private String city;
 	private Context mContext;
+	private long lastCheckinTime;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -253,12 +255,17 @@ public class ChannelProgramView extends Activity {
 		mCheckin =(Button)findViewById(R.id.checkin);
 		mCheckin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if (lastCheckinTime != 0 && System.currentTimeMillis() - lastCheckinTime < 60000){
+                    Toast.makeText(mContext, R.string.checkin_time_too_short, Toast.LENGTH_LONG).show();
+                    return;
+                }
                 pd = ProgressDialog.show(mContext, getString(R.string.msg_loading), getString(R.string.msg_wait), true, true);
                 pd.setIcon(R.drawable.icon);
                 String prog = "";
                 if(currentPosition > 0 ){
                     prog = pl.get(currentPosition).getProgram().trim();
                 }
+                lastCheckinTime = System.currentTimeMillis();
                 checkin(channelname.trim(),prog);
             }
         });
@@ -342,7 +349,7 @@ public class ChannelProgramView extends Activity {
 	
 	private void showTop(String channel,Date date){
 
-		SimpleDateFormat df2=new SimpleDateFormat("yyyy年MM月dd日");
+		SimpleDateFormat df2=new SimpleDateFormat("MM月dd日");
 		String currentdate2=df2.format(date);
 		channellogo.setImageBitmap(getImageFromAssetFile(channel+".png"));
 		cdate.setText(currentdate2);
@@ -574,6 +581,18 @@ public class ChannelProgramView extends Activity {
         	                       else if(which == 3){
                                        Post.addWeibo(mContext, seletedProgram);
                                    }
+        	                       else if(which == 4){
+        	                           Intent intent = new Intent(mContext, CommentList.class);
+        	                           intent.putExtra("type", "0");
+        	                           intent.putExtra("program", seletedProgram.getProgram().trim());
+        	                           startActivity(intent);
+                                   }
+        	                       else if(which == 5){
+        	                           Intent intent = new Intent(mContext, CommentList.class);
+                                       intent.putExtra("type", "1");
+                                       intent.putExtra("program", seletedProgram.getProgram().trim());
+                                       startActivity(intent);
+                                   }
         	                    }
 
         	                }).show();
@@ -700,7 +719,7 @@ public class ChannelProgramView extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, 0, 0, this.getText(R.string.menu_about)).setIcon(R.drawable.icon);
+		menu.add(0, 0, 0, this.getText(R.string.comment_post)).setIcon(R.drawable.ic_menu_edit);
 		menu.add(0, 1, 1, this.getText(R.string.menu_channel)).setIcon(R.drawable.ic_menu_channel);
 		menu.add(0, 2, 2,  this.getText(R.string.menu_help)).setIcon(android.R.drawable.ic_menu_help);
 
@@ -715,18 +734,11 @@ public class ChannelProgramView extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case 0:
-			new AlertDialog.Builder(this)
-					.setIcon(R.drawable.icon)
-					.setTitle(R.string.menu_abouttitle)
-					.setMessage(R.string.aboutinfo)
-					.setPositiveButton(this.getText(R.string.alert_dialog_ok),
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int whichButton) {
-
-								}
-							}).show();
-
+		    TVProgram p = null;
+		    if(currentPosition > 0 ){
+                p = pl.get(currentPosition);
+            }
+            Post.addWeibo(mContext, p);
 			break;
 		case 1:
 			startActivity(new Intent(this,ChannelTab.class));
