@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class MydbHelper {
     private static final String TAG = "MydbHelper";
-    private static final String DATABASE_NAME = "chinatvguide.db";  
+    private static final String DATABASE_NAME = "chinatvguide6.db";  
     SQLiteDatabase db;
     Context context;
     
@@ -259,6 +259,50 @@ public class MydbHelper {
         db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('ysyl','央视娱乐','',0,'sz')");
         db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('yxjj','游戏竞技','',0,'sz')");
         db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('yyzn','孕育指南','',0,'sz')");
+        
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvdfcj','SiTV东方财经','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvmstf','SiTV美食天府','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvdsjc','SiTV都市剧场','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvjdjc','SiTV经典剧场','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvwjyz','SiTV玩具益智','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvwsjk','SiTV卫生健康','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvyxfy','SiTV游戏风云','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvjbzq','SiTV劲爆足球','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvbjjc','SiTV白金剧场','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvsyjc','SiTV首映剧场','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvjspd','SiTV金色频道','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvxxks','SiTV学习考试','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvdmxc','SiTV动漫秀场','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvyyjs','SiTV英语教室','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvqjs','SiTV全纪实','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvjsqc','SiTV极速汽车','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvwxty','SiTV五星体育','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvxfc','SiTV幸福彩','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvqcxj','SiTV七彩戏剧','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvshss','SiTV生活时尚','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvjbty','SiTV劲爆体育','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvhxjc','SiTV欢笑剧场','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvmlyy','SiTV魅力音乐','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvzxqx','SiTV资讯气象','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvshss(sh)','SiTV生活时尚(上海)','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvylqx','SiTV娱乐前线','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvwssj','SiTV武术世界','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('sitvfztd','SITV法治天地','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('xyl','新娱乐','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('hqly','环球旅游','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('jsjc','京视剧场','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('bgcmzypd','置业频道','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('dgyy','动感音乐','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('ajgw','爱家购物','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('ytcq','弈坛春秋','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('cm','车迷','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('kszx','考试在线','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('qqbb','亲亲宝贝','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('shdy','四海钓鱼','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('ozzqpd','欧洲足球频道','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('xfpy','先锋乒羽','',0,'sz')");
+        db.execSQL("insert into tvchannel(channel,channelname,image,hidden,type) values ('cctvxfjl','先锋纪录','',0,'sz')");
+        
         
         //预置RSS初始化
         db.execSQL("insert into rsschannel(url,title,image,hidden,item_count,description_count,category) values ('http://ent.qq.com/tv/rss_tv.xml','腾讯娱乐-电视','最贴近用户群体的专业网络电视资讯门户',0,20,300,'tv')");
