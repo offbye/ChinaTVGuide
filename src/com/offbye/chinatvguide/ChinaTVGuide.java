@@ -17,6 +17,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +40,8 @@ public class ChinaTVGuide extends Activity {
 
     private Context mContext;
 
+    private boolean isConnectOn = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,30 +51,42 @@ public class ChinaTVGuide extends Activity {
         imageview = (ImageView) this.findViewById(R.id.ImageView01);
         textview = (TextView) this.findViewById(R.id.TextView01);
 
+        ConnectivityManager cwjManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cwjManager.getActiveNetworkInfo();
+        if (info != null && info.isAvailable()) {
+            isConnectOn = true;
+        }
+
         new Thread(new Runnable() {
             public void run() {
-                initApp(); // 初始化程序
+                initDb();
+                if (isConnectOn) {
+                    if(checkUpdate()){
+                        return;
+                    }
+                }
                 Message msg = mHandler.obtainMessage();
                 msg.what = 1;
-                mHandler.sendMessageDelayed(msg, 20000);
+                mHandler.sendMessageDelayed(msg, 1000);
             }
         }).start();
 
-        new Thread() {
-            public void run() {
-                try {
-                    if (5 < Integer.valueOf(Build.VERSION.SDK)) {
+        if (isConnectOn && 5 < Integer.valueOf(Build.VERSION.SDK)) {
+            new Thread() {
+                public void run() {
+                    try {
+
                         LocationUtils.getLocation(getApplicationContext());
+                    } catch (Exception e) {
+                        Log.d(TAG, e.getMessage());
                     }
-                } catch (Exception e) {
-                    Log.d(TAG, e.getMessage());
-                }
-            };
-        }.start();
+                };
+            }.start();
+        }
 
         final String token = UserStore.getAccessToken(mContext);
         final String secret = UserStore.getAccessSecret(mContext);
-        if (token.length() > 0 && secret.length() > 0) {
+        if (isConnectOn && token.length() > 0 && secret.length() > 0) {
             new Thread() {
                 public void run() {
                     try {
@@ -88,37 +104,6 @@ public class ChinaTVGuide extends Activity {
                 };
             }.start();
         }
-
-        new Thread() {
-            public void run() {
-                try {
-                    String sb = HttpUtil.getUrl(mContext, Constants.URL_UPDATE);
-                    if (sb.length() > 6) {
-                        JSONObject st = new JSONObject(sb.toString());
-                        Constants.setUrlTvs(mContext, st.getString(Constants.URL_TVS));
-                        Constants.setUrlBroadcast(mContext, st.getString(Constants.URL_BROADCAST));
-                        Constants.setUrlShuzi(mContext, st.getString(Constants.URL_BROADCAST));
-                        Constants.setUrlSync(mContext, st.getString(Constants.URL_SYNC));
-                        Constants.setUrlLocal(mContext, st.getString(Constants.URL_LOCAL));
-
-                        int versionCode = st.getInt("versionCode");
-                        String versionUrl = st.getString("versionUrl");
-                        String versionInfo = st.getString("versionInfo");
-                        if (Constants.VERSION_CODE < versionCode) {
-                            Message m = mHandler.obtainMessage();
-                            m.what = 3;
-                            m.obj = new String[] {
-                                    versionInfo, versionUrl
-                            };
-                            mHandler.sendMessage(m);
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.d(TAG, e.getMessage());
-                }
-            };
-        }.start();
-
     }
 
     private Handler mHandler = new Handler() {
@@ -130,7 +115,6 @@ public class ChinaTVGuide extends Activity {
                 enterHome();
             } else if (msg.what == 3) {
                 showUpdate((String[]) msg.obj);
-                enterHome();
             }
 
         }
@@ -156,7 +140,7 @@ public class ChinaTVGuide extends Activity {
         finish();
     }
 
-    private void initApp() {
+    private void initDb() {
         MydbHelper mydb = new MydbHelper(this);
         mydb.FirstStart();
         mydb.close();
@@ -170,7 +154,44 @@ public class ChinaTVGuide extends Activity {
                         Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(msg[1]));
                         startActivity(i);
                     }
+                }).setNegativeButton(android.R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        enterHome();
+                    }
                 }).show();
+    }
+
+    private boolean checkUpdate() {
+        boolean needUpdate = false;
+        try {
+            String sb = HttpUtil.getUrl(mContext, Constants.URL_UPDATE);
+            if (sb.contains("versionCode")) {
+                JSONObject st = new JSONObject(sb.toString());
+                Constants.setUrlTvs(mContext, st.getString(Constants.URL_TVS));
+                Constants.setUrlBroadcast(mContext, st.getString(Constants.URL_BROADCAST));
+                Constants.setUrlShuzi(mContext, st.getString(Constants.URL_SHUZI));
+                Constants.setUrlSync(mContext, st.getString(Constants.URL_SYNC));
+                Constants.setUrlLocal(mContext, st.getString(Constants.URL_LOCAL));
+
+                int versionCode = st.getInt("versionCode");
+                String versionUrl = st.getString("versionUrl");
+                String versionInfo = st.getString("versionInfo");
+
+                if (Constants.VERSION_CODE < versionCode) {
+                    Message m = mHandler.obtainMessage();
+                    m.what = 3;
+                    m.obj = new String[] {
+                            versionInfo, versionUrl
+                    };
+                    mHandler.sendMessage(m);
+                    needUpdate = true;
+                }
+            }
+        } catch (Exception e) {
+            Log.d(TAG, e.getMessage());
+        }
+        return needUpdate;
     }
 
 }

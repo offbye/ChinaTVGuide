@@ -6,16 +6,14 @@ import com.offbye.chinatvguide.server.CommentList;
 import com.offbye.chinatvguide.server.CommentTask;
 import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.AppException;
+import com.offbye.chinatvguide.util.AssetUtil;
 import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
 import com.offbye.chinatvguide.util.MD5;
-import com.offbye.chinatvguide.weibo.OAuthActivity;
 import com.offbye.chinatvguide.weibo.Post;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import weibo4android.WeiboException;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -26,11 +24,8 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,7 +45,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -351,7 +345,7 @@ public class ChannelProgramView extends Activity {
 
 		SimpleDateFormat df2=new SimpleDateFormat("MM月dd日");
 		String currentdate2=df2.format(date);
-		channellogo.setImageBitmap(getImageFromAssetFile(channel+".png"));
+		channellogo.setImageBitmap(AssetUtil.getImageFromAssetFile(mContext,channel+".png"));
 		cdate.setText(currentdate2);
 	}
 
@@ -703,20 +697,7 @@ public class ChannelProgramView extends Activity {
         }
         
     }
-    
-	private Bitmap getImageFromAssetFile(String fileName) {
-		Bitmap image = null;
-		try {
-			AssetManager am = this.getAssets();
-			InputStream is = am.open(fileName);
-			image = BitmapFactory.decodeStream(is);
-			is.close();
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-		return image;
-	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 0, 0, this.getText(R.string.comment_post)).setIcon(R.drawable.ic_menu_edit);

@@ -57,18 +57,4 @@ public class RSSAdapter extends ArrayAdapter<RSSItem> {
 		
 		return channelView;
 	}
-
-	private Bitmap getImageFromAssetFile(String fileName) {
-		Bitmap image = null;
-		try {
-			AssetManager am = context.getAssets();
-			InputStream is = am.open(fileName);
-			image = BitmapFactory.decodeStream(is);
-			is.close();
-		} catch (Exception e) {
-
-		}
-		return image;
-	}
-
 }

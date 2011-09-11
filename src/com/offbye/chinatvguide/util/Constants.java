@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 public class Constants {
 	public static String key = "wztv20110911";
-	public static final int VERSION_CODE = 17;
+	public static final int VERSION_CODE = 18;
 	public static final String URL_UPDATE = "http://wztv.sinaapp.com/client/update.php";
 	
 	public static String url_tvrate = "http://wztv.sinaapp.com/ga/tvrate.php";

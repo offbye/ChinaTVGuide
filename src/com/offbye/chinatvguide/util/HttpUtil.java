@@ -59,6 +59,7 @@ public class HttpUtil {
 	}
 
 	public static String getURLByCmwap(String weburl) throws IOException {
+	    Log.d(TAG, weburl);
 		StringBuilder sb = new StringBuilder(10000);
 		URL url;
 		HttpURLConnection conn;
