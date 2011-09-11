@@ -159,7 +159,7 @@ public class TVWidget extends AppWidgetProvider {
 		String currentdate=df.format(date);
 		String channel = "";
 		StringBuilder urlsb = new StringBuilder();
-		urlsb.append(Constants.url);
+		urlsb.append(Constants.getUrlTvs(mContext));
 		urlsb.append("?c=");
 		urlsb.append(channel);
 		urlsb.append("&fav=");

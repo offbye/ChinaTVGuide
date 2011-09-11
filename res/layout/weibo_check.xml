@@ -7,10 +7,15 @@
 		android:layout_gravity="center_horizontal" android:textAppearance="?android:attr/textAppearanceMedium"
 		android:layout_margin="10dp" android:layout_width="fill_parent"
 		android:layout_height="wrap_content"></TextView>
-	<ImageButton android:layout_height="wrap_content"
+	<ImageButton android:layout_height="wrap_content"  android:layout_margin="5dp"
 		android:src="@drawable/weibo_login" android:layout_gravity="center_horizontal"
 		android:layout_width="fill_parent" android:id="@+id/Connect" />
-	<ImageButton android:id="@+id/btnPost" android:visibility="gone"
+	<ImageButton android:id="@+id/btnPost" android:visibility="gone"  android:layout_margin="5dp"
 		android:layout_width="fill_parent" android:src="@drawable/weibo_share"
 		android:layout_height="wrap_content" android:layout_gravity="center_horizontal" />
+	<Button android:id="@+id/home" android:layout_margin="5dp"
+		android:textSize="18sp" android:layout_width="fill_parent"
+		android:text="@string/menu_home" android:layout_height="wrap_content">
+	</Button>
+
 </LinearLayout>

@@ -290,14 +290,14 @@ public class ChannelProgramView extends Activity {
 		SimpleDateFormat df=new SimpleDateFormat("yyyyMMdd");
 		StringBuffer urlsb =new StringBuffer(128);
 		if ("sz".equals(type)){
-			urlsb.append(Constants.url_shuzi);
+			urlsb.append(Constants.getUrlShuzi(mContext));
 		}
 		else if("local".equals(type)){
-			urlsb.append(Constants.url_local);
+			urlsb.append(Constants.getUrlLocal(mContext));
 		}
 		else
 		{
-			urlsb.append(Constants.url);
+			urlsb.append(Constants.getUrlTvs(mContext));
 		}
 		
 		urlsb.append("?c=");

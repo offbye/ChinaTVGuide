@@ -97,7 +97,7 @@ public class LocalChannelProgramView extends Activity {
 		
 		
 		urlsb =new StringBuffer(128);
-		urlsb.append(Constants.url_local);
+		urlsb.append(Constants.getUrlLocal(mContext));
 
 		urlsb.append("?c=");
 		urlsb.append(channel);

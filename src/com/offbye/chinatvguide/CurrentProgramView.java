@@ -79,7 +79,7 @@ public class CurrentProgramView extends Activity {
 		currentdate=df.format(date);
 
 		urlsb = new StringBuffer();
-		urlsb.append(Constants.url_broadcast);
+		urlsb.append(Constants.getUrlBroadcast(mContext));
 		urlsb.append("?d=");
 		urlsb.append(currentdate.substring(0, 8));
 		urlsb.append("&t=");

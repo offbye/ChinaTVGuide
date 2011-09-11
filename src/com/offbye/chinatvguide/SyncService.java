@@ -49,7 +49,7 @@ public class SyncService extends Service {
 		currentdate = df.format(date);
 
 		urlsb = new StringBuffer();
-		urlsb.append(Constants.url_sync);
+		urlsb.append(Constants.getUrlSync(SyncService.this));
 		urlsb.append("?d=");
 		urlsb.append(currentdate);
 		

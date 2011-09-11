@@ -18,6 +18,7 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -61,12 +62,14 @@ public class SearchResultView extends Activity {
 	
 	ListView optionsListView;
 	TextView titleText;
+    private Context mContext;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.channelview);
 
+		mContext = this;
 		titleText = (TextView) this.findViewById(R.id.TextView01);
 		optionsListView = (ListView) this.findViewById(R.id.ListView01);
 
@@ -82,7 +85,7 @@ public class SearchResultView extends Activity {
 		sql = new StringBuffer(128);
 		StringBuffer k = new StringBuffer(128);
 
-		urlsb.append(Constants.url);
+		urlsb.append(Constants.getUrlTvs(mContext));
 		urlsb.append("?c=");
 		sql.append(" 1=1 ");
 		
@@ -179,7 +182,7 @@ public class SearchResultView extends Activity {
 	public ArrayList<TVProgram> getTVProgramsFromDB(String sql) {
 		ArrayList<TVProgram> pl = new ArrayList<TVProgram>();
 		try {
-			mydb = new MydbHelper(SearchResultView.this);
+			mydb = new MydbHelper(mContext);
 			//Log.v(TAG, "sql=" + sql.toString());
 			Cursor programsCursor = mydb.searchPrograms(sql);
 
@@ -239,14 +242,14 @@ public class SearchResultView extends Activity {
 			case R.string.notify_succeeded:
 				pd.dismiss();
 				CurrentProgramAdapter pa = new CurrentProgramAdapter(
-						SearchResultView.this, R.layout.current_row, pl);
+						mContext, R.layout.current_row, pl);
 				optionsListView.setAdapter(pa);
 				optionsListView.setOnItemClickListener(new OnItemClickListener() {
         			public void onItemClick(AdapterView<?> arg0, View arg1,int position, long id)
         			{
         				seletedProgram = pl.get(position);
         				
-        				new AlertDialog.Builder(SearchResultView.this)
+        				new AlertDialog.Builder(mContext)
                         .setIcon(R.drawable.icon)
                         .setTitle(R.string.alarmtimes)
                         .setSingleChoiceItems(R.array.alarmtimes, 0, new DialogInterface.OnClickListener() {
@@ -261,12 +264,12 @@ public class SearchResultView extends Activity {
                             public void onClick(DialogInterface dialog, int whichButton) {
 
                                 /* User clicked Yes so do some stuff */
-                   	            Intent indent = new Intent(SearchResultView.this, TVAlarm.class); 
+                   	            Intent indent = new Intent(mContext, TVAlarm.class); 
                 	            indent.putExtra("id", seletedProgram.getId());
                 	            indent.putExtra("starttime", seletedProgram.getStarttime());
                 	            indent.putExtra("program", seletedProgram.getProgram());
                 	            indent.putExtra("channel", seletedProgram.getChannel());
-                	            PendingIntent sender = PendingIntent.getBroadcast(SearchResultView.this,
+                	            PendingIntent sender = PendingIntent.getBroadcast(mContext,
                 	                    0, indent,PendingIntent.FLAG_CANCEL_CURRENT);
 
                 	            Calendar calendar = Calendar.getInstance();
@@ -302,7 +305,7 @@ public class SearchResultView extends Activity {
                 	            am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
                 	            
                 	            String alarm= "成功设置提醒 " +seletedProgram.getProgram();
-                                Toast.makeText(SearchResultView.this, alarm,10).show();
+                                Toast.makeText(mContext, alarm,10).show();
 //                                new AlertDialog.Builder(CurrentProgramView.this)
 //                                        .setMessage(alarm)
 //                                        .show();
@@ -324,12 +327,12 @@ public class SearchResultView extends Activity {
         			{
         				seletedProgram = pl.get(position);
         				
-        				new AlertDialog.Builder(SearchResultView.this)
+        				new AlertDialog.Builder(mContext)
         	                .setTitle(R.string.select_dialog)
         	                .setItems(R.array.localoptions, new DialogInterface.OnClickListener() {
         	                    public void onClick(DialogInterface dialog, int which) {
         	                       if(which==0){
-        	           	            	Intent i = new Intent(SearchResultView.this, ChannelProgramView.class); 
+        	           	            	Intent i = new Intent(mContext, ChannelProgramView.class); 
         	           	            	i.putExtra("channel", seletedProgram.getChannel());
         	           					startActivity(i); 
         	                       }
@@ -355,34 +358,34 @@ public class SearchResultView extends Activity {
 				pd.dismiss();
 				titleText.setText(R.string.notify_network_error);
 				titleText.setVisibility(View.VISIBLE);
-				Toast.makeText(SearchResultView.this,R.string.notify_network_error, 5).show();
+				Toast.makeText(mContext,R.string.notify_network_error, 5).show();
 				break;
 			case R.string.notify_json_error:
 				pd.dismiss();
 				titleText.setText(R.string.notify_json_error);
-				Toast.makeText(SearchResultView.this, R.string.notify_json_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_json_error, 5).show();
 				break;
 			case R.string.notify_database_error:
 				pd.dismiss();
 				titleText.setText(R.string.notify_database_error);
-				Toast.makeText(SearchResultView.this, R.string.notify_database_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_database_error, 5).show();
 				break;
 			case R.string.notify_no_result:
 				pd.dismiss();
 				titleText.setText(R.string.notify_no_result);
-				Toast.makeText(SearchResultView.this, R.string.notify_no_result, 5).show();
+				Toast.makeText(mContext, R.string.notify_no_result, 5).show();
 				break;
 			case R.string.notify_no_connection:
 				pd.dismiss();
-				Toast.makeText(SearchResultView.this, R.string.notify_no_connection, 5).show();
+				Toast.makeText(mContext, R.string.notify_no_connection, 5).show();
 				break;
 			case R.string.notify_newversion:
 				pd.dismiss();
 
 				titleText.setText(servermsg.split("--")[4]);
-				Toast.makeText(SearchResultView.this, servermsg.split("--")[4], 5).show();
+				Toast.makeText(mContext, servermsg.split("--")[4], 5).show();
 				
-				new AlertDialog.Builder(SearchResultView.this)
+				new AlertDialog.Builder(mContext)
                 .setIcon(R.drawable.icon)
                 .setTitle(servermsg.split("--")[3])
                 .setMessage(servermsg.split("--")[4])
