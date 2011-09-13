@@ -60,7 +60,7 @@
        <activity android:name=".server.user.Login" android:label="@string/user_login" android:theme="@android:style/Theme.Light.NoTitleBar" />
        <activity android:name=".server.user.Register" android:label="@string/user_register_now" android:theme="@android:style/Theme.Light.NoTitleBar" />
        <activity android:name=".server.CommentList"  android:theme="@android:style/Theme.Light" android:configChanges="orientation|keyboardHidden|navigation"/>
-       <activity android:name=".server.CommentTab" />
+       <activity android:name=".server.CommentTab" android:configChanges="orientation|keyboardHidden|navigation"/>
 		<receiver android:name="widget.TVWidget"
 			android:label="@string/widget_name">
 			<intent-filter>
