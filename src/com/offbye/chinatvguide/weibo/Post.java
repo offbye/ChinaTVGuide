@@ -103,6 +103,11 @@ public class Post extends Activity {
             + mChannel.trim() + "#, #" + mProgram.trim() + "#";
             mContent.setHint(msg);
         }
+        else if (null != mChannel && !"".equals(mChannel)){
+            msg = "\n " + mContext.getString(R.string.comment) + " #"
+            + mChannel.trim() + "#";
+            mContent.setHint(msg);
+        }
 
     }
 

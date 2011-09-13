@@ -41,7 +41,7 @@ public class LocationUtils {
 
                     String address = a.getAdminArea() +  a.getLocality() + a.getThoroughfare();
                     Log.d(TAG, "" + address + a.getAdminArea() + a.getSubAdminArea());
-                    UserStore.setLocation(context, address);
+                    UserStore.setLocation(context, address.replaceAll("null", ""));
 
                     SharedPreferences prefs = PreferenceManager
                             .getDefaultSharedPreferences(context);

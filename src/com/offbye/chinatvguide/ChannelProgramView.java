@@ -73,6 +73,7 @@ public class ChannelProgramView extends Activity {
 	private Date mo,tu,we,th,fr,sa,su;
 	private Button btnmo,btntu,btnwe,btnth,btnfr,btnsa,btnsu;
 	private Button mCheckin;
+	private Button mComment;
 	private String channelname;
 
 	private String type;
@@ -261,6 +262,24 @@ public class ChannelProgramView extends Activity {
                 }
                 lastCheckinTime = System.currentTimeMillis();
                 checkin(channelname.trim(),prog);
+            }
+        });
+		mComment = (Button)findViewById(R.id.comment);
+		mComment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                TVProgram p = null;
+                if (currentPosition > 0) {
+                    p = pl.get(currentPosition);
+                }
+                Intent it = new Intent();
+                if (null != p) {
+                    it.putExtra("channel", p.getChannelname());
+                    it.putExtra("program", p.getProgram());
+                } else {
+                    it.putExtra("channel", channelname);
+                }
+                it.setClass(mContext, Post.class);
+                mContext.startActivity(it);
             }
         });
 	}

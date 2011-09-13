@@ -14,13 +14,13 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".ChannelView" />
-		<activity android:name=".ChannelProgramView" />
-		<activity android:name=".CurrentProgramView" android:label="@string/grid_broadcasting"/>
+		<activity android:name=".ChannelProgramView" android:configChanges="orientation|keyboardHidden|navigation"/>
+		<activity android:name=".CurrentProgramView" android:label="@string/grid_broadcasting" android:configChanges="orientation|keyboardHidden|navigation"/>
 		<activity android:name=".SearchView" android:theme="@android:style/Theme.Light.NoTitleBar" />
 		<activity android:name=".SearchResultView" android:label="@string/grid_search"/>
 		<activity android:name=".local.LocalChannelView" />
-		<activity android:name=".local.LocalChannelProgramView" />
-		<activity android:name=".local.LocalCurrentProgramView" />
+		<activity android:name=".local.LocalChannelProgramView" android:configChanges="orientation|keyboardHidden|navigation"/>
+		<activity android:name=".local.LocalCurrentProgramView" android:configChanges="orientation|keyboardHidden|navigation"/>
 		<activity android:name=".SuggestView" android:label="@string/grid_suggest" android:theme="@android:style/Theme.Light.NoTitleBar" />
 		<receiver android:name=".TVAlarm" android:process=":remote">
 		</receiver>
@@ -36,8 +36,8 @@
         <activity android:name=".rss.RSSActivity" android:label="@string/grid_rss"/>
 		<activity android:name=".rss.RSSReader" />
 		<activity android:name=".rss.ShowDescription" />
-		<activity android:name=".rate.TVRateActivity" android:label="@string/grid_rank"/>
-		<activity android:name=".recommend.TVRecommendActivity" android:label="@string/grid_recommend"/>
+		<activity android:name=".rate.TVRateActivity" android:label="@string/grid_rank" android:configChanges="orientation|keyboardHidden|navigation"/>
+		<activity android:name=".recommend.TVRecommendActivity" android:label="@string/grid_recommend" android:configChanges="orientation|keyboardHidden|navigation"/>
 
 		<activity android:name="PreferencesActivity" android:label="@string/preferences_name"/>
 		 <activity android:name=".weibo.OAuthActivity">
@@ -59,7 +59,7 @@
        <activity android:name=".server.user.UserInfoActivity" android:label="@string/user_info" android:theme="@android:style/Theme.Light.NoTitleBar" />
        <activity android:name=".server.user.Login" android:label="@string/user_login" android:theme="@android:style/Theme.Light.NoTitleBar" />
        <activity android:name=".server.user.Register" android:label="@string/user_register_now" android:theme="@android:style/Theme.Light.NoTitleBar" />
-       <activity android:name=".server.CommentList"  android:theme="@android:style/Theme.Light"/>
+       <activity android:name=".server.CommentList"  android:theme="@android:style/Theme.Light" android:configChanges="orientation|keyboardHidden|navigation"/>
        <activity android:name=".server.CommentTab" />
 		<receiver android:name="widget.TVWidget"
 			android:label="@string/widget_name">
