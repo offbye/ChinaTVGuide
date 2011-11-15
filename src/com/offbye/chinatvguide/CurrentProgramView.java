@@ -186,7 +186,7 @@ public class CurrentProgramView extends Activity {
 			// 4. the working
 
 			pl = getTVProgramsFromDB(sql.toString());
-			if (pl.size() > 0) {
+			if (pl.size() > 10 && !PreferencesActivity.isSyncing(mContext)) {
 				progressHandler.sendEmptyMessage(R.string.notify_succeeded);
 			} else {
 				pl = getTVProgramsFormURL(urlsb.toString());

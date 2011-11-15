@@ -10,7 +10,10 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
@@ -41,6 +44,13 @@ public class SyncService extends Service {
 
 	@Override
 	public void onCreate() {
+	    ConnectivityManager cwjManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE); 
+        NetworkInfo info = cwjManager.getActiveNetworkInfo();
+        if (info == null || !info.isAvailable()) {
+            return;
+        }
+        
+        PreferencesActivity.setSyncing(this, true);
 		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mydb = new MydbHelper(this);
 
@@ -93,7 +103,7 @@ public class SyncService extends Service {
 		if (mydb.getProgramsCountByDate(currentdate)> 100) {
 			Toast.makeText(this, R.string.havesynced, Toast.LENGTH_SHORT).show();
 		} else {
-			Toast.makeText(this, R.string.datasyncing, Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.datasyncing, Toast.LENGTH_LONG).show();
 			Thread thr = new Thread(null, mTask, "SyncService");
 			thr.start();
 		}
@@ -212,6 +222,7 @@ public class SyncService extends Service {
 		} catch (AppException e) {
 			progressHandler.sendEmptyMessage(R.string.notify_no_connection);
 		}
+		PreferencesActivity.setSyncing(this, false);
 	}
 	
 	// Define the Handler that receives messages from the thread

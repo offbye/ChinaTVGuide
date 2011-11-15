@@ -130,7 +130,6 @@ public class ChinaTVGuide extends Activity {
                 && !PreferencesActivity.getSyncToday(ChinaTVGuide.this).equals(today)) {
             Log.d(TAG, "SyncService");
             startService(new Intent(ChinaTVGuide.this, SyncService.class));
-            PreferencesActivity.setSyncToday(ChinaTVGuide.this, today);
         }
     }
 

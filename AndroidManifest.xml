@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.offbye.chinatvguide" android:versionName="6.1" android:versionCode="18">
+	package="com.offbye.chinatvguide" android:versionName="6.12" android:versionCode="19">
 	<application android:icon="@drawable/icon"
 		android:allowClearUserData="true"
 		android:debuggable="false" android:description="@string/aboutinfo"
@@ -75,6 +75,12 @@
 		<!-- <meta-data android:value="a14bc5b678a95fa" android:name="ADMOB_PUBLISHER_ID"/>-->
 		 	 <meta-data android:value="78de666e7f4a4d9d9da29192ea93926f" android:name="Wooboo_PID"/>
 			 <meta-data android:value="03" android:name="Market_ID"/>
+		<activity android:name="com.wooboo.adlib_android.AdActivity"
+			android:configChanges="orientation|keyboardHidden"
+			android:launchMode="singleTask" />
+		<activity android:name="com.wooboo.adlib_android.FullActivity"
+			android:configChanges="orientation|keyboardHidden"
+			android:launchMode="singleTask" />
 	</application>
 	<uses-sdk android:minSdkVersion="2"  android:targetSdkVersion="11"/>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -84,5 +90,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
    	<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-   	<uses-permission android:name="android.permission.RESTART_PACKAGES"></uses-permission>
+   	<uses-permission android:name="android.permission.RESTART_PACKAGES" />
+   	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+   	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>
