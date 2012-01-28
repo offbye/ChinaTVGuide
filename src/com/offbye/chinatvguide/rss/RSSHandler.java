@@ -1,14 +1,10 @@
 package com.offbye.chinatvguide.rss;
 
+import com.offbye.chinatvguide.util.DateUtil;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import android.util.Log;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 public class RSSHandler extends DefaultHandler {
 	private static final String TAG = "RSSHandler";
@@ -144,7 +140,7 @@ public class RSSHandler extends DefaultHandler {
 			currentstate = 0;
 			break;
 		case RSSFEED_PUBDATE:
-			_feed.setPubDate(formatDate(theString));
+			_feed.setPubDate(DateUtil.formatDate(theString));
 			currentstate = 0;
 			break;
 
@@ -165,7 +161,7 @@ public class RSSHandler extends DefaultHandler {
 			currentstate = 0;
 			break;
 		case RSS_PUBDATE:
-			_item.setPubDate(formatDate(theString));
+			_item.setPubDate(DateUtil.getDateAndPassedTime(theString.trim()));
 			currentstate = 0;
 			break;
 		default:
@@ -175,22 +171,4 @@ public class RSSHandler extends DefaultHandler {
 
 	}
 	
-	/**
-	 * format date "Wed, 25 Jan 2012 11:07:54 +0800" to "2012-01-25 11:07:54"
-	 * @param date "Wed, 25 Jan 2012 11:07:54 +0800"
-	 * @return
-	 */
-    public static String formatDate(String date) {
-        if (date.charAt(0) < 9) {
-            return date;
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.US);
-        SimpleDateFormat sdfs = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
-        try {
-            return sdfs.format(sdf.parse(date));
-        } catch (ParseException ex) {
-            return date;
-        }
-    }
 }
