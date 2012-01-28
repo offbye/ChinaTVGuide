@@ -190,6 +190,9 @@ public class SyncService extends Service {
 		} catch (AppException e) {
 			progressHandler.sendEmptyMessage(R.string.notify_no_connection);
 		}
+		finally {
+		      PreferencesActivity.setSyncing(this, false);
+		}
 	}
 	
 	public void getLocalTVProgramsToDb(String weburl) {
@@ -222,7 +225,9 @@ public class SyncService extends Service {
 		} catch (AppException e) {
 			progressHandler.sendEmptyMessage(R.string.notify_no_connection);
 		}
-		PreferencesActivity.setSyncing(this, false);
+	    finally {
+              PreferencesActivity.setSyncing(this, false);
+        }
 	}
 	
 	// Define the Handler that receives messages from the thread

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.offbye.chinatvguide" android:versionName="6.12" android:versionCode="19">
+	package="com.offbye.chinatvguide" android:versionName="6.2" android:versionCode="20">
 	<application android:icon="@drawable/icon"
 		android:allowClearUserData="true"
 		android:debuggable="false" android:description="@string/aboutinfo"
