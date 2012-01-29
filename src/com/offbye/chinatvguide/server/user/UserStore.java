@@ -54,6 +54,16 @@ public class UserStore {
         SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
         return sp.getString(LOCATION, "");
     }
+    
+    public static String getLat(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
+        return sp.getString("lat", "");
+    }
+    
+    public static String getLon(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
+        return sp.getString("lon", "");
+    }
 
     public static int getPoint(Context context) {
         SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
@@ -88,6 +98,14 @@ public class UserStore {
     public static void setLocation(Context context, String location) {
         SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
         sp.edit().putString(LOCATION, location).commit();
+    }
+    public static void setLat(Context context, String lat) {
+        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
+        sp.edit().putString("lat", lat).commit();
+    }
+    public static void setLon(Context context, String lon) {
+        SharedPreferences sp = context.getSharedPreferences(PREFS_USER, 0);
+        sp.edit().putString("lon", lon).commit();
     }
 
     public static void setPoint(Context context, int point) {

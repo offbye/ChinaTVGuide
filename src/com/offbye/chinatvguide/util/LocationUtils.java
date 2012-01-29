@@ -33,6 +33,8 @@ public class LocationUtils {
             if (location != null) {
                 double latitude = location.getLatitude();// 获取纬度
                 double longitude = location.getLongitude();// 获取经度
+                UserStore.setLat(context, String.valueOf(latitude));
+                UserStore.setLon(context, String.valueOf(longitude));
                 Geocoder gc = new Geocoder(context, Locale.CHINA);
 
                 List<Address> listAddress = gc.getFromLocation(latitude, longitude, 1);
@@ -42,6 +44,7 @@ public class LocationUtils {
                     String address = a.getAdminArea() +  a.getLocality() + a.getThoroughfare();
                     Log.d(TAG, "" + address + a.getAdminArea() + a.getSubAdminArea());
                     UserStore.setLocation(context, address.replaceAll("null", ""));
+                    
 
                     SharedPreferences prefs = PreferenceManager
                             .getDefaultSharedPreferences(context);

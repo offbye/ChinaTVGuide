@@ -153,6 +153,8 @@ public class Post extends Activity {
                 c.setContent(mContent.getText().toString());
                 c.setType("1");
                 c.setLocation(UserStore.getLocation(mContext));
+                c.setLat(UserStore.getLat(mContext));
+                c.setLon(UserStore.getLon(mContext));
                 c.setScreenName(UserStore.getScreenName(mContext));
                 if ("".equals(UserStore.getUserId(mContext))) {
                     c.setUserid("guest");

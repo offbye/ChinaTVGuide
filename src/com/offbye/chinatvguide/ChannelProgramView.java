@@ -677,6 +677,8 @@ public class ChannelProgramView extends Activity {
         c.setProgram(program);
         c.setType("0");
         c.setLocation(UserStore.getLocation(mContext));
+        c.setLat(UserStore.getLat(mContext));
+        c.setLon(UserStore.getLon(mContext));
         c.setScreenName(UserStore.getScreenName(mContext));
         if ("".equals(UserStore.getUserId(this))) {
             c.setUserid("guest");

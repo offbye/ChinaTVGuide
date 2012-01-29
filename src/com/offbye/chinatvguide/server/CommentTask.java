@@ -70,6 +70,14 @@ public class CommentTask extends Thread {
         if (null != c.getEmail() && !"".equals(c.getEmail())) {
             sb.append("&email=");
             sb.append(URLEncoder.encode(c.getEmail()));
+        } 
+        if (null != c.getLat() && !"".equals(c.getLat())) {
+            sb.append("&lat=");
+            sb.append(URLEncoder.encode(c.getLat()));
+        }
+        if (null != c.getLon() && !"".equals(c.getLon())) {
+            sb.append("&lon=");
+            sb.append(URLEncoder.encode(c.getLon()));
         }
         sb.append("&type=");
         sb.append(c.getType());

@@ -444,6 +444,8 @@ public class LocalCurrentProgramView extends Activity {
              c.setUserid(UserStore.getUserId(this));
          }
          c.setLocation(UserStore.getLocation(mContext));
+         c.setLat(UserStore.getLat(mContext));
+         c.setLon(UserStore.getLon(mContext));
          c.setScreenName(UserStore.getScreenName(mContext));
          c.setEmail(UserStore.getEmail(mContext));
          String url = CommentTask.genUrl(c);
