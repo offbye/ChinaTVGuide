@@ -111,7 +111,9 @@ public class ChinaTVGuide extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
-                syncPerDay();
+                if (isConnectOn){
+                    syncPerDay();
+                }
                 enterHome();
             } else if (msg.what == 3) {
                 showUpdate((String[]) msg.obj);
@@ -122,13 +124,11 @@ public class ChinaTVGuide extends Activity {
     };
 
     private void syncPerDay() {
-        Date date = new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-        String today = df.format(date);
 
         if (PreferencesActivity.isAutoSyncOn(ChinaTVGuide.this)
-                && !PreferencesActivity.getSyncToday(ChinaTVGuide.this).equals(today)) {
-            Log.d(TAG, "SyncService");
+                && PreferencesActivity.getSyncToday(ChinaTVGuide.this).compareTo(df.format(new Date())) != 0) {
+            Log.d(TAG, "we start SyncService");
             startService(new Intent(ChinaTVGuide.this, SyncService.class));
         }
     }

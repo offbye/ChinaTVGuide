@@ -1,23 +1,18 @@
+
 package com.offbye.chinatvguide;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Binder;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 import com.offbye.chinatvguide.channel.ChannelTab;
@@ -25,237 +20,140 @@ import com.offbye.chinatvguide.util.AppException;
 import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
 import com.offbye.chinatvguide.util.MD5;
+import android.app.IntentService;
 
-public class SyncService extends Service {
-	
-	public Timer timer;
-	public final String TAG = "SyncService";
-	private MydbHelper mydb;
+public class SyncService extends IntentService {
+    private static final String TAG = "SyncService";
 
-	private NotificationManager mNM;
-	private String currentdate;
-	private StringBuffer urlsb;
+    private MydbHelper mydb;
 
-	public class SyncServiceBinder extends Binder {
-		SyncService getService() {
-			return SyncService.this;
-		}
-	}
+    private NotificationManager mNM;
 
-	@Override
-	public void onCreate() {
-	    ConnectivityManager cwjManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE); 
+    private String currentdate;
+
+    private StringBuffer urlsb;
+
+    public SyncService() {
+        super(TAG);
+        Log.d(TAG, " ----> constructor");
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        long id = Thread.currentThread().getId();
+        Log.d(TAG, " ----> onCreate() in thread id: " + id);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, " ----> onDestroy()");
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, " ----> onStartCommand()");
+        // 记录发送此请求的时间
+        intent.putExtra("time", System.currentTimeMillis());
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public void setIntentRedelivery(boolean enabled) {
+        Log.d(TAG, " ----> setIntentRedelivery()");
+        super.setIntentRedelivery(enabled);
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        long id = Thread.currentThread().getId();
+        long time = intent.getLongExtra("time", 0);
+
+        Log.d(TAG, " ----> onHandleIntent() in thread id: " + id + "  " + time);
+
+        if (PreferencesActivity.isSyncing(this)) {
+            return;
+        }
+
+        ConnectivityManager cwjManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cwjManager.getActiveNetworkInfo();
         if (info == null || !info.isAvailable()) {
             return;
         }
-        
+
         PreferencesActivity.setSyncing(this, true);
-		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		mydb = new MydbHelper(this);
+        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mydb = new MydbHelper(this);
 
-		Date date = new Date();
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		currentdate = df.format(date);
+        Date date = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        currentdate = df.format(date);
 
-		urlsb = new StringBuffer();
-		urlsb.append(Constants.getUrlSync(SyncService.this));
-		urlsb.append("?d=");
-		urlsb.append(currentdate);
-		
-		StringBuffer k = new StringBuffer(128);
-		k.append(currentdate);
-		k.append(Constants.key);
-		
-		urlsb.append("&m=");						
-		urlsb.append(MD5.getMD5(k.toString().getBytes()));
-		
-		//构建本地同步url
-//		urllocalsb = new StringBuffer();
-//		urllocalsb.append(this.getString(R.string.url).replace("s.php", "l.php"));
-//		urllocalsb.append("?d=");
-//		urllocalsb.append(currentdate);
-//		
-//		urllocalsb.append("&m=");						
-//		urllocalsb.append(MD5.getMD5(k.toString().getBytes()));
-		
-//		 LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//	        /* 第一次运行向Location Provider取得Location */
-//	        Location location = LocationUtil.getLocationProvider(locationManager);
-//	        if (location != null) {
-//	            GeoPoint point = LocationUtil.getGeoByLocation(location);
-//	            Address address = LocationUtil.getAddressbyGeoPoint(SyncService.this, point);
-//	            if (address != null) {
-//	            	 //Log.v(TAG,address.getAdminArea());
-//	            	 city = address.getLocality();
-//	            	 urllocalsb.append("&province=");
-//	            	 urllocalsb.append(URLEncoder.encode(address.getAdminArea()));
-//	            	 urllocalsb.append("&city=");
-//	            	 urllocalsb.append(URLEncoder.encode(address.getLocality()));
-//
-//	            	 //Log.v(TAG,urllocalsb.toString());
-//	            	 
-//	            	
-//	            }
-//	        } 
-	        
+        urlsb = new StringBuffer();
+        urlsb.append(Constants.getUrlSync(SyncService.this));
+        urlsb.append("?d=");
+        urlsb.append(currentdate);
 
-		if (mydb.getProgramsCountByDate(currentdate)> 100) {
-			Toast.makeText(this, R.string.havesynced, Toast.LENGTH_SHORT).show();
-		} else {
-			Toast.makeText(this, R.string.datasyncing, Toast.LENGTH_LONG).show();
-			Thread thr = new Thread(null, mTask, "SyncService");
-			thr.start();
-		}
-	}
+        StringBuffer k = new StringBuffer(128);
+        k.append(currentdate);
+        k.append(Constants.key);
 
-	@Override
-	public void onStart(Intent intent, int startId) {
-		//Log.i(TAG, "Starting #" + startId + ": " + intent.getExtras());
-	}
+        urlsb.append("&m=");
+        urlsb.append(MD5.getMD5(k.toString().getBytes()));
 
-	@Override
-	public void onDestroy() {
-		mydb.close();
-		// Cancel the persistent notification.
-		mNM.cancel(R.string.synccompleted);
-
-		// Tell the user we stopped.
-		Toast.makeText(this, R.string.synccompleted, Toast.LENGTH_SHORT).show();
-	}
-
-	Runnable mTask = new Runnable() {
-		public void run() {
-			
-			Log.i(TAG, "getTVProgramsToDb start");
-			getTVProgramsToDb(urlsb.toString());
-//			if(city!=null){
-//				getLocalTVProgramsToDb(urllocalsb.toString());
-//			}
-		        			
-			SyncService.this.stopSelf();
-		}
-	};
-
-	@Override
-	public IBinder onBind(Intent intent) {
-		return mBinder;
-	}
-
-	// This is the object that receives interactions from clients. See
-	// RemoteService for a more complete example.
-	private final IBinder mBinder = new SyncServiceBinder();
-
-	private void showNotification() {
-		CharSequence text = getText(R.string.synccompleted);
-		Notification notification = new Notification(R.drawable.icon, text,
-				System.currentTimeMillis());
-
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, ChannelTab.class), 0);
-
-		notification.setLatestEventInfo(this, getText(R.string.synccompleted),
-				text, contentIntent);
-
-		mNM.notify(R.string.synccompleted, notification);
-	}
-
-	public void getTVProgramsToDb(String weburl) {
-		try {
-			String sb = HttpUtil.getUrl(this,weburl);
-
-			if (sb.length() > 10) {  //可能会返回error或null
-
-				JSONArray ja = new JSONArray(sb.toString());
-				for (int i = 0; i < ja.length(); i++) {
-					JSONArray jp = ja.getJSONArray(i);
-					mydb.insertProgram(jp.getString(1), jp.getString(2), 
-							jp.getString(3), jp.getString(4), jp.getString(5), jp.getString(6), jp.getString(7));
-				}
-				progressHandler.sendEmptyMessage(R.string.notify_succeeded);
-				Log.d(TAG, "sync success");
-			}
-			else{
-				progressHandler.sendEmptyMessage(R.string.notify_network_error);
-				Log.d(TAG, "network return error");
-			}
-			
-
-		} catch (IOException e) {
-			progressHandler.sendEmptyMessage(R.string.notify_network_error);
-			Log.d(TAG, "network err");
-		} catch (JSONException e) {
-			progressHandler.sendEmptyMessage(R.string.notify_json_error);
-			Log.d(TAG, "decode err");
-		} catch (AppException e) {
-			progressHandler.sendEmptyMessage(R.string.notify_no_connection);
-		}
-		finally {
-		      PreferencesActivity.setSyncing(this, false);
-		}
-	}
-	
-	public void getLocalTVProgramsToDb(String weburl) {
-		try {			
-			String sb = HttpUtil.getUrl(this,weburl);
-
-			if (sb.length() > 10) {  //可能会返回error或null
-
-				JSONArray ja = new JSONArray(sb.toString());
-				for (int i = 0; i < ja.length(); i++) {
-					JSONArray jp = ja.getJSONArray(i);
-					mydb.insertLocalProgram(jp.getString(1), jp.getString(2), 
-							jp.getString(3), jp.getString(4), jp.getString(5), jp.getString(6), jp.getString(7));
-				}
-				progressHandler.sendEmptyMessage(R.string.notify_succeeded);
-				Log.d(TAG, "sync success");
-			}
-			else{
-				progressHandler.sendEmptyMessage(R.string.notify_network_error);
-				Log.d(TAG, "network return error");
-			}
-			
-
-		} catch (IOException e) {
-			progressHandler.sendEmptyMessage(R.string.notify_network_error);
-			Log.d(TAG, "network err");
-		} catch (JSONException e) {
-			progressHandler.sendEmptyMessage(R.string.notify_json_error);
-			Log.d(TAG, "decode err");
-		} catch (AppException e) {
-			progressHandler.sendEmptyMessage(R.string.notify_no_connection);
-		}
-	    finally {
-              PreferencesActivity.setSyncing(this, false);
+        if (mydb.getProgramsCountByDate(currentdate) > 100) {
+            Toast.makeText(this, R.string.havesynced, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.datasyncing, Toast.LENGTH_LONG).show();
+            getTVProgramsToDb(urlsb.toString());
         }
-	}
-	
-	// Define the Handler that receives messages from the thread
-	private Handler progressHandler = new Handler() {
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case R.string.notify_succeeded:
-				showNotification();
-				
-				break;
-			case R.string.notify_network_error:
-				Toast.makeText(SyncService.this, R.string.notify_network_error, 5).show();
-				break;
-			case R.string.notify_json_error:
-				Toast.makeText(SyncService.this, R.string.notify_json_error, 5).show();
-				break;
-			case R.string.notify_database_error:
-				Toast.makeText(SyncService.this, R.string.notify_database_error, 5).show();
-				break;
-			case R.string.notify_no_result:
-				Toast.makeText(SyncService.this, R.string.notify_no_result, 5).show();
-				break;
-			case R.string.notify_no_connection:
-				Toast.makeText(SyncService.this, R.string.notify_no_connection, 5).show();
-				break;
-			default:
-				Toast.makeText(SyncService.this, R.string.notify_network_error, 5).show();
-			}
-		}
-	};
+
+    }
+
+    private void showNotification() {
+        CharSequence text = getText(R.string.synccompleted);
+        Notification notification = new Notification(R.drawable.icon, text, System
+                .currentTimeMillis());
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this,
+                ChannelTab.class), 0);
+        notification.setLatestEventInfo(this, getText(R.string.synccompleted), text, contentIntent);
+        mNM.notify(R.string.synccompleted, notification);
+    }
+
+    public void getTVProgramsToDb(String weburl) {
+        try {
+            String sb = HttpUtil.getUrl(this, weburl);
+
+            if (sb.length() > 10) { // 可能会返回error或null
+
+                JSONArray ja = new JSONArray(sb.toString());
+                for (int i = 0; i < ja.length(); i++) {
+                    JSONArray jp = ja.getJSONArray(i);
+                    mydb.insertProgram(jp.getString(1), jp.getString(2), jp.getString(3), jp
+                            .getString(4), jp.getString(5), jp.getString(6), jp.getString(7));
+                }
+                showNotification();
+                Log.d(TAG, "sync success");
+            } else {
+                Toast.makeText(SyncService.this, R.string.notify_network_error, 5).show();
+                Log.d(TAG, "network return error");
+            }
+
+        } catch (IOException e) {
+            Toast.makeText(SyncService.this, R.string.notify_network_error, 5).show();
+            Log.d(TAG, "network err");
+        } catch (JSONException e) {
+            Toast.makeText(SyncService.this, R.string.notify_json_error, 5).show();
+            Log.d(TAG, "decode err");
+        } catch (AppException e) {
+            Toast.makeText(SyncService.this, R.string.notify_no_connection, 5).show();
+        } finally {
+            PreferencesActivity.setSyncing(this, false);
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+            PreferencesActivity.setSyncToday(this, df.format(new Date()));
+        }
+    }
+
 }
