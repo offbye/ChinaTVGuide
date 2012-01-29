@@ -223,4 +223,5 @@
     <string name="pull_to_refresh_more_label">More</string>
     
     <string name="checkin_time_too_short">Time too short after last checkin.</string>
+    <string name="exist_last_toast">Click again to exit China TV Guide.</string>
 </resources>

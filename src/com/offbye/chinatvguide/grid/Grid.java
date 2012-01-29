@@ -26,6 +26,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,6 +44,7 @@ import java.util.Date;
 
 public class Grid extends Activity {
 	private ArrayList<Icon> icons = new ArrayList<Icon>();
+    private boolean isExit;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -243,6 +245,23 @@ public class Grid extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (!isExit) {
+                isExit = true;
+                Toast.makeText(this, R.string.exist_last_toast, Toast.LENGTH_SHORT).show();
+            }
+            else {
+                finish();
+                Shortcut.exit(this);
+            }
+            return true;
+        }
+            
+        return super.onKeyDown(keyCode, event);
+    }
+	
 	private void addWeibo(String msg) {
 		Intent it = new Intent();
 		it.setClass(getApplicationContext(), WeiboCheck.class);

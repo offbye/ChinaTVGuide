@@ -36,6 +36,7 @@ import com.offbye.chinatvguide.TVAlarm;
 import com.offbye.chinatvguide.TVProgram;
 import com.offbye.chinatvguide.channel.ChannelTab;
 import com.offbye.chinatvguide.grid.Grid;
+import com.offbye.chinatvguide.util.Shortcut;
 
 public class FavoriteProgramActivity extends Activity {
 	private static final String TAG = "FavoriteProgramActivity";
@@ -334,6 +335,7 @@ public class FavoriteProgramActivity extends Activity {
 			break;
 		case 4:
 			this.finish();
+			Shortcut.exit(this);
 			break;
 
 		}

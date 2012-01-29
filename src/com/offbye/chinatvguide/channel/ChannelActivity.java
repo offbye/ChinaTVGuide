@@ -29,6 +29,7 @@ import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.SuggestView;
 import com.offbye.chinatvguide.SyncService;
 import com.offbye.chinatvguide.TVChannel;
+import com.offbye.chinatvguide.util.Shortcut;
 
 public class ChannelActivity extends Activity {
 	private static final String TAG = "ChannelActivity";
@@ -222,6 +223,7 @@ public class ChannelActivity extends Activity {
 			break;
 		case 5:
 			this.finish();
+			Shortcut.exit(this);
 			break;
 
 		}

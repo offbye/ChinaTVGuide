@@ -43,6 +43,7 @@ import com.offbye.chinatvguide.util.AppException;
 import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
 import com.offbye.chinatvguide.util.MD5;
+import com.offbye.chinatvguide.util.Shortcut;
 
 public class SearchResultView extends Activity {
 	private static final String TAG = "SearchResultView";
@@ -473,6 +474,7 @@ public class SearchResultView extends Activity {
 			break;
 		case 5:
 			this.finish();
+			Shortcut.exit(this);
 			break;
 
 		}

@@ -224,4 +224,5 @@
     <string name="pull_to_refresh_more_label">更多</string>
       
     <string name="checkin_time_too_short">距离上次签到的时间太短了，等一会再来签到吧</string>
+    <string name="exist_last_toast">再按一次，您将退出玩转电视！</string>
 </resources>
