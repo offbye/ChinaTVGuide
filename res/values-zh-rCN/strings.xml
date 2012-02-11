@@ -171,10 +171,10 @@
 	<string name="comment_weibo_failed">发布电视评论到新浪微博失败</string>
 	<string name="comment_weibo_succeed">成功发布电视评论到新浪微博</string>
 	<string name="comment_post">发表评论</string>
-	<string name="comment_have_input">您已经输入 </string>
+	<string name="comment_have_input">已经输入 </string>
 	<string name="comment">评论 </string>
 	<string name="comment_post_weibo">同步评论到新浪微博 </string>
-	<string name="comment_min_length">评论至少要输入10个字 ，请支持一下吧</string>
+	<string name="comment_min_length">评论至少要输入%s个字 ，请支持一下吧</string>
 	
 	<string name="preferences_sync_title">电视节目同步</string>
 	<string name="preferences_autosync_title">自动同步当天的电视节目</string>
@@ -228,4 +228,12 @@
     <string name="wait_fetch_image">正在抓取当前播放的电视画面，希望能抓到你想要的啊</string>
     <string name="fetch_image_success">抓到当前播放的电视画面了，如果不是你想要的，就再摇一摇吧</string>
     <string name="fetch_image_failed">哎呀，抓取图片失败了，想再试下就摇一摇吧</string>
+    <string name="fetch_image_by_shake">摇一摇抓取电视画面</string>
+    <string name="fetch_image_by_shake2">摇一摇获取电视画面，然后可以发送到微博</string>
+    <string name="tvplayer_install">您需要下载并安装玩转电视Live播放器才能看电视直播</string>
+    <string name="tvplayer_downaload">下载播放器</string>
+    <string name="setalarm_ok">成功设置提醒</string>
+    <string name="edit">编辑</string>
+    <string name="back">返回</string>
+    <string name="send">发送</string>  
 </resources>

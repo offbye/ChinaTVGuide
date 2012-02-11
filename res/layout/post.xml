@@ -1,36 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:gravity="center_horizontal" android:orientation="vertical"
-	android:background="#ffffffff">
-	<TextView android:gravity="center" android:textSize="18sp"
-		android:textColor="#ffffffff" android:layout_width="fill_parent"
-		android:padding="5dp" android:text="@string/comment_post"
-		android:background="@drawable/title_background_simple"
-		android:layout_height="wrap_content" android:singleLine="true" />
-	<TextView android:layout_height="wrap_content"
-		android:layout_width="wrap_content" android:id="@+id/count"
-		android:text="0/140"></TextView>
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
 
-	<EditText android:layout_width="fill_parent" android:gravity="top"
-		android:maxLength="140" android:layout_margin="5dp"
-		android:layout_height="wrap_content" android:lines="5"
-		android:id="@+id/content"></EditText>
-	<CheckBox android:text="@string/comment_post_weibo"
-		android:id="@+id/isPostWeibo" 
-		android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dip"
+        android:background="@drawable/ic_btn_title_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-	
-	<Button android:id="@+id/post" android:layout_margin="5dp"
-		android:textSize="18sp" android:textColor="#ffffffff"
-		android:layout_width="fill_parent" android:text="@string/comment_post"
-		android:layout_height="wrap_content" android:background="@drawable/button1">
-	</Button>
+        <Button
+            android:id="@+id/left_button"
+            style="@style/button_text"
+            android:layout_width="66dip"
+            android:layout_height="32dip"
+            android:layout_marginLeft="8dip"
+            android:background="@drawable/btn_black"
+            android:gravity="center"
+            android:text="@string/back" />
 
-	<ImageView
-	    android:id="@+id/imageView1"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/button_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_marginRight="8dip"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/comment_post" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/right_button"
+            style="@style/button_text"
+            android:layout_width="66dip"
+            android:layout_height="32dip"
+            android:layout_marginRight="8dip"
+            android:background="@drawable/btn_black"
+            android:gravity="center"
+            android:text="@string/send" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:gravity="top"
+        android:lines="5"
+        android:maxLength="140" >
+    </EditText>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/isPostWeibo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/comment_post_weibo" >
+        </CheckBox>
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="0/140" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/shake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="@string/fetch_image_by_shake2" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:visibility="gone" />
 
 </LinearLayout>

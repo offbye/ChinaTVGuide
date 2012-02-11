@@ -8,6 +8,8 @@ import com.offbye.chinatvguide.server.CommentTask;
 import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.FileUtil;
 import com.offbye.chinatvguide.util.HttpUtil;
+import com.offbye.chinatvguide.util.ShakeDetector;
+import com.offbye.chinatvguide.util.ShakeDetector.OnShakeListener;
 
 import weibo4android.Status;
 import weibo4android.Weibo;
@@ -19,10 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -41,27 +39,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Post extends Activity {
 
     private final static String TAG = "Post";
-    private static final String SEND_IMG_FILE_PATH = "/sdcard/chinatvguide/sendImg.png";
+    private static final String IMG_FILE_PATH = "/sdcard/chinatvguide/";
 
     private static final String IMAGE_URL = "http://m.intotv.net/sc/s.php?c=";
-
-    static Object lock = new Object();
+    protected static final int MIN_INPUT = 5;
 
     private TextView mCount;
 
     private EditText mContent;
 
-    private Button mPost;
+    private Button mPostButton;
+    private Button mBackButton;
     private CheckBox isPostWeibo;
     private ImageView mImage;
     private ProgressDialog pd;
@@ -73,16 +71,10 @@ public class Post extends Activity {
 
     private Context mContext;
     
-    private int count=0;
-    private SensorManager sensorManager = null;
-    private Sensor sensor = null;
-    private int countx = 0;
-    private int countxm = 0;
-    private int county = 0;
-    private int countym = 0;
-    private int countz = 0;
-    private int countzm = 0;
-    private Bitmap mBitmap = null;
+    private volatile File mFile;
+    private volatile Bitmap mBitmap;
+    private ShakeDetector mShakeDetector;
+
     public static void addWeibo(Context context, TVProgram p) {
         Intent it = new Intent();
         if (null != p){
@@ -124,8 +116,6 @@ public class Post extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post);
         mContext = getApplicationContext();
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         
         System.setProperty("weibo4j.oauth.consumerKey", Weibo.CONSUMER_KEY);
@@ -138,34 +128,54 @@ public class Post extends Activity {
         
         msg = "";
         if (null != mChannelName && !"".equals(mChannelName) && null != mProgram && !"".equals(mProgram)){
-            msg = "\n " + mContext.getString(R.string.comment) + " #"
+            msg =  mContext.getString(R.string.comment) + " #"
             + mChannelName.trim() + "#, #" + mProgram.trim() + "#";
             mContent.setHint(msg);
         }
         else if (null != mChannelName && !"".equals(mChannelName)){
-            msg = "\n " + mContext.getString(R.string.comment) + " #"
+            msg =   mContext.getString(R.string.comment) + " #"
             + mChannelName.trim() + "#";
             mContent.setHint(msg);
         }
+        msg = "\n " + msg;
+        
+        mShakeDetector = new ShakeDetector(mContext);
+        mShakeDetector.registerOnShakeListener(new OnShakeListener(){
 
+            @Override
+            public void onShake() {
+               doFetchImage();
+            }});
+        
+        if (getIntent().getBooleanExtra("fetchImage", false)) {
+            doFetchImage();
+        }
     }
     
     @Override
     protected void onResume() {
         super.onResume();
-        register();
+        mShakeDetector.start();
     }
 
     @Override
     protected void onPause() {
+        mShakeDetector.stop();
         super.onPause();
-        unregister();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (null != mBitmap)
+            mBitmap.recycle();
+        super.onDestroy();
     }
 
     private void init() {
         mCount = (TextView) findViewById(R.id.count);
         mContent = (EditText) findViewById(R.id.content);
-        mPost = (Button) findViewById(R.id.post);
+        mPostButton = (Button) findViewById(R.id.right_button);
+        mBackButton = (Button) findViewById(R.id.left_button);
         isPostWeibo = (CheckBox) findViewById(R.id.isPostWeibo);
         if (!"".equals( UserStore.getAccessToken(mContext))){
             isPostWeibo.setChecked(true);
@@ -187,13 +197,22 @@ public class Post extends Activity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mCount.setText(mContext.getString(R.string.comment_have_input) + mContent.length() +"/140");
-            }});
-        mPost.setOnClickListener(new OnClickListener() {
+            }
+        });
+        
+        mBackButton.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        
+        mPostButton.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(mContent.getText().toString().trim().length() < 10){
-                    Toast.makeText(mContext, R.string.comment_min_length, Toast.LENGTH_LONG).show();
+                if(mContent.getText().toString().trim().length() < MIN_INPUT){
+                    Toast.makeText(mContext, String.format(getString(R.string.comment_min_length), MIN_INPUT), Toast.LENGTH_LONG).show();
                     return;
                 }
                 
@@ -268,10 +287,10 @@ public class Post extends Activity {
 
             Status status;
             if (null != location && null != mBitmap) {
-                status = weibo.uploadStatus(content,saveMyBitmap(mBitmap), location.getLatitude(), location
+                status = weibo.uploadStatus(content,mFile, location.getLatitude(), location
                         .getLongitude());
             } else if (null == location && null != mBitmap)  {
-                status = weibo.uploadStatus(content,saveMyBitmap(mBitmap));
+                status = weibo.uploadStatus(content,mFile);
             } else if (null != location && null == mBitmap)  {
                 status = weibo.updateStatus(content,location.getLatitude(), location
                         .getLongitude());
@@ -301,9 +320,9 @@ public class Post extends Activity {
                     break;
                 case -1:
                     if (null != pd) {
+                        pd.dismiss();
                         Toast.makeText(Post.this, R.string.comment_weibo_failed,
                                 Toast.LENGTH_SHORT).show();
-                        pd.dismiss();
                     }
                     break;
                 case 2:
@@ -311,6 +330,7 @@ public class Post extends Activity {
                         pd.dismiss();
                         Toast.makeText(Post.this, R.string.comment_succeed, Toast.LENGTH_SHORT)
                                 .show();
+                        finish();
                     }
                     break;
                 case -2:
@@ -342,77 +362,30 @@ public class Post extends Activity {
         };
     };
     
-    
-    SensorEventListener listener = new SensorEventListener() {
-        public void onSensorChanged(SensorEvent e) {
-            float x = e.values[SensorManager.DATA_X];
-            float y = e.values[SensorManager.DATA_Y];
-            float z = e.values[SensorManager.DATA_Z];
-
-            process(x, y, z);
-        }
-
-        public void onAccuracyChanged(Sensor s, int accuracy) {
-        }
-    };
-
-    public void process(float x, float y, float z) {
-        if (x > 3 ) {
-            countx++;
-            //Toast.makeText(HomeActivity.this, "countx" + countx, 5).show();
-        }
-        if (x < -3 ) {
-            countxm++;
-            //Toast.makeText(HomeActivity.this, "countx" + countx, 5).show();
-        }
-        if (y > 3) {
-            county++;
-        }
-        if (y < -3) {
-            countym++;
-        }
-        if (z - SensorManager.GRAVITY_EARTH > 4) {
-            countz++;
-        }
-        if((countx>3 && countxm>3) || (county>3 && countym>3) || countz>3){
-            countx=0;
-            countxm=0;
-            county=0;
-            countym=0;
-            countz=0;
-            countzm=0;
-            
-            if (null != pd && pd.isShowing()) { return;}
-            showProgressDialog(getString(R.string.wait_fetch_image));
-            
-            Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-            vibrator.vibrate(new long[] {100,200,300}, -1);
-            fetchImage();
-        }
+    private void doFetchImage() {
+        if (null != pd && pd.isShowing()) { return;}
+        showProgressDialog(getString(R.string.wait_fetch_image));
+        
+        Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(new long[] {100,200,300}, 2);
+        fetchImage();
     }
 
-    void register() {
-        sensorManager.registerListener(listener, sensor,
-                SensorManager.SENSOR_DELAY_UI);
-    }
-
-    void unregister() {
-        sensorManager.unregisterListener(listener);
-    }
-    
     private void fetchImage() {
         if (null != mChannel && !"".equals(mChannel)) {
             new Thread() {
                 public void run() {
                     
                     try {
-                        mBitmap = BitmapFactory.decodeStream(HttpUtil.getURLStream(IMAGE_URL+mChannel+"&d="+new Date()));
+                        mBitmap = BitmapFactory.decodeStream(HttpUtil.getURLStream(IMAGE_URL + mChannel ));
                         
                         if (null != mBitmap) {
                             Message msg = mHandler.obtainMessage();
                             msg.what = 4;
                             msg.obj = mBitmap;
-                            Log.d(TAG, "bitmap " + mBitmap.getRowBytes());
+                            mFile = saveBitmapFile(mBitmap,(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))+ ".jpg");
+                            Log.d(TAG, "bitmap " + mBitmap.getRowBytes() +  mFile.getAbsolutePath());
+
                             mHandler.sendMessage(msg);
                         }
                         else {
@@ -428,12 +401,7 @@ public class Post extends Activity {
             }.start();
         }
     }
-    
-    private byte[] bitmap2Bytes(Bitmap bm) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        return baos.toByteArray();
-    }
+
     
     /**
      * 把Bitmap保存为本地图片
@@ -442,21 +410,16 @@ public class Post extends Activity {
      * @return bitmap
      * @throws IOException 程序的写入异常
      */
-    public File saveMyBitmap(Bitmap bitmap) throws IOException
-    {
-        if (bitmap == null)
-        {
-            Log.e(TAG,
-                "saveMyBitmap failed,the bitmap is null");
+    public File saveBitmapFile(Bitmap bitmap, String filename) throws IOException {
+        if (bitmap == null) {
+            Log.e(TAG, "saveMyBitmap failed,the bitmap is null");
             return null;
         }
 
         FileOutputStream out = null;
-        File file = new File(SEND_IMG_FILE_PATH);
-        try
-        {
-            if (!file.getParentFile().exists())
-            {
+        File file = new File(IMG_FILE_PATH + filename);
+        try {
+            if (!file.getParentFile().exists()) {
                 if (file.getParentFile().mkdirs())// 创建目录
                 {
                     // 如果不存在,创建又失败了,则说明无法创建目录
@@ -467,25 +430,16 @@ public class Post extends Activity {
             // 创建文件
             out = new FileOutputStream(file);
 
-            if (bitmap.compress(Bitmap.CompressFormat.PNG,
-                70,
-                out))
-            {
+            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 85, out)) {
                 out.flush();
-                bitmap.recycle();
+                // bitmap.recycle();
             }
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
             file = null;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             FileUtil.closeStream(out);
         }
 

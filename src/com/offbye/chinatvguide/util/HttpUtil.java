@@ -155,7 +155,6 @@ public class HttpUtil {
 	}
 	
 	   public static InputStream getURLStream(String weburl) throws IOException {
-	        StringBuilder sb = new StringBuilder(10000);
 	        URL url;
 	        HttpURLConnection conn;
 	        url = new URL(weburl);

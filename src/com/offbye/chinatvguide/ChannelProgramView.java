@@ -288,7 +288,16 @@ public class ChannelProgramView extends Activity {
 
             @Override
             public void onShake() {
-                Toast.makeText(mContext, "shake", 1).show();                
+                //Toast.makeText(mContext, "shake", 0).show();
+                Intent it = new Intent();
+                if (currentPosition > 0) {
+                    it.putExtra("program", pl.get(currentPosition).getProgram());
+                }
+                it.putExtra("channel", channel);
+                it.putExtra("channelname",channelname);
+                it.putExtra("fetchImage",true);
+                it.setClass(mContext, Post.class);
+                mContext.startActivity(it);
             }});
 	}
 	
@@ -564,7 +573,7 @@ public class ChannelProgramView extends Activity {
                 	            AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
                 	            am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
                 	            
-                	            String alarm= "成功设置提醒 " +seletedProgram.getProgram();
+                	            String alarm = mContext.getString(R.string.setalarm_ok)  +seletedProgram.getProgram();
                                 Toast.makeText(mContext, alarm,10).show();
                             }
                         })
@@ -629,35 +638,36 @@ public class ChannelProgramView extends Activity {
         			}
 
         		});
+                Toast.makeText(mContext, R.string.fetch_image_by_shake, 0).show();
 				break;
 			case R.string.notify_network_error:
 				pd.dismiss();
 				optionsListView.setAdapter(null);
-				Toast.makeText(mContext, R.string.notify_network_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_network_error, 0).show();
 				break;
 			case R.string.notify_json_error:
 				pd.dismiss();
 				optionsListView.setAdapter(null);
-				Toast.makeText(mContext, R.string.notify_json_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_json_error, 0).show();
 				break;
 			case R.string.notify_database_error:
 				pd.dismiss();
 				optionsListView.setAdapter(null);
-				Toast.makeText(mContext, R.string.notify_database_error, 5).show();
+				Toast.makeText(mContext, R.string.notify_database_error, 0).show();
 				break;
 			case R.string.notify_no_result:
 				pd.dismiss();
 				optionsListView.setAdapter(null);
-				Toast.makeText(mContext,  R.string.notify_no_result, 5).show();
+				Toast.makeText(mContext,  R.string.notify_no_result, 0).show();
 				break;
 			case R.string.notify_no_connection:
 				pd.dismiss();
-				Toast.makeText(mContext, R.string.notify_no_connection, 5).show();
+				Toast.makeText(mContext, R.string.notify_no_connection, 0).show();
 				break;
 			case R.string.notify_newversion:
 				pd.dismiss();
 				optionsListView.setAdapter(null);
-				Toast.makeText(mContext, servermsg.split("--")[4], 5).show();
+				Toast.makeText(mContext, servermsg.split("--")[4], 0).show();
 				
 				new AlertDialog.Builder(mContext)
                 .setIcon(R.drawable.icon)

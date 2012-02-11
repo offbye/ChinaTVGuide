@@ -170,10 +170,10 @@
 	<string name="comment_weibo_failed">发布电视评论到新浪微博失败</string>
 	<string name="comment_weibo_succeed">成功发布电视评论到新浪微博</string>
 	<string name="comment_post">发表评论</string>
-	<string name="comment_have_input">您已经输入 </string>
+	<string name="comment_have_input">Have input </string>
 	<string name="comment">评论 </string>
 	<string name="comment_post_weibo">同步评论到新浪微博 </string>
-	<string name="comment_min_length">评论至少要输入10个字 ，请支持一下吧</string>
+	<string name="comment_min_length">评论至少要输入%s个字 ，请支持一下吧</string>
 	
 	<string name="preferences_sync_title">电视节目同步</string>
 	<string name="preferences_autosync_title">自动同步当天的电视节目</string>
@@ -200,8 +200,8 @@
 	<string name="user_register_now">Register Now</string>
 	<string name="user_password">Password</string>
 	<string name="user_password_again">Repeat Password</string>
-	<string name="user_protocol">同意注册条款</string>
-	<string name="user_register">完成注册</string>
+	<string name="user_protocol">Agree</string>
+	<string name="user_register">Register</string>
 	<string name="user_register_success">Register success</string>
 	<string name="user_register_failed">Register failed</string>
 	
@@ -227,4 +227,12 @@
     <string name="wait_fetch_image">Fetching TV screenshot,please wait</string>
     <string name="fetch_image_success">Fetch TV screenshot finished，if this image is not what you want，please shake again。</string>
     <string name="fetch_image_failed">Fetch TV screenshot failed。</string>
+    <string name="fetch_image_by_shake">Shake your phone and get TV screenshot</string>
+    <string name="fetch_image_by_shake2">Shake your phone and get TV screenshot，then you can send the image to Weibo.</string>
+    <string name="tvplayer_install">You need to download and install ChinaTVGuide TVPlayer to watch TV.</string>
+    <string name="tvplayer_downaload">下载播放器</string>
+    <string name="setalarm_ok">set alarm ok </string>
+    <string name="edit">Edit</string>
+    <string name="back">Back</string>
+    <string name="send">Send</string>  
 </resources>

@@ -3,9 +3,14 @@ package com.offbye.chinatvguide;
 
 import com.offbye.chinatvguide.server.media.MediaStore;
 import com.offbye.chinatvguide.util.AssetUtil;
+import com.offbye.chinatvguide.util.SystemUtility;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,11 +72,35 @@ public class ChannelAdapter extends ArrayAdapter<TVChannel> {
             play.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, channel.getChannel(), Toast.LENGTH_SHORT).show();
-                    Intent i =new Intent("com.offbye.chinatvguide.player");
-                    i.putStringArrayListExtra("playlist", MediaStore.getInstance().getHrefs(channel.getChannel()));
-                    i.putStringArrayListExtra("titlelist", MediaStore.getInstance().getTitles(channel.getChannel()));
-                    mContext.startActivity(i);
+                    final int arch = SystemUtility.getArmArchitecture();
+                    Log.i("ChannelAdapter", "getArmArchitecture" + arch);
+                    try {
+                        Intent i =new Intent("com.offbye.chinatvguide.player");
+                        i.putStringArrayListExtra("playlist", MediaStore.getInstance().getHrefs(channel.getChannel()));
+                        i.putStringArrayListExtra("titlelist", MediaStore.getInstance().getTitles(channel.getChannel()));
+                        mContext.startActivity(i);
+                    }
+                    catch (Exception e){
+                       
+                        new AlertDialog.Builder(mContext)
+                        .setIcon(R.drawable.icon)
+                        .setTitle(R.string.tvplayer_downaload)
+                        .setMessage(R.string.tvplayer_install)
+                        .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                if (arch > 6) {
+                                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.pecansoft.com/app/chinatvguidelive_n.apk"));
+                                    mContext.startActivity(i); 
+                                }
+                                else {
+                                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.pecansoft.com/app/chinatvguidelive_a.apk"));
+                                    mContext.startActivity(i); 
+                                }
+                            }
+                        }).show();
+                      
+                    }
+
                 }
             });
         } else {
