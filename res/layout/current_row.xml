@@ -11,13 +11,19 @@
 	<TextView android:id="@+id/startime"
 		android:layout_width="wrap_content" android:textSize="15sp"
 		android:layout_height="wrap_content" android:padding="1dp"
-		android:textColor="#ffff0000" android:text="title"
+		android:textColor="#ffff0000" android:layout_toLeftOf="@+id/playicon"
 		android:layout_toRightOf="@+id/channellogo" />
 	<TextView android:id="@+id/program"
 		android:layout_width="wrap_content" android:textSize="16sp"
 		android:layout_height="wrap_content" android:padding="1dp"
 		android:singleLine="true" android:ellipsize="marquee"
 		android:marqueeRepeatLimit="marquee_forever"
-		android:layout_toRightOf="@+id/channellogo" android:text="description"
+		android:layout_toRightOf="@+id/channellogo" android:layout_toLeftOf="@+id/playicon"
 		android:layout_below="@+id/startime" />
+	<ImageView android:layout_alignParentRight="true"
+		android:layout_centerVertical="true" android:layout_marginRight="5dp"
+		android:id="@+id/playicon" android:layout_height="wrap_content"
+		android:src="@drawable/btn_play" android:visibility="gone" 
+		android:layout_width="wrap_content">
+	</ImageView>
 </RelativeLayout>

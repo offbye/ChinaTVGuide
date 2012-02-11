@@ -5,6 +5,7 @@ import com.offbye.chinatvguide.grid.Grid;
 import com.offbye.chinatvguide.server.Comment;
 import com.offbye.chinatvguide.server.CommentList;
 import com.offbye.chinatvguide.server.CommentTask;
+import com.offbye.chinatvguide.server.media.MediaStore;
 import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.AppException;
 import com.offbye.chinatvguide.util.Constants;
@@ -119,6 +120,8 @@ public class CurrentProgramView extends Activity {
 					TVProgram tp = new TVProgram(jp.getString(0), jp
 							.getString(1), jp.getString(2), jp.getString(3), jp
 							.getString(4), jp.getString(5), jp.getString(6), jp.getString(7));
+					
+					tp.isPlayable = MediaStore.getInstance().isInMediaList(jp.getString(1));
 					pl.add(tp);
 				}
 			} else {
@@ -151,6 +154,8 @@ public class CurrentProgramView extends Activity {
 						programsCursor.getString(3), programsCursor
 								.getString(4), programsCursor.getString(5),
 								programsCursor.getString(6),programsCursor.getString(7));
+				tvprogram.isPlayable = MediaStore.getInstance().isInMediaList(programsCursor.getString(1));
+
 				pl.add(tvprogram);
 			}
 			//Log.v(TAG, "load from sqllite");

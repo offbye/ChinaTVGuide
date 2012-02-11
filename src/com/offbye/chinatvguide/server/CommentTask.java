@@ -30,11 +30,9 @@ public class CommentTask extends Thread {
             Log.d(TAG,sb);
             mCallback.update(Integer.valueOf(sb));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             mCallback.update(-3);
         } catch (AppException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             mCallback.update(-2);
         }

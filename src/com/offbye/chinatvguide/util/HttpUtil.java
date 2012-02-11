@@ -153,5 +153,17 @@ public class HttpUtil {
 		}
 		return null;
 	}
+	
+	   public static InputStream getURLStream(String weburl) throws IOException {
+	        StringBuilder sb = new StringBuilder(10000);
+	        URL url;
+	        HttpURLConnection conn;
+	        url = new URL(weburl);
+	        conn = (HttpURLConnection) url.openConnection();
+
+	        conn.setConnectTimeout(CONNECT_TIMEOUT);
+	        conn.setReadTimeout(READ_TIMEOUT);
+	        return conn.getInputStream();
+	    }
 
 }

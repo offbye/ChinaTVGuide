@@ -10,6 +10,7 @@ public class TVProgram {
 	private String daynight=null;
 
 	private String channelname=null;
+	public boolean isPlayable;
 
 	public TVProgram() {
 		super();

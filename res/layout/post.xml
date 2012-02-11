@@ -14,15 +14,23 @@
 
 	<EditText android:layout_width="fill_parent" android:gravity="top"
 		android:maxLength="140" android:layout_margin="5dp"
-		android:layout_height="wrap_content" android:text="" android:lines="7"
+		android:layout_height="wrap_content" android:lines="5"
 		android:id="@+id/content"></EditText>
 	<CheckBox android:text="@string/comment_post_weibo"
-		android:id="@+id/isPostWeibo" android:layout_margin="5dp"
+		android:id="@+id/isPostWeibo" 
 		android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
 
+	
 	<Button android:id="@+id/post" android:layout_margin="5dp"
 		android:textSize="18sp" android:textColor="#ffffffff"
 		android:layout_width="fill_parent" android:text="@string/comment_post"
 		android:layout_height="wrap_content" android:background="@drawable/button1">
 	</Button>
+
+	<ImageView
+	    android:id="@+id/imageView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:visibility="gone" />
+
 </LinearLayout>

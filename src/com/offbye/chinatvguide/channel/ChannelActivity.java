@@ -29,6 +29,7 @@ import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.SuggestView;
 import com.offbye.chinatvguide.SyncService;
 import com.offbye.chinatvguide.TVChannel;
+import com.offbye.chinatvguide.server.media.MediaStore;
 import com.offbye.chinatvguide.util.Shortcut;
 
 public class ChannelActivity extends Activity {
@@ -108,10 +109,11 @@ public class ChannelActivity extends Activity {
 		channelList=new ArrayList<TVChannel>();
 
 		while(channellCursor.moveToNext()){
-			TVChannel tvchannel=new  TVChannel(
+			TVChannel tvchannel= new  TVChannel(
 					channellCursor.getString(0),channellCursor.getString(1),
 					channellCursor.getString(2),channellCursor.getString(3),
 					channellCursor.getString(4),channellCursor.getString(5));
+			tvchannel.isPlayable = MediaStore.getInstance().isInMediaList(channellCursor.getString(1));
 			channelList.add(tvchannel);
 		}
 		channellCursor.close();

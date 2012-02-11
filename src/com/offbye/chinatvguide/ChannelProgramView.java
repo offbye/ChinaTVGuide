@@ -10,6 +10,8 @@ import com.offbye.chinatvguide.util.AssetUtil;
 import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
 import com.offbye.chinatvguide.util.MD5;
+import com.offbye.chinatvguide.util.ShakeDetector;
+import com.offbye.chinatvguide.util.ShakeDetector.OnShakeListener;
 import com.offbye.chinatvguide.weibo.Post;
 
 import org.json.JSONArray;
@@ -36,13 +38,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -83,6 +85,7 @@ public class ChannelProgramView extends Activity {
 	private String city;
 	private Context mContext;
 	private long lastCheckinTime;
+	private ShakeDetector mShakeDetector;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -267,27 +270,39 @@ public class ChannelProgramView extends Activity {
 		mComment = (Button)findViewById(R.id.comment);
 		mComment.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                TVProgram p = null;
+                TVProgram p = new TVProgram();
                 if (currentPosition > 0) {
                     p = pl.get(currentPosition);
                 }
-                Intent it = new Intent();
-                if (null != p) {
-                    it.putExtra("channel", p.getChannelname());
-                    it.putExtra("program", p.getProgram());
-                } else {
-                    it.putExtra("channel", channelname);
+                else {
+                    p.setChannel(channel);
+                    p.setChannelname(channelname);
                 }
-                it.setClass(mContext, Post.class);
-                mContext.startActivity(it);
+                Post.addWeibo(mContext, p);
+
             }
         });
+		
+		mShakeDetector = new ShakeDetector(mContext);
+		mShakeDetector.registerOnShakeListener(new OnShakeListener(){
+
+            @Override
+            public void onShake() {
+                Toast.makeText(mContext, "shake", 1).show();                
+            }});
 	}
 	
 
     @Override
     protected void onResume() {
         super.onResume();
+        mShakeDetector.start();
+    }
+    
+    @Override
+    protected void onPause() {
+        mShakeDetector.stop();
+        super.onPause();
     }
 	private void resetWeekbutton(){
 		btnmo.setBackgroundResource(R.xml.btn_week);
@@ -736,10 +751,14 @@ public class ChannelProgramView extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case 0:
-		    TVProgram p = null;
+		    TVProgram p = new TVProgram();
 		    if(currentPosition > 0 ){
                 p = pl.get(currentPosition);
             }
+		    else {
+		        p.setChannel(channel);
+		        p.setChannelname(channelname);
+		    }
             Post.addWeibo(mContext, p);
 			break;
 		case 1:

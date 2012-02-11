@@ -7,6 +7,7 @@ public class TVChannel {
 	private String image=null;
 	private String hidden=null;
 	private String type=null;
+	public boolean isPlayable;
 	public TVChannel() {
 		super();
 	}
