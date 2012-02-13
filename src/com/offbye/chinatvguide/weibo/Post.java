@@ -6,6 +6,7 @@ import com.offbye.chinatvguide.TVProgram;
 import com.offbye.chinatvguide.server.Comment;
 import com.offbye.chinatvguide.server.CommentTask;
 import com.offbye.chinatvguide.server.user.UserStore;
+import com.offbye.chinatvguide.util.DESCoder;
 import com.offbye.chinatvguide.util.FileUtil;
 import com.offbye.chinatvguide.util.HttpUtil;
 import com.offbye.chinatvguide.util.ShakeDetector;
@@ -51,7 +52,7 @@ public class Post extends Activity {
     private final static String TAG = "Post";
     private static final String IMG_FILE_PATH = "/sdcard/chinatvguide/";
 
-    private static final String IMAGE_URL = "http://m.intotv.net/sc/s.php?c=";
+    private static final String IMAGE_URL = "http://m.intotv.net/sc/s.php?m=";
     protected static final int MIN_INPUT = 5;
 
     private TextView mCount;
@@ -377,7 +378,7 @@ public class Post extends Activity {
                 public void run() {
                     
                     try {
-                        mBitmap = BitmapFactory.decodeStream(HttpUtil.getURLStream(IMAGE_URL + mChannel ));
+                        mBitmap = BitmapFactory.decodeStream(HttpUtil.getURLStream(IMAGE_URL + DESCoder.encrypt(mChannel)));
                         
                         if (null != mBitmap) {
                             Message msg = mHandler.obtainMessage();
@@ -394,6 +395,9 @@ public class Post extends Activity {
 
                     } catch (IOException e) {
                         mHandler.sendEmptyMessage(-4);
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        // encrypt error
                         e.printStackTrace();
                     }
                 }

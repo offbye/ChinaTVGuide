@@ -2,11 +2,14 @@
 package com.offbye.chinatvguide.server.media;
 
 import com.offbye.chinatvguide.util.AppException;
+import com.offbye.chinatvguide.util.Base64;
 import com.offbye.chinatvguide.util.HttpUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import weibo4android.http.BASE64Encoder;
 
 import android.content.Context;
 import android.util.Log;
@@ -38,7 +41,7 @@ public class MediaStore {
         try {
             sb = HttpUtil.getUrl(context, "http://m.intotv.net/sc/media.php");
             if (sb.length() > 0 && !sb.toString().equals("null") && !sb.toString().equals("error")) {
-                JSONArray ja = new JSONArray(sb.toString());
+                JSONArray ja = new JSONArray(new String(Base64.decode(sb.toString()),"UTF-8"));
                 int len = ja.length();
                 for (int i = 0; i < len; i++) {
                     JSONObject jp = ja.getJSONObject(i);
