@@ -67,7 +67,7 @@ public class ChannelAdapter extends ArrayAdapter<TVChannel> {
         }
         
         ImageView play = (ImageView) channelView.findViewById(R.id.playicon);
-        if (channel.isPlayable) {
+        /*if (channel.isPlayable) {
             play.setVisibility(View.VISIBLE);
             play.setOnClickListener(new OnClickListener() {
                 @Override
@@ -106,7 +106,7 @@ public class ChannelAdapter extends ArrayAdapter<TVChannel> {
         } else {
             play.setVisibility(View.GONE);
         }
-        
+        */
 
         return channelView;
     }

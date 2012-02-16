@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.offbye.chinatvguide" android:versionName="6.2" android:versionCode="20">
+	package="com.offbye.chinatvguide" android:versionName="6.3" android:versionCode="21">
 	<application android:icon="@drawable/icon"
 		android:allowClearUserData="true"
 		android:debuggable="false" android:description="@string/aboutinfo"
 		android:label="@string/app_name">
 		<activity android:name=".ChinaTVGuide" android:screenOrientation="portrait"
+		    android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

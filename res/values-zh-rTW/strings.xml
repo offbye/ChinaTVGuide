@@ -31,7 +31,7 @@
 	<string name="suggest">建議</string>
 	<string name="suggest_title">請提出您的寶貴建議</string>
 	<string name="invalid_content_title">請填寫您的建議</string>
-	<string name="invalid_content_msg">建議不能少於5個字,請認真填寫！</string>
+	<string name="invalid_content_msg">建議不能少於5個字,請好好寫啊</string>
 	<string name="invalid_email_title">請輸入Email</string>
 	<string name="invalid_email_msg">Email沒有填寫或格式錯誤</string>
 	<string name="submitsuggest">提交建議</string>
@@ -62,14 +62,14 @@
 	<string name="notify_no_connection">沒有網路連接</string>
 
 
-	<string name="aboutinfo">玩轉電視是您看電視時最好的夥伴。玩轉電視是最好的電視預告軟體，是基於位置的電視互動交流平臺。玩轉電視提供中國電視節目預告，可以查看當前正在播出的節目，	電視娛樂資訊，
-	收視率排行，熱點節目推薦等，可以設置節目播出前定時提醒，讓您不錯過想看的節目。軟體現在提供中央電視臺，省級衛視頻道,港澳臺頻道，數位電視，以及800多個地面頻道節目預告資訊。\n  玩轉電視支援電視評論和簽到功能，並支持在新浪微博上分享電視評論。
-	\n   玩轉電視支援Wifi，3G和cmwap網路，完全相容android1.5-3.1。
+	<string name="aboutinfo">玩轉電視是您看電視時最好的夥伴。玩轉電視是最好的電視預告軟體，是基於位置的電視互動交流平臺。\n  玩轉電視提供中國電視節目預告，可以查看當前正在播出的節目，
+	電視娛樂資訊，收視率排行，熱點節目推薦等，可以設置節目播出前定時提醒，讓您不錯過想看的節目。軟體現在提供中央電視臺，
+	省級衛視頻道,港澳臺頻道，數位電視，以及800多個地面頻道節目預告資訊。\n  玩轉電視支援電視評論和簽到功能，並支持在新浪微博上分享電視評論。
+	\n   玩轉電視支援Wifi，3G和cmwap網路，完全相容android1.5-3.1。 \n 請關注新浪微博 http://weibo.com/cntvguide
 	</string>
 	<string name="helpinfo">1、軟體啟動後會自動同步當天的節目資料，以方便手機不能經常聯網的用戶。你可以在設置中關掉“啟動電視節目同步”選項禁用此功能。\n 2、使用本軟體很長時間後請注意使用"清空緩存"功能清除以前的節目緩存資料，節省寶貴的手機記憶體
 	\n 3、目前只能設置一個節目提醒，以最後設置的為准 \n 4、在節目清單頁面長按節目項會出現功能表，可以查看本頻道其他節目，分享電視節目給朋友，在網上搜索這個節目，簽到，對電視節目發表評論等功能  \n 5、在頻道清單上長按可以把該頻道加入或刪除我的最愛,收藏的頻道可以在桌面widget顯示\n
-	6、 連接到新浪微博後，簽到和發表評論可以同步到新浪微博。
-	</string>
+	6、 連接到新浪微博後，簽到和發表評論可以同步到新浪微博。</string>
 	<string name="msg_no_connenction">沒有網路連接</string>
   	<string name="msg_no_connenction_detail">目前沒有可用的網路連接，本程式只能從本地緩存中讀取節目資料，部分功能將不可用</string>
 
@@ -91,7 +91,7 @@
 	<string name="grid_search">電視搜索</string>
 
 	<string name="grid_suggest">提交建議</string>
-	<string name="grid_comment">電視評論</string>
+	<string name="grid_comment">電視互動</string>
 	<string name="grid_favourite">我的收藏</string>
 	<string name="grid_recommend">節目推薦</string>
 	<string name="grid_rss">娛樂資訊</string>
@@ -122,8 +122,8 @@
 	<string name="tvrate">收視率</string>
 	<string name="tvprogram">電視節目和頻道</string>
 	<string name="changecity">切換城市</string>
-	<string name="suggest_content">你的建議是對我們最好的支持！</string>
-	<string name="suggest_email">your@youremail.com</string>
+	<string name="suggest_content">您的建議是對我們最好的支持！</string>
+	<string name="suggest_email">您的Email</string>
 
 	<string name="tv_actor">演員</string>
 	<string name="tv_director">導演</string>
@@ -153,14 +153,14 @@
 	<string name="create_shortcut_body">點擊確定在桌面創建一個玩轉電視的快捷圖示</string>
 	<string name="connect_info">您還沒有授權使用您的新浪微博帳戶登錄玩轉電視，因此無法通過玩轉電視分享您的簽到和評論到新浪微博。請點擊下面的按鈕使用新浪微博帳戶登錄玩轉電視。</string>
 	<string name="connect">連接到新浪微博</string>
-	<string name="weibo_promotion">我正在使用玩轉電視，再也不會錯過想看的電視了!</string>
-	<string name="weibo_post">發布到新浪微博</string>
+	<string name="weibo_promotion">我正在使用#玩轉電視#，再也不會錯過想看的電視了!</string>
+	<string name="weibo_post">發佈到新浪微博</string>
 	<string name="weibo_title">分享評論到新浪微博</string>
 	<string name="weibo_watching">我正在收看 </string>
-	<string name="weibo_connect_ok">您已經連接到新浪微博，現在您可以發布評論了</string>
+	<string name="weibo_post_ok">成功發佈到新浪微博</string>
+	<string name="weibo_connect_ok">您已經連接到新浪微博，現在您可以發佈評論了</string>
 	<string name="weibo_menu">新浪微博</string>
 	<string name="weibo_re_binding">您已經連接到新浪微博，是否使用新的帳號重新連接？</string>
-	
 	<string name="search_hint">搜索今天的電視節目</string>
 	<string name="search_not_blank">請輸入要搜索的電視節目</string>
 	
@@ -171,10 +171,10 @@
 	<string name="comment_weibo_failed">發佈電視評論到新浪微博失敗</string>
 	<string name="comment_weibo_succeed">成功發佈電視評論到新浪微博</string>
 	<string name="comment_post">發表評論</string>
-	<string name="comment_have_input">您已經輸入 </string>
+	<string name="comment_have_input">已經輸入 </string>
 	<string name="comment">評論 </string>
 	<string name="comment_post_weibo">同步評論到新浪微博 </string>
-	<string name="comment_min_length">評論至少要輸入10個字 ，請支持一下吧</string>
+	<string name="comment_min_length">評論至少要輸入%s個字 ，請支援一下吧</string>
 	
 	<string name="preferences_sync_title">電視節目同步</string>
 	<string name="preferences_autosync_title">自動同步當天的電視節目</string>
@@ -217,11 +217,23 @@
 	<string name="latest_checkin">最新簽到</string>
 	<string name="latest_comment">最新評論</string>
 	
-	<string name="pull_to_refresh_pull_label">下拉刷新...</string>
-    <string name="pull_to_refresh_release_label">鬆開即可刷新...</string>
-    <string name="pull_to_refresh_refreshing_label">載入中...</string>
-    <string name="pull_to_refresh_tap_label">輕觸刷新...</string>
+	<string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">鬆開即可刷新</string>
+    <string name="pull_to_refresh_refreshing_label">載入中</string>
+    <string name="pull_to_refresh_tap_label">輕觸刷新</string>
     <string name="pull_to_refresh_more_label">更多</string>
       
     <string name="checkin_time_too_short">距離上次簽到的時間太短了，等一會再來簽到吧</string>
+    <string name="exist_last_toast">再按一次，您將退出玩轉電視！</string>
+    <string name="wait_fetch_image">正在抓取當前播放的電視畫面，希望能抓到你想要的啊</string>
+    <string name="fetch_image_success">抓到當前播放的電視畫面了，如果不是你想要的，就再搖一搖吧</string>
+    <string name="fetch_image_failed">哎呀，抓取圖片失敗了，想再試下就搖一搖吧</string>
+    <string name="fetch_image_by_shake">搖一搖抓取電視畫面</string>
+    <string name="fetch_image_by_shake2">搖一搖獲取電視畫面，然後可以發送到微博</string>
+    <string name="tvplayer_install">您需要下載並安裝玩轉電視Live播放機才能看電視直播</string>
+    <string name="tvplayer_downaload">下載播放機</string>
+    <string name="setalarm_ok">成功設置提醒</string>
+    <string name="edit">編輯</string>
+    <string name="back">返回</string>
+    <string name="send">發送</string>  
 </resources>

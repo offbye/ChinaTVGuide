@@ -21,6 +21,14 @@
 		<item>본 프로그램을 즐겨찾기에 추가</item>
 		<item>I am Watching</item>
 	</string-array>
+	<string-array name="programoptions">
+        <item>Share it to friends</item>
+        <item>Search on google</item>
+        <item>Add to favourite</item>
+        <item>Comment this TV program</item>
+        <item>View Checkins</item>
+        <item>View Comments</item>
+    </string-array>
 	<string-array name="rss">
 		<item>전체 내용 보기</item>
 		<item>친구에게 전송</item>

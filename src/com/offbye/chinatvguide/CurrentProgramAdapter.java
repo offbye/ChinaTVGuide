@@ -3,6 +3,7 @@ package com.offbye.chinatvguide;
 
 import com.offbye.chinatvguide.server.media.MediaStore;
 import com.offbye.chinatvguide.util.AssetUtil;
+import com.offbye.chinatvguide.weibo.Post;
 
 import android.content.Context;
 import android.content.Intent;
@@ -63,10 +64,17 @@ public class CurrentProgramAdapter extends ArrayAdapter<TVProgram> {
             play.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent("com.offbye.chinatvguide.player");
-                    i.putStringArrayListExtra("playlist", MediaStore.getInstance().getHrefs(item.getChannel()));
-                    i.putStringArrayListExtra("titlelist", MediaStore.getInstance().getTitles(item.getChannel()));
-                    context.startActivity(i);
+//                    Intent i = new Intent("com.offbye.chinatvguide.player");
+//                    i.putStringArrayListExtra("playlist", MediaStore.getInstance().getHrefs(item.getChannel()));
+//                    i.putStringArrayListExtra("titlelist", MediaStore.getInstance().getTitles(item.getChannel()));
+//                    context.startActivity(i);
+                    
+                    Intent it = new Intent();
+                    it.putExtra("channel", item.getChannel());
+                    it.putExtra("channelname",item.getChannelname());
+                    it.putExtra("fetchImage",true);
+                    it.setClass(context, Post.class);
+                    context.startActivity(it);
                 }
             });
         } else {

@@ -137,4 +137,91 @@
 		즐겨찾기에 추가 또는 즐겨찾기에서 취소하십시오. </string>
 	<string name="create_shortcut">바탕화면에 바로가기 아이콘을 만듭니다.</string>
 	<string name="create_shortcut_body">확인을 클릭하시여 바탕화면에 재미있는 TV 바로가기 아이콘을 만듭니다. </string>
+	
+	
+		<string name="connect_info">You have not authorized ChinaTVGuide to connect to your sina Weibo. Now you can connect to Sina Weibo,then you can post tv comments.</string>
+	<string name="connect">Connect to Sina Weibo</string>
+	<string name="weibo_promotion">I am using ChinaTvGuide,It is amazing!</string>
+	<string name="weibo_post">Post to sina Weibo</string>
+	<string name="weibo_title">Post</string>
+	<string name="weibo_watching">I am watching </string>
+	<string name="weibo_post_ok">have posted to Sina Weibo.</string>
+	<string name="weibo_connect_ok">You have connected to Sina Weibo,now you can post comments.</string>
+	<string name="weibo_menu">Sina Weibo</string>
+	<string name="weibo_re_binding">You have already binding to Sina Weibo.Do you want to binding use a new account?</string>
+    <string name="search_hint">Search a TV program of today</string>
+	<string name="search_not_blank">Search text can not be blank</string>
+	
+	<string name="checkin_failed">Check in failed</string>
+	<string name="checkin_succeed">Check in success</string>
+	<string name="comment_failed">Comment failed</string>	
+	<string name="comment_succeed">成功发表电视评论</string>
+	<string name="comment_weibo_failed">发布电视评论到新浪微博失败</string>
+	<string name="comment_weibo_succeed">成功发布电视评论到新浪微博</string>
+	<string name="comment_post">发表评论</string>
+	<string name="comment_have_input">Have input </string>
+	<string name="comment">评论 </string>
+	<string name="comment_post_weibo">同步评论到新浪微博 </string>
+	<string name="comment_min_length">评论至少要输入%s个字 ，请支持一下吧</string>
+	
+	<string name="preferences_sync_title">电视节目同步</string>
+	<string name="preferences_autosync_title">自动同步当天的电视节目</string>
+	<string name="preferences_autosync_summary">软件启动后自动同步当天的电视节目表</string>
+	
+    <string name="preferences_clearcache_title">清除节目数据缓存</string>
+	<string name="preferences_clearcache_summary">清除电视节目数据缓存，节省手机内存</string>
+	
+	<string name="user_info">User Center</string>
+	<string name="user_screen_name">Name</string>
+	<string name="user_email">Email</string>
+	<string name="user_location">Location</string>
+	<string name="user_point">points</string>
+	<string name="user_checkin">Checkin</string>
+	<string name="user_comment">Comment</string>
+	<string name="user_guest">Guest</string>
+	<string name="user_get_success">Get user info ok.</string>
+	<string name="user_get_fail">Get user info failed</string>
+	<string name="user_guest_tip">您现在是游客身份，无法获取用户资料，如果您以前注册过，您可以直接登录。如果您没有注册，您可以注册用户或使用新浪微博用户登录。</string>
+	<string name="user_weibo_login_failed">使用新浪微博账户登录失败，请退出软件后重试</string>
+	<string name="user_refresh">Refresh</string>
+	
+	<string name="user_reg">Register</string>
+	<string name="user_register_now">Register Now</string>
+	<string name="user_password">Password</string>
+	<string name="user_password_again">Repeat Password</string>
+	<string name="user_protocol">Agree</string>
+	<string name="user_register">Register</string>
+	<string name="user_register_success">Register success</string>
+	<string name="user_register_failed">Register failed</string>
+	
+	<string name="user_login_now">Login Now</string>
+	<string name="user_login">Login</string>
+	<string name="user_findpassword">Find password</string>
+	<string name="user_screenname_invalid">Invalid user name，at least 2 characters</string>
+	<string name="user_password_invalid">Invalid password,at least 6 characters</string>
+	<string name="user_password_not_same">Password entered not same.</string>
+	<string name="user_login_success">Login success</string>
+	<string name="user_login_failed">Login failed</string>
+	<string name="latest_checkin">Lastest Checkin</string>
+	<string name="latest_comment">Lastest Comment</string>
+	
+	<string name="pull_to_refresh_pull_label">Pull to refresh...</string>
+    <string name="pull_to_refresh_release_label">Release to refresh...</string>
+    <string name="pull_to_refresh_refreshing_label">Loading...</string>
+    <string name="pull_to_refresh_tap_label">Tap to refresh...</string>
+    <string name="pull_to_refresh_more_label">More</string>
+    
+    <string name="checkin_time_too_short">Time too short after last checkin.</string>
+    <string name="exist_last_toast">Click again to exit China TV Guide.</string>
+    <string name="wait_fetch_image">Fetching TV screenshot,please wait</string>
+    <string name="fetch_image_success">Fetch TV screenshot finished，if this image is not what you want，please shake again。</string>
+    <string name="fetch_image_failed">Fetch TV screenshot failed。</string>
+    <string name="fetch_image_by_shake">Shake your phone and get TV screenshot</string>
+    <string name="fetch_image_by_shake2">Shake your phone and get TV screenshot，then you can send the image to Weibo.</string>
+    <string name="tvplayer_install">You need to download and install ChinaTVGuide TVPlayer to watch TV.</string>
+    <string name="tvplayer_downaload">下载播放器</string>
+    <string name="setalarm_ok">set alarm ok </string>
+    <string name="edit">Edit</string>
+    <string name="back">Back</string>
+    <string name="send">Send</string>  
 </resources>

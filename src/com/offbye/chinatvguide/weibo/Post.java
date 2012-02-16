@@ -6,7 +6,7 @@ import com.offbye.chinatvguide.TVProgram;
 import com.offbye.chinatvguide.server.Comment;
 import com.offbye.chinatvguide.server.CommentTask;
 import com.offbye.chinatvguide.server.user.UserStore;
-import com.offbye.chinatvguide.util.DESCoder;
+import com.offbye.chinatvguide.util.DES;
 import com.offbye.chinatvguide.util.FileUtil;
 import com.offbye.chinatvguide.util.HttpUtil;
 import com.offbye.chinatvguide.util.ShakeDetector;
@@ -44,6 +44,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -268,7 +270,7 @@ public class Post extends Activity {
     private void showProgressDialog(String msg) {
         pd = new ProgressDialog(this);
         pd.setMessage(msg);
-        pd.setCancelable(true);
+        pd.setCancelable(false);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.show();
     }
@@ -378,28 +380,38 @@ public class Post extends Activity {
                 public void run() {
                     
                     try {
-                        mBitmap = BitmapFactory.decodeStream(HttpUtil.getURLStream(IMAGE_URL + DESCoder.encrypt(mChannel)));
-                        
-                        if (null != mBitmap) {
-                            Message msg = mHandler.obtainMessage();
-                            msg.what = 4;
-                            msg.obj = mBitmap;
-                            mFile = saveBitmapFile(mBitmap,(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))+ ".jpg");
-                            Log.d(TAG, "bitmap " + mBitmap.getRowBytes() +  mFile.getAbsolutePath());
+                        URL url = new URL(IMAGE_URL +  DES.encrypt(mChannel) );
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-                            mHandler.sendMessage(msg);
+                        conn.setConnectTimeout(30000);
+                        conn.setReadTimeout(300000);
+                        //conn.addRequestProperty("m", DES.encrypt(mChannel));
+                        //Log.d(TAG, DES.encrypt(mChannel));
+                        if (conn.getResponseCode() == 200) {
+                            mBitmap = BitmapFactory.decodeStream(conn.getInputStream());
+                            
+                            if (null != mBitmap) {
+                                Message msg = mHandler.obtainMessage();
+                                msg.what = 4;
+                                msg.obj = mBitmap;
+                                mFile = saveBitmapFile(mBitmap,(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())) + mChannel + ".jpg");
+                                Log.d(TAG, "bitmap " + mBitmap.getRowBytes() +  mFile.getAbsolutePath());
+
+                                mHandler.sendMessage(msg);
+                            }
+                            else {
+                                mHandler.sendEmptyMessage(-4);
+                            }
                         }
                         else {
                             mHandler.sendEmptyMessage(-4);
                         }
+                      
 
                     } catch (IOException e) {
                         mHandler.sendEmptyMessage(-4);
                         e.printStackTrace();
-                    } catch (Exception e) {
-                        // encrypt error
-                        e.printStackTrace();
-                    }
+                    } 
                 }
 
             }.start();

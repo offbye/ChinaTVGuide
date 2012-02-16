@@ -4,6 +4,7 @@ import com.offbye.chinatvguide.channel.ChannelTab;
 import com.offbye.chinatvguide.server.Comment;
 import com.offbye.chinatvguide.server.CommentList;
 import com.offbye.chinatvguide.server.CommentTask;
+import com.offbye.chinatvguide.server.media.MediaStore;
 import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.AppException;
 import com.offbye.chinatvguide.util.AssetUtil;
@@ -86,6 +87,7 @@ public class ChannelProgramView extends Activity {
 	private Context mContext;
 	private long lastCheckinTime;
 	private ShakeDetector mShakeDetector;
+	private boolean isShakeTipShowed;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -289,6 +291,10 @@ public class ChannelProgramView extends Activity {
             @Override
             public void onShake() {
                 //Toast.makeText(mContext, "shake", 0).show();
+                if (!MediaStore.getInstance().isInMediaList(channel)) {
+                    return;
+                }
+                    
                 Intent it = new Intent();
                 if (currentPosition > 0) {
                     it.putExtra("program", pl.get(currentPosition).getProgram());
@@ -638,7 +644,11 @@ public class ChannelProgramView extends Activity {
         			}
 
         		});
-                Toast.makeText(mContext, R.string.fetch_image_by_shake, 0).show();
+        		
+                if (!isShakeTipShowed && MediaStore.getInstance().isInMediaList(channel)) {
+                    Toast.makeText(mContext, R.string.fetch_image_by_shake, 0).show();
+                    isShakeTipShowed = true;
+                }
 				break;
 			case R.string.notify_network_error:
 				pd.dismiss();
