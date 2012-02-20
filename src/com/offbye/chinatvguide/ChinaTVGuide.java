@@ -2,7 +2,7 @@
 package com.offbye.chinatvguide;
 
 import com.offbye.chinatvguide.grid.Grid;
-import com.offbye.chinatvguide.server.media.MediaStore;
+import com.offbye.chinatvguide.server.media.GetMediaListTask;
 import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.Constants;
 import com.offbye.chinatvguide.util.HttpUtil;
@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -109,7 +108,7 @@ public class ChinaTVGuide extends Activity {
         
         //get media list.
         if (isConnectOn) {
-            new GetMediaListTask().execute();
+            new GetMediaListTask(mContext).execute();
         }
     }
 
@@ -199,19 +198,4 @@ public class ChinaTVGuide extends Activity {
         }
         return needUpdate;
     }
-    
-
-    private class GetMediaListTask extends AsyncTask<Void, Void, Boolean> {
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            return MediaStore.getInstance().requestMediaList(mContext);
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            super.onPostExecute(result);
-        }
-    }
-
 }

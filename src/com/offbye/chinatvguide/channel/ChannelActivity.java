@@ -29,6 +29,7 @@ import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.SuggestView;
 import com.offbye.chinatvguide.SyncService;
 import com.offbye.chinatvguide.TVChannel;
+import com.offbye.chinatvguide.server.media.GetMediaListTask;
 import com.offbye.chinatvguide.server.media.MediaStore;
 import com.offbye.chinatvguide.util.Shortcut;
 

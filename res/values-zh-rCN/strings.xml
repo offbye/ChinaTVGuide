@@ -226,7 +226,7 @@
     <string name="checkin_time_too_short">距离上次签到的时间太短了，等一会再来签到吧</string>
     <string name="exist_last_toast">再按一次，您将退出玩转电视！</string>
     <string name="wait_fetch_image">正在抓取当前播放的电视画面，希望能抓到你想要的啊</string>
-    <string name="fetch_image_success">抓到当前播放的电视画面了，如果不是你想要的，就再摇一摇吧</string>
+    <string name="fetch_image_success">抓到当前播放的电视画面了，图片保存在 </string>
     <string name="fetch_image_failed">哎呀，抓取图片失败了，想再试下就摇一摇吧</string>
     <string name="fetch_image_by_shake">摇一摇抓取电视画面</string>
     <string name="fetch_image_by_shake2">摇一摇获取电视画面，然后可以发送到微博</string>

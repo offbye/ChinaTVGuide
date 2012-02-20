@@ -5,6 +5,7 @@ import com.offbye.chinatvguide.grid.Grid;
 import com.offbye.chinatvguide.server.Comment;
 import com.offbye.chinatvguide.server.CommentList;
 import com.offbye.chinatvguide.server.CommentTask;
+import com.offbye.chinatvguide.server.media.GetMediaListTask;
 import com.offbye.chinatvguide.server.media.MediaStore;
 import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.AppException;
@@ -100,6 +101,9 @@ public class CurrentProgramView extends Activity {
 		sql.append(currentdate.substring(8));
 		sql.append("'");
 
+        if (MediaStore.getInstance().channels.isEmpty()) {
+            new GetMediaListTask(mContext).execute();
+        }
 		getDataInitialize();
 	}
 
@@ -126,7 +130,7 @@ public class CurrentProgramView extends Activity {
 				}
 			} else {
 				progressHandler.sendEmptyMessage(R.string.notify_no_result);
-				Log.d(TAG, "response data err");
+				//Log.d(TAG, "response data err");
 			}
 
 		} catch (IOException e) {
@@ -349,7 +353,6 @@ public class CurrentProgramView extends Activity {
 	        c.setEmail(UserStore.getEmail(mContext));
 	        String url = CommentTask.genUrl(c);
 
-	        Log.d(TAG, "url:" +url);
 	        CommentTask.Callback callback = new CommentTask.Callback() {
 
 	            @Override

@@ -8,7 +8,6 @@ import com.offbye.chinatvguide.server.CommentTask;
 import com.offbye.chinatvguide.server.user.UserStore;
 import com.offbye.chinatvguide.util.DES;
 import com.offbye.chinatvguide.util.FileUtil;
-import com.offbye.chinatvguide.util.HttpUtil;
 import com.offbye.chinatvguide.util.ShakeDetector;
 import com.offbye.chinatvguide.util.ShakeDetector.OnShakeListener;
 
@@ -24,6 +23,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -76,6 +76,8 @@ public class Post extends Activity {
     
     private volatile File mFile;
     private volatile Bitmap mBitmap;
+    private volatile String mFileName;
+
     private ShakeDetector mShakeDetector;
 
     public static void addWeibo(Context context, TVProgram p) {
@@ -184,7 +186,19 @@ public class Post extends Activity {
             isPostWeibo.setChecked(true);
         }
         mImage = (ImageView)findViewById(R.id.imageView1);
+        mImage.setOnClickListener(new OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.VIEW");
+                intent.addCategory("android.intent.category.DEFAULT");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Uri uri = Uri.fromFile(new File(IMG_FILE_PATH + mFileName));
+                intent.setDataAndType(uri, "image/*");
+                startActivity(intent);
+            }
+        });
+        
         mContent.addTextChangedListener(new TextWatcher(){
 
             @Override
@@ -349,7 +363,7 @@ public class Post extends Activity {
                         pd.dismiss();
                         mImage.setImageBitmap((Bitmap)msg.obj);
                         mImage.setVisibility(View.VISIBLE);
-                        Toast.makeText(Post.this, R.string.fetch_image_success, Toast.LENGTH_SHORT)
+                        Toast.makeText(Post.this, mContext.getString(R.string.fetch_image_success) + IMG_FILE_PATH + mFileName, Toast.LENGTH_LONG)
                                 .show();
                     }
                     break;
@@ -377,6 +391,7 @@ public class Post extends Activity {
     private void fetchImage() {
         if (null != mChannel && !"".equals(mChannel)) {
             new Thread() {
+
                 public void run() {
                     
                     try {
@@ -394,7 +409,8 @@ public class Post extends Activity {
                                 Message msg = mHandler.obtainMessage();
                                 msg.what = 4;
                                 msg.obj = mBitmap;
-                                mFile = saveBitmapFile(mBitmap,(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())) + mChannel + ".jpg");
+                                mFileName = (new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())) + mChannelName + ".jpg";
+                                mFile = saveBitmapFile(mBitmap,mFileName);
                                 Log.d(TAG, "bitmap " + mBitmap.getRowBytes() +  mFile.getAbsolutePath());
 
                                 mHandler.sendMessage(msg);

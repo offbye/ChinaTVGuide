@@ -20,7 +20,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class MediaStore {
     private static MediaStore sInstance;
 
-    private static CopyOnWriteArraySet<String> channels = new CopyOnWriteArraySet<String>();
+    public static CopyOnWriteArraySet<String> channels = new CopyOnWriteArraySet<String>();
 
     private static ArrayList<Media> ml = new ArrayList<Media>();
 

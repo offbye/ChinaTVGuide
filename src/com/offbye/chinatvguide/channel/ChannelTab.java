@@ -7,6 +7,8 @@ import android.widget.TabHost;
 
 import com.offbye.chinatvguide.R;
 import com.offbye.chinatvguide.local.LocalCurrentProgramView;
+import com.offbye.chinatvguide.server.media.GetMediaListTask;
+import com.offbye.chinatvguide.server.media.MediaStore;
 
 public class ChannelTab extends TabActivity {
 
@@ -42,5 +44,9 @@ public class ChannelTab extends TabActivity {
                 .setIndicator(this.getString(R.string.tab_local),getResources().getDrawable(R.drawable.ic_tab_local))
                 .setContent(new Intent(this,LocalCurrentProgramView.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
+        
+        if (MediaStore.getInstance().channels.isEmpty()) {
+            new GetMediaListTask(this).execute();
+        }
     }
 }

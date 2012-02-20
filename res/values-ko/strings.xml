@@ -214,7 +214,7 @@
     <string name="checkin_time_too_short">Time too short after last checkin.</string>
     <string name="exist_last_toast">Click again to exit China TV Guide.</string>
     <string name="wait_fetch_image">Fetching TV screenshot,please wait</string>
-    <string name="fetch_image_success">Fetch TV screenshot finished，if this image is not what you want，please shake again。</string>
+    <string name="fetch_image_success">Fetch TV screenshot succeed。Saved in</string>
     <string name="fetch_image_failed">Fetch TV screenshot failed。</string>
     <string name="fetch_image_by_shake">Shake your phone and get TV screenshot</string>
     <string name="fetch_image_by_shake2">Shake your phone and get TV screenshot，then you can send the image to Weibo.</string>
